@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Contact & Request a Quotation · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+<dc-import name="SiteHeader" active="contact" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+<main>
+<section style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,4vw,48px)">
+    <nav aria-label="Breadcrumb" style="font-size:14px;color:#C9CABF;display:flex;gap:8px;margin-bottom:28px"><a href="SFG%20Home%20v2.dc.html" style="color:#C9CABF" style-hover="color:#FFFFFF">{{ t.home }}</a><span aria-hidden="true">/</span><span aria-current="page" style="color:#FFFFFF">{{ t.kick }}</span></nav>
+    <h1 style="margin:0;max-width:820px;font-size:clamp(38px,5.4vw,72px);line-height:1;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">{{ t.h1 }}</h1>
+    <p style="margin:22px 0 0;max-width:600px;font-size:clamp(17px,1.4vw,19px);line-height:1.55;color:#D6D7CE">{{ t.intro }}</p>
+  </div>
+</section>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,64px) clamp(20px,4vw,48px) clamp(56px,7vw,96px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,4vw,56px);align-items:flex-start">
+  <div style="flex:1.6 1 460px;min-width:0">
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="border:1px solid #E6E6E1;border-radius:4px;padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <i class="ph ph-check-circle" style="font-size:44px;color:#4A7023"></i>
+        <h2 style="margin:0;font-size:28px;font-weight:550;letter-spacing:-0.02em">{{ t.sentH }}</h2>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#45473F;max-width:520px">{{ sentP }}</p>
+        <button type="button" onClick="{{ reset }}" style="margin-top:8px;min-height:44px;padding:0 16px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;cursor:pointer;font-size:15px">{{ t.another }}</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" novalidate="" aria-labelledby="form-h" style="border:1px solid #E6E6E1;border-radius:4px;padding:clamp(20px,3vw,36px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:18px">
+        <div style="grid-column:1/-1">
+          <h2 id="form-h" style="margin:0;font-size:clamp(24px,2.6vw,32px);font-weight:550;letter-spacing:-0.02em">{{ t.formH }}</h2>
+          <p style="margin:8px 0 0;font-size:14px;color:#5A5C54">{{ t.req }}</p>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.name }} *<input value="{{ f.name }}" onChange="{{ set.name }}" autocomplete="name" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.company }} *<input value="{{ f.company }}" onChange="{{ set.company }}" autocomplete="organization" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.email }} *<input value="{{ f.email }}" onChange="{{ set.email }}" type="email" autocomplete="email" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.phone }} *<input value="{{ f.phone }}" onChange="{{ set.phone }}" type="tel" autocomplete="tel" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.type }} *
+          <select value="{{ f.type }}" onChange="{{ set.type }}" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:16px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.choose }}</option><sc-for list="{{ types }}" as="o" hint-placeholder-count="7"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.area }}
+          <span style="position:relative;display:block"><input value="{{ f.area }}" onChange="{{ set.area }}" inputmode="numeric" placeholder="5000" style="width:100%;box-sizing:border-box;height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 48px 0 14px;font-size:16px;color:#1F211C"><span aria-hidden="true" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:15px;color:#5A5C54">m²</span></span>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;grid-column:1/-1">{{ t.location }} *<input value="{{ f.location }}" onChange="{{ set.location }}" placeholder="{{ t.locPh }}" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <fieldset style="grid-column:1/-1;border:0;margin:0;padding:0">
+          <legend style="font-size:14px;font-weight:500;margin-bottom:8px">{{ t.services }} *</legend>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+              <label style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border:1px solid {{ l.border }};border-radius:999px;font-size:14px;cursor:pointer;background:{{ l.bg }}" style-hover="border-color:#1F211C"><input type="checkbox" checked="{{ l.on }}" onChange="{{ l.toggle }}" style="accent-color:#1F211C;width:16px;height:16px;margin:0"><span style="width:8px;height:8px;background:{{ l.color }}"></span>{{ l.title }}</label>
+            </sc-for>
+          </div>
+        </fieldset>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;grid-column:1/-1">{{ t.message }}<textarea value="{{ f.message }}" onChange="{{ set.message }}" rows="5" placeholder="{{ t.msgPh }}" style="border:1px solid #C4C4BC;border-radius:4px;padding:12px 14px;font-size:16px;resize:vertical;color:#1F211C"></textarea></label>
+        <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <button type="submit" disabled="{{ cantSend }}" style="border:0;background:{{ sendBg }};color:#FFFFFF;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px;cursor:{{ sendCursor }};display:flex;align-items:center;gap:10px">{{ t.send }} <i class="ph ph-arrow-right"></i></button>
+          <p aria-live="polite" style="margin:0;font-size:13px;color:#45473F;flex:1 1 220px">{{ sendWhy }}</p>
+        </div>
+      </form>
+    </sc-if>
+  </div>
+
+  <aside style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">
+    <a href="https://wa.me/6212345678" style="display:flex;align-items:center;gap:16px;padding:22px;border-radius:4px;background:#1E7A44;color:#FFFFFF" style-hover="background:#17663A;color:#FFFFFF">
+      <span style="width:52px;height:52px;flex:none;border-radius:50%;background:#FFFFFF;color:#1E7A44;display:grid;place-items:center;font-size:30px"><i class="ph-fill ph-whatsapp-logo"></i></span>
+      <span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:19px;font-weight:550">{{ t.wa }}</span><span style="font-size:15px">+62 1234 5678 · {{ t.waNote }}</span></span>
+    </a>
+    <div style="padding:22px;border:1px solid #E6E6E1;border-radius:4px;display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #EFEFEA"><i class="ph ph-map-pin" style="font-size:22px;color:#C6241C"></i><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.office }}</p><p style="margin:0;font-size:16px;line-height:1.5">{{ t.address }}</p></div></div>
+      <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #EFEFEA"><i class="ph ph-phone" style="font-size:22px;color:#C6241C"></i><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.phoneL }}</p><a href="tel:+622112345678" style="font-size:16px">+62 21 1234 5678</a></div></div>
+      <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid #EFEFEA"><i class="ph ph-envelope-simple" style="font-size:22px;color:#C6241C"></i><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">Email</p><a href="mailto:hello@sunshinefacility.com" style="font-size:16px;word-break:break-all">hello@sunshinefacility.com</a></div></div>
+      <div style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:12px 0 0"><i class="ph ph-clock" style="font-size:22px;color:#C6241C"></i><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.hoursL }}</p><p style="margin:0;font-size:16px;line-height:1.5">{{ t.hours }}</p></div></div>
+    </div>
+    <div style="border:1px solid #E6E6E1;border-radius:4px;overflow:hidden">
+      <iframe title="{{ t.mapTitle }}" src="https://www.openstreetmap.org/export/embed.html?bbox=106.585%2C-6.240%2C106.630%2C-6.210&amp;layer=mapnik&amp;marker=-6.2265%2C106.6075" loading="lazy" style="display:block;width:100%;height:280px;border:0;filter:grayscale(0.6)"></iframe>
+      <a href="https://www.openstreetmap.org/?mlat=-6.2265&amp;mlon=106.6075#map=16/-6.2265/106.6075" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 16px;font-size:15px;font-weight:500;border-top:1px solid #E6E6E1">{{ t.openMap }} <i class="ph ph-arrow-up-right"></i></a>
+    </div>
+  </aside>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const LINES = [['food', '#EA2915'], ['digital', '#28937A'], ['workforce', '#5E9628'], ['remote', '#FD572A'], ['facility', '#C6241C']];
+const COPY = {
+  en: {
+    home: 'Home', kick: 'Contact', h1: 'Request a quotation.', intro: 'Tell us about your building. We will arrange a site survey and send an itemised proposal, usually within one working day.',
+    formH: 'Your building', req: 'Fields marked * are required.', name: 'Full name', company: 'Company', email: 'Work email', phone: 'Phone', type: 'Building type', choose: 'Choose a type', area: 'Area size', location: 'Location', locPh: 'City or full address', services: 'Services needed', message: 'Message', msgPh: 'Opening hours, number of floors, current provider, start date…',
+    types: ['Office', 'Hospital', 'Mall / retail', 'F&B outlet', 'Residential tower', 'Industrial / mining site', 'School / campus'],
+    lines: { food: 'Food Services', digital: 'Digital & Operational', workforce: 'Workforce Solutions', remote: 'Remote', facility: 'Facility Management' },
+    send: 'Send request', ready: 'Ready to send.', missing: 'To send, add: ', fields: { name: 'full name', company: 'company', email: 'a valid email', phone: 'phone', type: 'building type', location: 'location', services: 'at least one service' },
+    sentH: 'Request received', sent: n => 'Thank you, ' + n + '. Our team will contact you within one working day to arrange a site survey.', another: 'Send another request',
+    wa: 'Chat on WhatsApp', waNote: 'fastest reply', office: 'Office', address: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia', phoneL: 'Phone', hoursL: 'Office hours', hours: 'Monday–Friday, 08:00–17:00 WIB. Site response line 24/7.', mapTitle: 'Map of our office location', openMap: 'Open in maps'
+  },
+  id: {
+    home: 'Beranda', kick: 'Kontak', h1: 'Minta penawaran.', intro: 'Ceritakan tentang gedung Anda. Kami akan menjadwalkan survei lokasi dan mengirim proposal terperinci, biasanya dalam satu hari kerja.',
+    formH: 'Gedung Anda', req: 'Kolom bertanda * wajib diisi.', name: 'Nama lengkap', company: 'Perusahaan', email: 'Email kantor', phone: 'Telepon', type: 'Jenis gedung', choose: 'Pilih jenis', area: 'Luas area', location: 'Lokasi', locPh: 'Kota atau alamat lengkap', services: 'Layanan yang dibutuhkan', message: 'Pesan', msgPh: 'Jam operasional, jumlah lantai, penyedia saat ini, tanggal mulai…',
+    types: ['Perkantoran', 'Rumah sakit', 'Mal / ritel', 'Gerai F&B', 'Apartemen', 'Kawasan industri / tambang', 'Sekolah / kampus'],
+    lines: { food: 'Layanan Makanan', digital: 'Digital & Operasional', workforce: 'Solusi Tenaga Kerja', remote: 'Remote', facility: 'Manajemen Fasilitas' },
+    send: 'Kirim permintaan', ready: 'Siap dikirim.', missing: 'Untuk mengirim, lengkapi: ', fields: { name: 'nama lengkap', company: 'perusahaan', email: 'email yang valid', phone: 'telepon', type: 'jenis gedung', location: 'lokasi', services: 'minimal satu layanan' },
+    sentH: 'Permintaan diterima', sent: n => 'Terima kasih, ' + n + '. Tim kami akan menghubungi Anda dalam satu hari kerja untuk menjadwalkan survei lokasi.', another: 'Kirim permintaan lain',
+    wa: 'Chat via WhatsApp', waNote: 'balasan tercepat', office: 'Kantor', address: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia', phoneL: 'Telepon', hoursL: 'Jam kantor', hours: 'Senin–Jumat, 08.00–17.00 WIB. Layanan respons lokasi 24/7.', mapTitle: 'Peta lokasi kantor kami', openMap: 'Buka di peta'
+  }
+};
+const EMPTY = { name: '', company: '', email: '', phone: '', type: '', area: '', location: '', message: '' };
+class Component extends DCLogic {
+  state = { lang: 'en', f: { ...EMPTY }, svc: {}, sent: false };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    try { const s = new URLSearchParams(location.search).get('service'); if (s) this.setState({ svc: { [s]: true } }); } catch (e) {}
+    this._l = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this._l);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this._l); }
+  renderVals() {
+    const { lang, f, svc, sent } = this.state;
+    const t = COPY[lang];
+    const set = {};
+    Object.keys(EMPTY).forEach(k => { set[k] = e => { const v = k === 'area' ? e.target.value.replace(/[^0-9]/g, '') : e.target.value; this.setState(s => ({ f: { ...s.f, [k]: v } })); }; });
+    const miss = [];
+    ['name', 'company'].forEach(k => { if (!f[k].trim()) miss.push(t.fields[k]); });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) miss.push(t.fields.email);
+    if (!f.phone.trim()) miss.push(t.fields.phone);
+    if (!f.type) miss.push(t.fields.type);
+    if (!f.location.trim()) miss.push(t.fields.location);
+    if (!Object.values(svc).some(Boolean)) miss.push(t.fields.services);
+    const cantSend = miss.length > 0;
+    return {
+      t, f, set, sent, notSent: !sent, types: t.types,
+      lines: LINES.map(([k, color]) => ({ title: t.lines[k], color, on: !!svc[k], bg: svc[k] ? '#F4F4F1' : '#FFFFFF', border: svc[k] ? '#1F211C' : '#C4C4BC', toggle: () => this.setState(s => ({ svc: { ...s.svc, [k]: !s.svc[k] } })) })),
+      cantSend, sendBg: cantSend ? '#8A8B83' : '#C6241C', sendCursor: cantSend ? 'not-allowed' : 'pointer',
+      sendWhy: cantSend ? t.missing + miss.join(', ') + '.' : t.ready,
+      submit: e => { e.preventDefault(); if (!cantSend) this.setState({ sent: true }); },
+      sentP: t.sent(f.name.split(' ')[0] || ''),
+      reset: () => this.setState({ sent: false, f: { ...EMPTY }, svc: {} })
+    };
+  }
+}
+</script>
+</body>
+</html>

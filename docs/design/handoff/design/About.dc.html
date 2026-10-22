@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>About Us · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+<dc-import name="SiteHeader" active="about" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+<main>
+<section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,72px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,88px);align-items:center">
+  <div style="flex:1.3 1 420px;min-width:0">
+    <nav aria-label="Breadcrumb" style="font-size:14px;color:#5A5C54;display:flex;gap:8px;margin-bottom:28px"><a href="SFG%20Home%20v2.dc.html" style="color:#5A5C54">{{ t.home }}</a><span aria-hidden="true">/</span><span aria-current="page" style="color:#1F211C">{{ t.kick }}</span></nav>
+    <p style="margin:0 0 18px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:#45473F"><span style="width:28px;height:3px;background:#C6241C;border-radius:2px"></span>{{ t.kick }}</p>
+    <h1 style="margin:0;font-size:clamp(38px,5.4vw,72px);line-height:1;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">{{ t.h1 }}</h1>
+    <p style="margin:24px 0 0;max-width:560px;font-size:clamp(17px,1.4vw,19px);line-height:1.55;color:#45473F;text-wrap:pretty">{{ t.p1 }}</p>
+  </div>
+  <div style="flex:1 1 320px;min-width:0;max-width:460px;position:relative;aspect-ratio:4/5;background:#C6241C;color:#FFFFFF;border-radius:4px;overflow:hidden;display:flex;flex-direction:column">
+    <div style="background:#FFFFFF;padding:22px 24px 52px;clip-path:polygon(0 0,100% 0,100% 55%,0 100%)"><div aria-hidden="true" style="width:60px;height:60px;background:{{ a.sgFood }} left top/contain no-repeat"></div></div>
+    <p style="position:relative;z-index:1;margin:4px 24px 0;font-size:clamp(40px,4.4vw,60px);font-weight:600;letter-spacing:-0.035em;line-height:0.95">2015</p>
+    <p style="position:relative;z-index:1;margin:10px 24px 0;font-size:16px;line-height:1.45;max-width:55%">{{ t.posterCap }}</p>
+    <div aria-hidden="true" style="position:absolute;right:-6%;bottom:-6%;width:72%;aspect-ratio:1/1;background:{{ a.kitchen }} center/cover;filter:grayscale(1);-webkit-mask:{{ a.sgFood }} center/contain no-repeat;mask:{{ a.sgFood }} center/contain no-repeat"></div>
+  </div>
+</section>
+
+<section style="border-top:1px solid #E6E6E1;border-bottom:1px solid #E6E6E1">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(20px,4vw,48px)">
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px 32px">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column-reverse;gap:6px;border-left:3px solid #EA2915;padding-left:16px">
+          <dt style="font-size:14px;color:#5A5C54">{{ s.label }}</dt>
+          <dd style="margin:0;font-size:clamp(34px,3.6vw,48px);font-weight:550;letter-spacing:-0.03em;line-height:1">{{ s.value }}</dd>
+        </div>
+      </sc-for>
+    </dl>
+  </div>
+</section>
+
+<section aria-labelledby="story-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,96px)">
+  <div style="flex:1 1 300px;max-width:420px">
+    <p style="margin:0 0 14px;font-size:14px;font-weight:500;color:#C6241C">{{ t.storyKick }}</p>
+    <h2 id="story-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;text-wrap:balance">{{ t.storyH }}</h2>
+  </div>
+  <div style="flex:1.5 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.6;color:#45473F;max-width:680px">
+    <p style="margin:0">{{ t.p2 }}</p>
+    <p style="margin:0">{{ t.p3 }}</p>
+  </div>
+</section>
+
+<section aria-labelledby="jr-h" style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px)">
+    <p style="margin:0 0 14px;font-size:14px;font-weight:500;color:#FD572A">{{ t.jrKick }}</p>
+    <h2 id="jr-h" style="margin:0 0 48px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;max-width:720px;text-wrap:balance">{{ t.jrH }}</h2>
+    <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:32px 24px">
+      <sc-for list="{{ journey }}" as="j" hint-placeholder-count="5">
+        <li style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:3px solid {{ j.color }}">
+          <span style="font-size:clamp(28px,2.6vw,36px);font-weight:550;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums">{{ j.year }}</span>
+          <span style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#C9CABF">{{ j.tag }}</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#D6D7CE">{{ j.text }}</p>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="vm-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px)">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:36px">
+    <h2 id="vm-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.vmH }}</h2>
+    <span style="font-size:12px;font-weight:550;letter-spacing:0.06em;text-transform:uppercase;color:#C6241C;border:1px dashed #C6241C;padding:5px 10px;border-radius:4px">{{ t.draft }}</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px">
+    <div style="padding:28px;border:1px solid #E6E6E1;border-radius:4px;display:flex;flex-direction:column;gap:14px">
+      <p style="margin:0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.vision }}</p>
+      <p style="margin:0;font-size:clamp(22px,2.2vw,28px);line-height:1.25;font-weight:500;letter-spacing:-0.015em">{{ t.visionText }}</p>
+    </div>
+    <div style="padding:28px;border:1px solid #E6E6E1;border-radius:4px;display:flex;flex-direction:column;gap:14px">
+      <p style="margin:0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.mission }}</p>
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+        <sc-for list="{{ mission }}" as="m" hint-placeholder-count="3"><li style="display:grid;grid-template-columns:32px 1fr;gap:8px;padding:12px 0;border-top:1px solid #EFEFEA;font-size:16px;line-height:1.5"><span style="font-weight:600;color:#C6241C;font-variant-numeric:tabular-nums">{{ m.n }}</span>{{ m.text }}</li></sc-for>
+      </ol>
+    </div>
+  </div>
+  <h3 style="margin:56px 0 24px;font-size:clamp(24px,2.6vw,32px);font-weight:550;letter-spacing:-0.02em">{{ t.valuesH }}</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px">
+    <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid #1F211C">
+        <i class="ph {{ v.icon }}" style="font-size:30px;color:#C6241C"></i>
+        <h4 style="margin:6px 0 0;font-size:21px;font-weight:550;letter-spacing:-0.01em">{{ v.title }}</h4>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#45473F">{{ v.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section aria-labelledby="eco-h" style="background:#F4F4F1;border-top:1px solid #E6E6E1;border-bottom:1px solid #E6E6E1">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px)">
+    <div style="display:flex;flex-wrap:wrap;gap:16px 48px;align-items:flex-end;justify-content:space-between;margin-bottom:36px">
+      <h2 id="eco-h" style="margin:0;max-width:640px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;text-wrap:balance">{{ t.ecoH }}</h2>
+      <p style="margin:0;max-width:380px;font-size:16px;line-height:1.55;color:#45473F">{{ t.ecoP }}</p>
+    </div>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px">
+      <sc-for list="{{ eco }}" as="e" hint-placeholder-count="7"><li style="padding:22px;background:#FFFFFF;border:1px solid #E6E6E1;border-radius:4px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:19px;font-weight:550">{{ e.title }}</h3><p style="margin:0;font-size:15px;line-height:1.5;color:#45473F">{{ e.desc }}</p></li></sc-for>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="cert-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px)">
+  <h2 id="cert-h" style="margin:0 0 32px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.certH }}</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+    <div style="border:1px solid #E6E6E1;border-radius:4px;overflow:hidden"><div style="background:#F4F4F1;padding:20px 20px 0;height:220px;box-sizing:border-box;overflow:hidden;display:flex;justify-content:center"><div role="img" aria-label="ISO 22000:2018 certificate" style="width:72%;aspect-ratio:1/1.414;align-self:flex-start;background:#FFFFFF {{ a.cert_iso_22000 }} top center/cover no-repeat;box-shadow:0 10px 24px -10px rgba(31,33,28,0.35)"></div></div><div style="padding:16px 20px 20px;border-top:1px solid #E6E6E1"><p style="margin:0;font-size:18px;font-weight:550">ISO 22000:2018</p><p style="margin:4px 0 0;font-size:14px;color:#5A5C54">{{ t.validSep }}</p></div></div>
+    <div style="border:1px solid #E6E6E1;border-radius:4px;overflow:hidden"><div style="background:#F4F4F1;padding:20px 20px 0;height:220px;box-sizing:border-box;overflow:hidden;display:flex;justify-content:center"><div role="img" aria-label="HACCP CXC 1-1969 certificate" style="width:72%;aspect-ratio:1/1.414;align-self:flex-start;background:#FFFFFF {{ a.cert_haccp_cxc }} top center/cover no-repeat;box-shadow:0 10px 24px -10px rgba(31,33,28,0.35)"></div></div><div style="padding:16px 20px 20px;border-top:1px solid #E6E6E1"><p style="margin:0;font-size:18px;font-weight:550">HACCP · CXC 1-1969</p><p style="margin:4px 0 0;font-size:14px;color:#5A5C54">{{ t.validAug }}</p></div></div>
+    <div style="border:1px solid #E6E6E1;border-radius:4px;overflow:hidden"><div style="background:#F4F4F1;padding:20px 20px 0;height:220px;box-sizing:border-box;overflow:hidden;display:flex;justify-content:center"><div role="img" aria-label="SLHS certificate" style="width:72%;aspect-ratio:1/1.414;align-self:flex-start;background:#FFFFFF {{ a.cert_slhs }} top center/cover no-repeat;box-shadow:0 10px 24px -10px rgba(31,33,28,0.35)"></div></div><div style="padding:16px 20px 20px;border-top:1px solid #E6E6E1"><p style="margin:0;font-size:18px;font-weight:550">SLHS</p><p style="margin:4px 0 0;font-size:14px;color:#5A5C54">{{ t.slhs }}</p></div></div>
+  </div>
+</section>
+
+<section aria-labelledby="mg-h" style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(56px,7vw,104px)">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:32px">
+    <h2 id="mg-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.mgH }}</h2>
+    <span style="font-size:12px;font-weight:550;letter-spacing:0.06em;text-transform:uppercase;color:#C6241C;border:1px dashed #C6241C;padding:5px 10px;border-radius:4px">{{ t.placeholder }}</span>
+  </div>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:16px">
+    <sc-for list="{{ mgmt }}" as="m" hint-placeholder-count="4">
+      <li style="display:flex;flex-direction:column;gap:12px">
+        <div style="aspect-ratio:4/5;border:1px dashed #C4C4BC;border-radius:4px;background:#F4F4F1;display:grid;place-items:center;color:#5A5C54"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;font-size:14px"><i class="ph ph-user" style="font-size:40px"></i>{{ t.photo }}</div></div>
+        <div><p style="margin:0;font-size:18px;font-weight:550">{{ m.name }}</p><p style="margin:4px 0 0;font-size:15px;color:#45473F">{{ m.role }}</p></div>
+      </li>
+    </sc-for>
+  </ul>
+</section>
+
+<section style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,88px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between">
+    <h2 style="margin:0;max-width:620px;font-size:clamp(30px,3.8vw,52px);line-height:1;font-weight:550;letter-spacing:-0.035em;text-wrap:balance">{{ t.ctaH }}</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;background:#C6241C;color:#FFFFFF;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px" style-hover="background:#A3181A;color:#FFFFFF">{{ t.quote }} <i class="ph ph-arrow-right"></i></a>
+      <a href="Careers.dc.html" style="display:flex;align-items:center;gap:10px;border:1.5px solid #FFFFFF;color:#FFFFFF;font-weight:500;font-size:16px;padding:15px 22px;border-radius:4px" style-hover="background:#FFFFFF;color:#1F211C">{{ t.careers }}</a>
+    </div>
+  </div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COLORS = ['#EA2915', '#5E9628', '#28937A', '#FD572A', '#C6241C'];
+const COPY = {
+  en: {
+    home: 'Home', kick: 'About Us', quote: 'Request a Quotation', careers: 'Work with us',
+    h1: 'More than a decade of operational excellence.',
+    p1: 'For over 10 years, Sunshine has built a strong track record in delivering reliable operational services across Indonesia, earning the trust of leading organizations through food service excellence, operational expertise, and a commitment to quality.',
+    posterCap: 'Established as Sunshine Food Group, with a focus on healthcare catering.',
+    stats: [['10+', 'Years experienced'], ['18+', 'Cities'], ['1,000+', 'Employees'], ['5M+', 'Meals served a year']],
+    storyKick: 'Our story', storyH: 'One integrated solution partner.',
+    p2: 'Building on this foundation, we have evolved into Sunshine Facility Group, an integrated facility solutions partner delivering Food Services, Technical Services, Soft Services, and Supply Chain Solutions through one trusted platform.',
+    p3: 'Today, we support clients across healthcare, corporate, retail, industrial, hospitality, and institutional sectors, helping them simplify operations and achieve consistent, high-quality performance.',
+    jrKick: 'Our journey', jrH: 'From food expertise to integrated facility solutions.',
+    journey: [['2015', 'Healthcare Catering', 'Established as Sunshine Food Group with a focus on healthcare catering.'], ['2017–2020', 'Corporate Catering', 'Expanded into corporate catering and industrial catering services.'], ['2021–2024', 'Operations & Technology', 'Strengthened nutrition expertise, kitchen management, coffee solutions and digital operational systems.'], ['2025', 'Facilities & Partnerships', 'Expanded facility support capabilities through strategic partnerships and integrated services.'], ['Today', 'Sunshine Facility Group', 'Delivering end-to-end integrated facility solutions beyond food.']],
+    vmH: 'Vision & mission', draft: 'Draft · confirm wording', vision: 'Vision', mission: 'Mission',
+    visionText: 'To be Indonesia’s most trusted integrated facility solutions partner.',
+    missionList: ['Deliver safe, consistent services through trained and supervised teams.', 'Make operations transparent, with a digital record of every job.', 'Simplify our clients’ operations with one partner for food, facilities, workforce and supply.'],
+    valuesH: 'What we stand for',
+    values: [['ph-arrows-in-simple', 'Simplifying operations', 'One partner, one contract and one report, so our clients manage less.'], ['ph-medal', 'Delivering excellence', 'Audited standards, trained people and work that is checked on every shift.'], ['ph-plant', 'Enhancing workplaces', 'Clean, safe and well-fed sites where people can do their best work.']],
+    ecoH: 'Powered by one of Indonesia’s strongest business ecosystems.', ecoP: 'Part of Lippo Indonesia. Built for integrated operations. Our experience across many industries helps us understand diverse operational needs.',
+    eco: [['Food and Lifestyle', 'Supporting retail food operations from concept to execution.'], ['Retail', 'Large-scale retail operational support and food solutions.'], ['Education', 'Supporting the development of Indonesia’s education landscape through leading school and higher education.'], ['Financial Services', 'Supporting integrated business ecosystems.'], ['EPC', 'Supporting facility readiness through engineering collaboration.'], ['Healthcare', 'Clinical nutrition and hospital food operations.'], ['Hospitality', 'Supporting quality dining and operational services across hospitality environments.']],
+    certH: 'Certifications', validSep: 'Valid until Sep 2027', validAug: 'Valid until Aug 2027', slhs: 'Sertifikat Laik Higiene Sanitasi',
+    mgH: 'Management', placeholder: 'Placeholder · replace with real names and photos', photo: 'Photo',
+    mgmt: [['[Name]', 'President Director'], ['[Name]', 'Director of Operations'], ['[Name]', 'Director of Finance'], ['[Name]', 'Head of Food Services']],
+    ctaH: 'Let’s talk about your site, or your career.'
+  },
+  id: {
+    home: 'Beranda', kick: 'Tentang Kami', quote: 'Minta Penawaran', careers: 'Bergabung bersama kami',
+    h1: 'Lebih dari satu dekade keunggulan operasional.',
+    p1: 'Selama lebih dari 10 tahun, Sunshine membangun rekam jejak yang kuat dalam menghadirkan layanan operasional yang andal di seluruh Indonesia, dipercaya organisasi terkemuka berkat keunggulan layanan makanan, keahlian operasional, dan komitmen terhadap kualitas.',
+    posterCap: 'Didirikan sebagai Sunshine Food Group, berfokus pada katering rumah sakit.',
+    stats: [['10+', 'Tahun pengalaman'], ['18+', 'Kota'], ['1.000+', 'Karyawan'], ['5 jt+', 'Porsi per tahun']],
+    storyKick: 'Cerita kami', storyH: 'Satu mitra solusi terpadu.',
+    p2: 'Berangkat dari fondasi ini, kami berkembang menjadi Sunshine Facility Group, mitra solusi fasilitas terpadu yang menghadirkan Layanan Makanan, Layanan Teknis, Soft Services, dan Solusi Rantai Pasok melalui satu platform tepercaya.',
+    p3: 'Kini kami mendukung klien di sektor kesehatan, korporat, ritel, industri, perhotelan, dan institusi, membantu mereka menyederhanakan operasional dan mencapai kinerja yang konsisten dan berkualitas.',
+    jrKick: 'Perjalanan kami', jrH: 'Dari keahlian pangan menuju solusi fasilitas terpadu.',
+    journey: [['2015', 'Katering Rumah Sakit', 'Didirikan sebagai Sunshine Food Group dengan fokus pada katering rumah sakit.'], ['2017–2020', 'Katering Korporat', 'Berkembang ke layanan katering korporat dan katering industri.'], ['2021–2024', 'Operasional & Teknologi', 'Memperkuat keahlian gizi, manajemen dapur, solusi kopi, dan sistem operasional digital.'], ['2025', 'Fasilitas & Kemitraan', 'Memperluas kemampuan dukungan fasilitas melalui kemitraan strategis dan layanan terpadu.'], ['Kini', 'Sunshine Facility Group', 'Menghadirkan solusi fasilitas terpadu menyeluruh, lebih dari sekadar makanan.']],
+    vmH: 'Visi & misi', draft: 'Draf · konfirmasi kata-kata', vision: 'Visi', mission: 'Misi',
+    visionText: 'Menjadi mitra solusi fasilitas terpadu paling tepercaya di Indonesia.',
+    missionList: ['Menghadirkan layanan yang aman dan konsisten melalui tim yang terlatih dan diawasi.', 'Membuat operasional transparan, dengan catatan digital untuk setiap pekerjaan.', 'Menyederhanakan operasional klien dengan satu mitra untuk makanan, fasilitas, tenaga kerja, dan pasokan.'],
+    valuesH: 'Nilai kami',
+    values: [['ph-arrows-in-simple', 'Menyederhanakan operasional', 'Satu mitra, satu kontrak, dan satu laporan, sehingga klien mengelola lebih sedikit.'], ['ph-medal', 'Menghadirkan keunggulan', 'Standar yang diaudit, orang-orang terlatih, dan pekerjaan yang diperiksa setiap shift.'], ['ph-plant', 'Meningkatkan tempat kerja', 'Lokasi yang bersih, aman, dan tercukupi kebutuhan makannya agar orang dapat bekerja dengan baik.']],
+    ecoH: 'Didukung salah satu ekosistem bisnis terkuat di Indonesia.', ecoP: 'Bagian dari Lippo Indonesia. Dibangun untuk operasional terpadu. Pengalaman kami di banyak industri membantu kami memahami beragam kebutuhan operasional.',
+    eco: [['Makanan dan Gaya Hidup', 'Mendukung operasional makanan ritel dari konsep hingga eksekusi.'], ['Ritel', 'Dukungan operasional ritel skala besar dan solusi makanan.'], ['Pendidikan', 'Mendukung perkembangan pendidikan Indonesia melalui sekolah dan perguruan tinggi terkemuka.'], ['Jasa Keuangan', 'Mendukung ekosistem bisnis terpadu.'], ['EPC', 'Mendukung kesiapan fasilitas melalui kolaborasi teknik.'], ['Kesehatan', 'Gizi klinis dan operasional makanan rumah sakit.'], ['Perhotelan', 'Mendukung layanan makan dan operasional berkualitas di lingkungan perhotelan.']],
+    certH: 'Sertifikasi', validSep: 'Berlaku hingga Sep 2027', validAug: 'Berlaku hingga Agu 2027', slhs: 'Sertifikat Laik Higiene Sanitasi',
+    mgH: 'Manajemen', placeholder: 'Contoh · ganti dengan nama dan foto asli', photo: 'Foto',
+    mgmt: [['[Nama]', 'Presiden Direktur'], ['[Nama]', 'Direktur Operasional'], ['[Nama]', 'Direktur Keuangan'], ['[Nama]', 'Kepala Layanan Makanan']],
+    ctaH: 'Mari bicara tentang lokasi Anda, atau karier Anda.'
+  }
+};
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const CSSURL = u => 'url("' + u + '")';
+const A = (id, p) => CSSURL(RES(id, p));
+class Component extends DCLogic {
+  state = { lang: 'en' };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    this._l = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this._l);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this._l); }
+  renderVals() {
+    const t = COPY[this.state.lang];
+    return {
+      t,
+      a: { sgFood: A('sg-food', 'assets/brand/sg-food.svg'), kitchen: A('photo-kitchen', 'assets/photos/kitchen.png'), cert_iso_22000: A('cert-iso-22000', 'assets/certificates/iso-22000.png'), cert_haccp_cxc: A('cert-haccp-cxc', 'assets/certificates/haccp-cxc.png'), cert_slhs: A('cert-slhs', 'assets/certificates/slhs.png') },
+      stats: t.stats.map(s => ({ value: s[0], label: s[1] })),
+      journey: t.journey.map((j, i) => ({ year: j[0], tag: j[1], text: j[2], color: COLORS[i] })),
+      mission: t.missionList.map((m, i) => ({ n: String(i + 1).padStart(2, '0'), text: m })),
+      values: t.values.map(v => ({ icon: v[0], title: v[1], desc: v[2] })),
+      eco: t.eco.map(e => ({ title: e[0], desc: e[1] })),
+      mgmt: t.mgmt.map(m => ({ name: m[0], role: m[1] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Sunshine Facilities Group · Integrated facility services in Indonesia</title>
+<meta name="description" content="Food, facility, workforce, remote-site and digital services for buildings across Indonesia.">
+<meta name="ext-resource-dependency" content="assets/vendor/three.module.js" data-resource-id="three">
+<meta name="ext-resource-dependency" content="assets/brand/sfg-logo-primary.png" data-resource-id="logo-primary">
+<meta name="ext-resource-dependency" content="assets/brand/sfg-logo-white.png" data-resource-id="logo-white">
+<meta name="ext-resource-dependency" content="assets/brand/sg-food.svg" data-resource-id="sg-food">
+<meta name="ext-resource-dependency" content="assets/brand/sg-digital.svg" data-resource-id="sg-digital">
+<meta name="ext-resource-dependency" content="assets/brand/sg-workforce.svg" data-resource-id="sg-workforce">
+<meta name="ext-resource-dependency" content="assets/brand/sg-remote.svg" data-resource-id="sg-remote">
+<meta name="ext-resource-dependency" content="assets/brand/sg-facility.svg" data-resource-id="sg-facility">
+<meta name="ext-resource-dependency" content="assets/photos/cleaning.png" data-resource-id="photo-cleaning">
+<meta name="ext-resource-dependency" content="assets/photos/kitchen.png" data-resource-id="photo-kitchen">
+<meta name="ext-resource-dependency" content="assets/photos/mep-panel.png" data-resource-id="photo-mep-panel">
+<meta name="ext-resource-dependency" content="assets/photos/team.png" data-resource-id="photo-team">
+<meta name="ext-resource-dependency" content="assets/photos/technical.png" data-resource-id="photo-technical">
+<meta name="ext-resource-dependency" content="assets/photos/lobby-cleaning.png" data-resource-id="photo-lobby-cleaning">
+<meta name="ext-resource-dependency" content="assets/photos/supply-map.png" data-resource-id="photo-supply-map">
+<meta name="ext-resource-dependency" content="assets/clients/danone.png" data-resource-id="client-danone">
+<meta name="ext-resource-dependency" content="assets/clients/cargill.png" data-resource-id="client-cargill">
+<meta name="ext-resource-dependency" content="assets/clients/mandiri.png" data-resource-id="client-mandiri">
+<meta name="ext-resource-dependency" content="assets/clients/united-tractors.png" data-resource-id="client-united-tractors">
+<meta name="ext-resource-dependency" content="assets/clients/danantara.png" data-resource-id="client-danantara">
+<meta name="ext-resource-dependency" content="assets/clients/lippo-group.png" data-resource-id="client-lippo-group">
+<meta name="ext-resource-dependency" content="assets/clients/lippo-malls.png" data-resource-id="client-lippo-malls">
+<meta name="ext-resource-dependency" content="assets/clients/byd.png" data-resource-id="client-byd">
+<meta name="ext-resource-dependency" content="assets/clients/savoria.png" data-resource-id="client-savoria">
+<meta name="ext-resource-dependency" content="assets/clients/sph.png" data-resource-id="client-sph">
+<meta name="ext-resource-dependency" content="assets/clients/darya-varia.png" data-resource-id="client-darya-varia">
+<meta name="ext-resource-dependency" content="assets/clients/st-carolus.png" data-resource-id="client-st-carolus">
+<meta name="ext-resource-dependency" content="assets/clients/permata-cibubur.png" data-resource-id="client-permata-cibubur">
+<meta name="ext-resource-dependency" content="assets/clients/siloam.png" data-resource-id="client-siloam">
+<meta name="ext-resource-dependency" content="assets/clients/harapan-kita.png" data-resource-id="client-harapan-kita">
+<meta name="ext-resource-dependency" content="assets/clients/fks-food.png" data-resource-id="client-fks-food">
+<meta name="ext-resource-dependency" content="assets/clients/buma.png" data-resource-id="client-buma">
+<meta name="ext-resource-dependency" content="assets/clients/hpu.png" data-resource-id="client-hpu">
+<meta name="ext-resource-dependency" content="assets/clients/hpmu.png" data-resource-id="client-hpmu">
+<meta name="ext-resource-dependency" content="assets/certificates/iso-22000.png" data-resource-id="cert-iso-22000">
+<meta name="ext-resource-dependency" content="assets/certificates/haccp-cxc.png" data-resource-id="cert-haccp-cxc">
+<meta name="ext-resource-dependency" content="assets/certificates/slhs.png" data-resource-id="cert-slhs">
+<template id="__bundler_thumbnail" data-bg-color="#1F211C"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1F211C"/><g transform="translate(30 30)"><polygon fill="#EA2915" points="0,0 20,0 20,20 0,14"/><polygon fill="#C6241C" points="26,0 40,0 40,20 20,20"/><polygon fill="#C6241C" points="0,20 20,20 14,40 0,40"/><polygon fill="#EA2915" points="20,20 40,26 40,40 20,40"/></g></svg></template>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}"><dc-import name="SFG Home v2" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}"><dc-import name="Services" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}"><dc-import name="Service Detail" line="{{ line }}" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isIndustries }}" hint-placeholder-val="{{ false }}"><dc-import name="Industries" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}"><dc-import name="About" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isCareers }}" hint-placeholder-val="{{ false }}"><dc-import name="Careers" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}"><dc-import name="Contact" hint-size="100%,100vh"></dc-import></sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const FILE_ROUTE = { 'sfg home v2': 'home', 'services': 'services', 'service detail': 'detail', 'industries': 'industries', 'about': 'about', 'careers': 'careers', 'contact': 'contact' };
+const LINES = ['food', 'digital', 'workforce', 'remote', 'facility'];
+const parseHash = h => {
+  const m = (h || '').match(/^#\/([a-z]+)(?:\/([a-z]+))?/);
+  if (!m) return null;
+  if (m[1] === 'service') return { page: 'detail', line: LINES.includes(m[2]) ? m[2] : 'facility' };
+  return Object.values(FILE_ROUTE).includes(m[1]) ? { page: m[1], line: null } : null;
+};
+const toHash = r => r.page === 'detail' ? '#/service/' + r.line : r.page === 'home' ? '#/' : '#/' + r.page;
+class Component extends DCLogic {
+  state = { page: 'home', line: 'facility' };
+  componentDidMount() {
+    const r = parseHash(location.hash); if (r) this.setState({ page: r.page, line: r.line || 'facility' });
+    this.onHash = () => { const r2 = parseHash(location.hash); if (r2) { this.setState({ page: r2.page, line: r2.line || this.state.line }); window.scrollTo(0, 0); } else if (location.hash === '#/' || location.hash === '') { this.setState({ page: 'home' }); } };
+    window.addEventListener('hashchange', this.onHash);
+    this.onClick = e => {
+      const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+      const href = a.getAttribute('href') || '';
+      const m = href.match(/^(?:\.\/)?([^?#\/]+)\.dc\.html(?:\?line=([a-z]+))?/i); if (!m) return;
+      const page = FILE_ROUTE[decodeURIComponent(m[1]).toLowerCase()]; if (!page) return;
+      e.preventDefault();
+      const line = page === 'detail' ? (LINES.includes(m[2]) ? m[2] : 'facility') : null;
+      const hash = toHash({ page, line });
+      if (location.hash === hash) window.scrollTo(0, 0); else location.hash = hash;
+    };
+    document.addEventListener('click', this.onClick, true);
+    if (window.__resources) {
+      const FONT_RULE = /@font-face\s*\{[^}]*url\(["']?assets\/fonts\/[^}]*\}/g;
+      const dead = n => {
+        if (n.tagName === 'STYLE' && FONT_RULE.test(n.textContent || '')) { FONT_RULE.lastIndex = 0; n.textContent = n.textContent.replace(FONT_RULE, ''); }
+        FONT_RULE.lastIndex = 0;
+        return n.tagName === 'LINK' && /assets\/(vendor|fonts)\//.test(n.getAttribute('href') || '');
+      };
+      const sweep = root => root.querySelectorAll && root.querySelectorAll('link,style').forEach(n => { if (dead(n)) n.remove(); });
+      sweep(document);
+      this.mo = new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; if (dead(n)) n.remove(); else sweep(n); })));
+      this.mo.observe(document.documentElement, { childList: true, subtree: true });
+    }
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.onHash); document.removeEventListener('click', this.onClick, true); if (this.mo) this.mo.disconnect(); }
+  renderVals() {
+    const p = this.state.page;
+    return { isHome: p === 'home', isServices: p === 'services', isDetail: p === 'detail', isIndustries: p === 'industries', isAbout: p === 'about', isCareers: p === 'careers', isContact: p === 'contact', line: this.state.line };
+  }
+}
+</script>
+</body>
+</html>

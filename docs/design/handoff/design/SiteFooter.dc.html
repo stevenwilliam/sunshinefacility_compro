@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="font-family:'Nohemi',system-ui,sans-serif">
+<div aria-hidden="true" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:clamp(64px,9vw,128px);overflow:hidden">
+  <div style="position:relative;overflow:hidden;background:#EA2915"><div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:#C6241C;-webkit-mask:{{ mk.food }} 0 0/contain no-repeat;mask:{{ mk.food }} 0 0/contain no-repeat"></div></div>
+  <div style="position:relative;overflow:hidden;background:#28937A"><div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:#1F7360;-webkit-mask:{{ mk.digital }} 0 0/contain no-repeat;mask:{{ mk.digital }} 0 0/contain no-repeat"></div></div>
+  <div style="position:relative;overflow:hidden;background:#5E9628"><div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:#4A7023;-webkit-mask:{{ mk.workforce }} 0 0/contain no-repeat;mask:{{ mk.workforce }} 0 0/contain no-repeat"></div></div>
+  <div style="position:relative;overflow:hidden;background:#FD572A"><div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:#E04E2B;-webkit-mask:{{ mk.remote }} 0 0/contain no-repeat;mask:{{ mk.remote }} 0 0/contain no-repeat"></div></div>
+  <div style="position:relative;overflow:hidden;background:#C6241C"><div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:#A3181A;-webkit-mask:{{ mk.facility }} 0 0/contain no-repeat;mask:{{ mk.facility }} 0 0/contain no-repeat"></div></div>
+</div>
+<footer style="background:#161813;color:#C9CABF;font-size:15px">
+  <div style="max-width:1280px;margin:0 auto;padding:56px clamp(20px,4vw,48px) 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span role="img" aria-label="Sunshine Facilities Group" style="display:block;height:36px;width:146px;background:{{ logoCss }} left center/contain no-repeat"></span>
+      <p style="margin:0;line-height:1.55">{{ t.address }}</p>
+      <p style="margin:0;font-size:13px">{{ t.lippo }}</p>
+    </div>
+    <div>
+      <p style="margin:0 0 14px;color:#FFFFFF;font-weight:500">{{ t.contact }}</p>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px">
+        <li><a href="tel:+622112345678" style="color:#C9CABF" style-hover="color:#FD572A">+62 21 1234 5678</a></li>
+        <li><a href="https://wa.me/6212345678" style="color:#C9CABF" style-hover="color:#FD572A">WhatsApp +62 1234 5678</a></li>
+        <li><a href="mailto:hello@sunshinefacility.com" style="color:#C9CABF" style-hover="color:#FD572A">hello@sunshinefacility.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="margin:0 0 14px;color:#FFFFFF;font-weight:500">{{ t.links }}</p>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6"><li><a href="{{ n.href }}" style="color:#C9CABF" style-hover="color:#FD572A">{{ n.label }}</a></li></sc-for>
+      </ul>
+    </div>
+    <div>
+      <p style="margin:0 0 14px;color:#FFFFFF;font-weight:500">{{ t.follow }}</p>
+      <div style="display:flex;gap:8px">
+        <a href="#" aria-label="Instagram" style="width:44px;height:44px;border:1px solid #44463E;border-radius:4px;display:grid;place-items:center;font-size:20px;color:#C9CABF" style-hover="border-color:#FD572A;color:#FD572A"><i class="ph ph-instagram-logo"></i></a>
+        <a href="#" aria-label="LinkedIn" style="width:44px;height:44px;border:1px solid #44463E;border-radius:4px;display:grid;place-items:center;font-size:20px;color:#C9CABF" style-hover="border-color:#FD572A;color:#FD572A"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="#" aria-label="Facebook" style="width:44px;height:44px;border:1px solid #44463E;border-radius:4px;display:grid;place-items:center;font-size:20px;color:#C9CABF" style-hover="border-color:#FD572A;color:#FD572A"><i class="ph ph-facebook-logo"></i></a>
+        <a href="#" aria-label="YouTube" style="width:44px;height:44px;border:1px solid #44463E;border-radius:4px;display:grid;place-items:center;font-size:20px;color:#C9CABF" style-hover="border-color:#FD572A;color:#FD572A"><i class="ph ph-youtube-logo"></i></a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,4vw,48px) 32px;border-top:1px solid #33352E;font-size:13px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between">
+    <span>© 2026 Sunshine Facilities Group</span><span>www.sunshinefacility.com</span>
+  </div>
+</footer>
+<a href="https://wa.me/6212345678" aria-label="{{ t.wa }}" style="position:fixed;right:clamp(16px,2vw,28px);bottom:clamp(16px,2vw,28px);z-index:60;width:60px;height:60px;border-radius:50%;background:#1E9E55;color:#FFFFFF;display:grid;place-items:center;font-size:32px;box-shadow:0 10px 24px -6px rgba(22,24,19,0.45)" style-hover="background:#178A49;color:#FFFFFF"><i class="ph-fill ph-whatsapp-logo"></i></a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;520px&quot;}}">
+const COPY = {
+  en: { address: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia', lippo: 'Part of Lippo Indonesia.', contact: 'Contact', links: 'Quick links', follow: 'Follow us', wa: 'Chat on WhatsApp', nav: ['Home', 'Services', 'Industries', 'About Us', 'Careers', 'Contact'] },
+  id: { address: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia', lippo: 'Bagian dari Lippo Indonesia.', contact: 'Kontak', links: 'Tautan', follow: 'Ikuti kami', wa: 'Chat via WhatsApp', nav: ['Beranda', 'Layanan', 'Industri', 'Tentang Kami', 'Karier', 'Kontak'] }
+};
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const U = (id, p) => 'url("' + RES(id, p) + '")';
+const HREF = ['SFG%20Home%20v2.dc.html', 'Services.dc.html', 'Industries.dc.html', 'About.dc.html', 'Careers.dc.html', 'Contact.dc.html'];
+class Component extends DCLogic {
+  state = { lang: 'en' };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    this.o = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this.o);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this.o); }
+  renderVals() {
+    const t = COPY[this.state.lang];
+    const mk = {}; ['food', 'digital', 'workforce', 'remote', 'facility'].forEach(m => { mk[m] = U('sg-' + m, 'assets/brand/sg-' + m + '.svg'); });
+    return { mk, logoCss: U('logo-white', 'assets/brand/sfg-logo-white.png'), t, nav: t.nav.map((label, i) => ({ label, href: HREF[i] })) };
+  }
+}
+</script>
+</body>
+</html>

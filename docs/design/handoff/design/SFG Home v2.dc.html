@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Sunshine Facilities Group · Integrated facility services in Indonesia</title>
+<meta name="description" content="Food, cleaning, MEP maintenance, security, environmental and workforce services for buildings across Indonesia.">
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<meta name="ext-resource-dependency" content="assets/vendor/three.module.js" data-resource-id="three">
+<meta name="ext-resource-dependency" content="assets/photos/cleaning.png" data-resource-id="photo-cleaning">
+<meta name="ext-resource-dependency" content="assets/brand/sfg-logo-primary.png" data-resource-id="logo-primary">
+<meta name="ext-resource-dependency" content="assets/brand/sfg-logo-white.png" data-resource-id="logo-white">
+<meta name="ext-resource-dependency" content="assets/clients/danone.png" data-resource-id="client-danone">
+<meta name="ext-resource-dependency" content="assets/clients/cargill.png" data-resource-id="client-cargill">
+<meta name="ext-resource-dependency" content="assets/clients/mandiri.png" data-resource-id="client-mandiri">
+<meta name="ext-resource-dependency" content="assets/clients/united-tractors.png" data-resource-id="client-united-tractors">
+<meta name="ext-resource-dependency" content="assets/clients/danantara.png" data-resource-id="client-danantara">
+<meta name="ext-resource-dependency" content="assets/clients/lippo-group.png" data-resource-id="client-lippo-group">
+<meta name="ext-resource-dependency" content="assets/clients/lippo-malls.png" data-resource-id="client-lippo-malls">
+<meta name="ext-resource-dependency" content="assets/clients/byd.png" data-resource-id="client-byd">
+<meta name="ext-resource-dependency" content="assets/clients/savoria.png" data-resource-id="client-savoria">
+<meta name="ext-resource-dependency" content="assets/clients/sph.png" data-resource-id="client-sph">
+<meta name="ext-resource-dependency" content="assets/clients/darya-varia.png" data-resource-id="client-darya-varia">
+<meta name="ext-resource-dependency" content="assets/clients/st-carolus.png" data-resource-id="client-st-carolus">
+<meta name="ext-resource-dependency" content="assets/clients/permata-cibubur.png" data-resource-id="client-permata-cibubur">
+<meta name="ext-resource-dependency" content="assets/clients/siloam.png" data-resource-id="client-siloam">
+<meta name="ext-resource-dependency" content="assets/clients/harapan-kita.png" data-resource-id="client-harapan-kita">
+<meta name="ext-resource-dependency" content="assets/clients/fks-food.png" data-resource-id="client-fks-food">
+<meta name="ext-resource-dependency" content="assets/clients/buma.png" data-resource-id="client-buma">
+<meta name="ext-resource-dependency" content="assets/clients/hpu.png" data-resource-id="client-hpu">
+<meta name="ext-resource-dependency" content="assets/clients/hpmu.png" data-resource-id="client-hpmu">
+<meta name="ext-resource-dependency" content="assets/brand/sg-food.svg" data-resource-id="sg-food">
+<meta name="ext-resource-dependency" content="assets/brand/sg-digital.svg" data-resource-id="sg-digital">
+<meta name="ext-resource-dependency" content="assets/brand/sg-workforce.svg" data-resource-id="sg-workforce">
+<meta name="ext-resource-dependency" content="assets/brand/sg-remote.svg" data-resource-id="sg-remote">
+<meta name="ext-resource-dependency" content="assets/brand/sg-facility.svg" data-resource-id="sg-facility">
+<meta name="ext-resource-dependency" content="assets/photos/kitchen.png" data-resource-id="photo-kitchen">
+<meta name="ext-resource-dependency" content="assets/photos/mep-panel.png" data-resource-id="photo-mep-panel">
+<meta name="ext-resource-dependency" content="assets/photos/team.png" data-resource-id="photo-team">
+<meta name="ext-resource-dependency" content="assets/photos/technical.png" data-resource-id="photo-technical">
+<meta name="ext-resource-dependency" content="assets/photos/lobby-cleaning.png" data-resource-id="photo-lobby-cleaning">
+<meta name="ext-resource-dependency" content="assets/certificates/iso-22000.png" data-resource-id="cert-iso-22000">
+<meta name="ext-resource-dependency" content="assets/certificates/haccp-cxc.png" data-resource-id="cert-haccp-cxc">
+<meta name="ext-resource-dependency" content="assets/certificates/slhs.png" data-resource-id="cert-slhs">
+<template id="__bundler_thumbnail" data-bg-color="#1F211C"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1F211C"/><g transform="translate(30 30)"><polygon fill="#EA2915" points="0,0 20,0 20,20 0,14"/><polygon fill="#C6241C" points="26,0 40,0 40,20 20,20"/><polygon fill="#C6241C" points="0,20 20,20 14,40 0,40"/><polygon fill="#EA2915" points="20,20 40,26 40,40 20,40"/></g></svg></template>
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #FD572A;outline-offset:3px}
+input,select,textarea,button{font-family:inherit}
+@keyframes sfgSpin{to{transform:rotate(360deg)}}
+@keyframes sfgSpinR{to{transform:rotate(-360deg)}}
+@keyframes sfgPing{0%{transform:scale(.94);opacity:.8}100%{transform:scale(1.3);opacity:0}}
+@keyframes sfgDot{50%{opacity:.3}}
+@keyframes sfgRibbon{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
+@keyframes sfgFloat{from{transform:translateY(-16px)}to{transform:translateY(16px)}}
+@media (prefers-reduced-motion:reduce){[data-ribbon] *{animation:none!important}}
+@media (prefers-reduced-motion:reduce){[data-hud] *{animation:none!important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;font-family:'Nohemi',system-ui,sans-serif;color:#1F211C">
+
+<dc-import name="SiteHeader" active="home" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+
+<main id="top">
+<section aria-labelledby="hero-h" style="position:relative;min-height:{{ heroMinH }};background:radial-gradient(ellipse 55% 75% at {{ heroGlowX }} 50%,#33362E 0%,#1F211C 60%,#161813 100%);overflow:hidden;color:#FFFFFF">
+  <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:{{ heroPad }};min-height:{{ heroMinH }};box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;pointer-events:none;opacity:{{ heroTextOp }};transition:opacity .35s">
+    <div style="max-width:540px;pointer-events:auto">
+      <p style="margin:0 0 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:#C9CABF;letter-spacing:0.02em"><span style="width:28px;height:3px;background:#FD572A;border-radius:2px"></span>{{ t.eyebrow }}</p>
+      <h1 id="hero-h" style="margin:0;font-size:clamp(40px,5.2vw,74px);line-height:0.98;font-weight:600;letter-spacing:-0.035em;text-wrap:balance;color:#FFFFFF">{{ t.h1a }} <span style="color:#A8A99F;font-weight:400">{{ t.h1b }}</span></h1>
+      <p style="margin:24px 0 0;font-size:clamp(17px,1.35vw,19px);line-height:1.55;color:#D6D7CE;max-width:480px;text-wrap:pretty">{{ t.sub }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+        <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;background:#C6241C;color:#FFFFFF;font-weight:550;font-size:16px;padding:16px 22px;border-radius:8px" style-hover="background:#A3181A;color:#FFFFFF">{{ t.cta }} <i class="ph ph-arrow-right"></i></a>
+        <a href="Services.dc.html" style="display:flex;align-items:center;gap:10px;border:1.5px solid #FFFFFF;color:#FFFFFF;font-weight:500;font-size:16px;padding:15px 22px;border-radius:8px" style-hover="background:#FFFFFF;color:#1F211C">{{ t.cta2 }}</a>
+      </div>
+      <p style="margin:28px 0 0;font-size:14px;color:#C9CABF;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><i class="ph ph-seal-check" style="font-size:18px;color:#FD572A"></i>{{ t.certLine }}</p>
+    </div>
+  </div>
+  <div style="position:{{ heroCanvasPos }};inset:0;height:{{ heroCanvasH }};z-index:{{ heroZ }}">{{ hero }}</div>
+</section>
+
+<section aria-label="{{ t.trustAria }}" style="position:relative;overflow:hidden;border-top:1px solid #E6E6E1;border-bottom:1px solid #E6E6E1;background:#FFFFFF">
+  {{ ribbonSte }}
+  <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(20px,4vw,48px)">
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px 32px">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column-reverse;gap:6px;border-left:3px solid #EA2915;padding-left:16px">
+          <dt style="font-size:14px;color:#5A5C54;line-height:1.4">{{ s.label }}</dt>
+          <dd style="margin:0;font-size:clamp(34px,3.6vw,48px);font-weight:550;letter-spacing:-0.03em;line-height:1">{{ s.value }}</dd>
+        </div>
+      </sc-for>
+    </dl>
+    <p style="margin:clamp(32px,4vw,48px) 0 18px;font-size:13px;font-weight:500;color:#5A5C54;letter-spacing:0.06em;text-transform:uppercase">{{ t.trusted }}</p>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px">
+      <sc-for list="{{ clients }}" as="c" hint-placeholder-count="0">
+        <li style="height:68px;display:grid;place-items:center;border:1px solid #EFEFEA;border-radius:8px;background:#FFFFFF;padding:10px 14px;filter:grayscale(1);opacity:0.72;transition:filter .2s,opacity .2s" style-hover="filter:grayscale(0);opacity:1"><div role="img" aria-label="{{ c.name }}" style="width:100%;height:40px;background:{{ c.urlCss }} center/contain no-repeat"></div></li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+<section id="services" aria-labelledby="svc-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(20px,4vw,48px)">
+  <div style="display:flex;flex-wrap:wrap;gap:16px 48px;align-items:flex-end;justify-content:space-between;margin-bottom:40px">
+    <div style="max-width:620px">
+      <p style="margin:0 0 14px;font-size:14px;font-weight:500;color:#C6241C">{{ t.svcKick }}</p>
+      <h2 id="svc-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;text-wrap:balance">{{ t.svcH }}</h2>
+    </div>
+    <p style="margin:0;max-width:380px;font-size:16px;line-height:1.55;color:#45473F">{{ t.svcP }}</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="0">
+      <a href="Service%20Detail.dc.html?line={{ s.mark }}" style="position:relative;display:flex;flex-direction:column;min-height:440px;background:{{ s.ink }};color:{{ s.onInk }};border-radius:4px;overflow:hidden;transition:transform .25s" style-hover="transform:translateY(-3px);color:{{ s.onInk }}">
+        <div style="background:#FFFFFF;padding:20px 22px 44px;clip-path:polygon(0 0,100% 0,100% 55%,0 100%);display:flex;justify-content:space-between;align-items:flex-start">
+          <div aria-hidden="true" style="width:56px;height:56px;background:{{ s.markCss }} left top/contain no-repeat"></div>
+          <span style="font-size:13px;color:#5A5C54;font-variant-numeric:tabular-nums">{{ s.n }}</span>
+        </div>
+        <div style="position:relative;z-index:1;padding:4px 22px 0;display:flex;flex-direction:column;gap:12px;max-width:70%">
+          <h3 style="margin:0;font-size:26px;font-weight:550;letter-spacing:-0.02em;line-height:1.08">{{ s.title }}</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.4">
+            <sc-for list="{{ s.tags }}" as="g" hint-placeholder-count="4"><li>{{ g }}</li></sc-for>
+          </ul>
+        </div>
+        <div aria-hidden="true" style="position:absolute;right:-5%;bottom:-5%;width:66%;aspect-ratio:1/1;background-image:{{ s.photoCss }};background-size:cover;background-position:center;filter:grayscale(1);-webkit-mask-image:{{ s.markCss }};mask-image:{{ s.markCss }};-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center"></div>
+        <span style="position:relative;z-index:1;margin-top:auto;padding:0 22px 22px;display:flex;align-items:center;gap:8px;font-size:15px;font-weight:550">{{ t.explore }} <i class="ph ph-arrow-right"></i></span>
+      </a>
+    </sc-for>
+    <a href="Contact.dc.html" style="display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-height:440px;padding:28px 24px;background:#1F211C;border-radius:4px;color:#FFFFFF" style-hover="background:#2A2C26;color:#FFFFFF">
+      <p style="margin:0;font-size:28px;font-weight:550;line-height:1.12;letter-spacing:-0.02em">{{ t.svcUnsure }}</p>
+      <span style="display:flex;align-items:center;gap:8px;color:#FFFFFF;font-weight:550">{{ t.svcUnsureCta }} <i class="ph ph-arrow-right" style="color:#FD572A"></i></span>
+    </a>
+  </div>
+</section>
+
+<div aria-hidden="true" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:clamp(64px,9vw,128px);overflow:hidden">
+  <sc-for list="{{ services }}" as="s" hint-placeholder-count="0">
+    <div style="position:relative;overflow:hidden;background:{{ s.base }}">
+      <div style="position:absolute;left:28%;top:-38%;width:120%;aspect-ratio:1/1;background:{{ s.shade }};-webkit-mask-image:{{ s.markCss }};mask-image:{{ s.markCss }};-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat"></div>
+    </div>
+  </sc-for>
+</div>
+<section aria-labelledby="why-h" style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,96px);align-items:flex-start">
+    <div style="flex:1 1 420px;min-width:0">
+      <p style="margin:0 0 14px;font-size:14px;font-weight:500;color:#FD572A">{{ t.whyKick }}</p>
+      <h2 id="why-h" style="margin:0 0 40px;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;text-wrap:balance;max-width:560px">{{ t.whyH }}</h2>
+      <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+        <sc-for list="{{ why }}" as="w" hint-placeholder-count="4">
+          <li style="display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid #3A3C35">
+            <i class="ph {{ w.icon }}" style="font-size:28px;color:#FD572A;margin-top:2px"></i>
+            <div>
+              <h3 style="margin:0 0 6px;font-size:20px;font-weight:500;letter-spacing:-0.01em">{{ w.title }}</h3>
+              <p style="margin:0;font-size:15px;line-height:1.55;color:#C9CABF;max-width:460px">{{ w.desc }}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+    <figure style="flex:1 1 380px;min-width:0;max-width:480px;margin:0">
+      <div style="background:#FFFFFF;color:#1F211C;border-radius:14px;padding:20px;box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);transform:rotate(-1.2deg)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px dashed #D6D6CF">
+          <div>
+            <p style="margin:0;font-size:12px;color:#5A5C54;letter-spacing:0.04em">{{ t.woLabel }}</p>
+            <p style="margin:2px 0 0;font-size:17px;font-weight:550;font-variant-numeric:tabular-nums">WO-2610-0412</p>
+          </div>
+          <span style="display:flex;align-items:center;gap:6px;background:#E5F2E7;color:#1F6B34;font-size:13px;font-weight:500;padding:6px 10px;border-radius:999px"><i class="ph-fill ph-check-circle"></i>{{ t.woDone }}</span>
+        </div>
+        <dl style="margin:14px 0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px">
+          <dt style="color:#5A5C54">{{ t.woSite }}</dt><dd style="margin:0">Tower B · Lobby L1</dd>
+          <dt style="color:#5A5C54">{{ t.woTask }}</dt><dd style="margin:0">{{ t.woTaskV }}</dd>
+          <dt style="color:#5A5C54">{{ t.woCrew }}</dt><dd style="margin:0">{{ t.woCrewV }}</dd>
+          <dt style="color:#5A5C54">{{ t.woTime }}</dt><dd style="margin:0;font-variant-numeric:tabular-nums">05:30 → 07:42</dd>
+        </dl>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:#E6E6E1"><div role="img" aria-label="{{ t.woBeforeAlt }}" style="width:100%;height:100%;background:{{ woBefore }} center/cover no-repeat"></div><span style="position:absolute;left:8px;top:8px;background:rgba(31,33,28,0.86);color:#FFFFFF;font-size:11px;padding:3px 7px;border-radius:4px">{{ t.woBefore }} · 05:34</span></div>
+          <div style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:#E6E6E1"><div role="img" aria-label="{{ t.woAfterAlt }}" style="width:100%;height:100%;background:{{ woAfter }} center/cover no-repeat"></div><span style="position:absolute;left:8px;top:8px;background:rgba(31,33,28,0.86);color:#FFFFFF;font-size:11px;padding:3px 7px;border-radius:4px">{{ t.woAfter }} · 07:40</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px;gap:12px">
+          <div>
+            <p style="margin:0;font-size:12px;color:#5A5C54">{{ t.woSigned }}</p>
+            <p style="margin:4px 0 0;font-size:22px;font-style:italic;font-weight:300;letter-spacing:-0.02em;border-bottom:1px solid #1F211C;padding:0 18px 2px 0">R. Hartono</p>
+          </div>
+          <p style="margin:0;font-size:12px;color:#5A5C54;text-align:right;font-variant-numeric:tabular-nums">{{ t.woRole }}<br>07:51 · GPS ✓</p>
+        </div>
+      </div>
+      <figcaption style="margin-top:22px;font-size:14px;line-height:1.5;color:#C9CABF;max-width:400px">{{ t.woCaption }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div style="position:relative;overflow:hidden">
+{{ ribbon }}
+<section aria-labelledby="cert-h" style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(20px,4vw,48px) 0">
+  <div style="display:flex;flex-wrap:wrap;gap:16px 48px;align-items:flex-end;justify-content:space-between;margin-bottom:40px">
+    <div style="max-width:620px">
+      <p style="margin:0 0 14px;font-size:14px;font-weight:500;color:#C6241C">{{ t.certKick }}</p>
+      <h2 id="cert-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;text-wrap:balance">{{ t.certH }}</h2>
+    </div>
+    <p style="margin:0;max-width:380px;font-size:16px;line-height:1.55;color:#45473F">{{ t.certP }}</p>
+  </div>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+    <sc-for list="{{ certs }}" as="c" hint-placeholder-count="0">
+      <li style="display:flex">
+        <button type="button" onClick="{{ c.open }}" aria-label="{{ c.aria }}" style="flex:1;display:flex;flex-direction:column;text-align:left;padding:0;border:1px solid #E6E6E1;border-radius:12px;background:#FFFFFF;cursor:zoom-in;overflow:hidden;color:#1F211C;transition:border-color .2s,transform .2s" style-hover="border-color:#1F211C;transform:translateY(-2px)">
+          <div style="background:#F4F4F1;padding:20px 20px 0;height:260px;box-sizing:border-box;overflow:hidden;display:flex;justify-content:center">
+            <div aria-hidden="true" style="width:78%;aspect-ratio:1/1.414;align-self:flex-start;background:#FFFFFF {{ c.urlCss }} top center/cover no-repeat;box-shadow:0 10px 24px -10px rgba(31,33,28,0.35)"></div>
+          </div>
+          <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;border-top:1px solid #E6E6E1">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <h3 style="margin:0;font-size:19px;font-weight:550;letter-spacing:-0.01em">{{ c.title }}</h3>
+              <i class="ph ph-magnifying-glass-plus" aria-hidden="true" style="font-size:20px;color:#5A5C54"></i>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.5;color:#45473F">{{ c.desc }}</p>
+            <p style="margin:6px 0 0;font-size:13px;color:#5A5C54;font-variant-numeric:tabular-nums">{{ c.meta }}</p>
+          </div>
+        </button>
+      </li>
+    </sc-for>
+  </ul>
+</section>
+
+<sc-if value="{{ certOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="{{ cert.title }}" onClick="{{ closeCert }}" style="position:fixed;inset:0;z-index:80;background:rgba(22,24,19,0.88);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);box-sizing:border-box">
+    <figure style="margin:0;max-height:100%;display:flex;flex-direction:column;gap:12px;align-items:center">
+      <div role="img" aria-label="{{ cert.aria }}" style="height:calc(100vh - 140px);aspect-ratio:1/1.414;max-width:100%;background:#FFFFFF {{ cert.urlCss }} center/contain no-repeat;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6)"></div>
+      <figcaption style="color:#EDEDE6;font-size:15px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center">{{ cert.title }} · {{ cert.meta }}<button type="button" onClick="{{ closeCert }}" style="min-height:44px;padding:0 16px;border-radius:8px;border:1px solid #4E5047;background:transparent;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:14px"><i class="ph ph-x"></i>{{ t.close }}</button></figcaption>
+    </figure>
+  </div>
+</sc-if>
+
+<section aria-labelledby="tst-h" style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(20px,4vw,48px)">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:40px">
+    <h2 id="tst-h" style="margin:0;font-size:clamp(30px,3.6vw,48px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.tstH }}</h2>
+    <span style="font-size:12px;font-weight:550;letter-spacing:0.06em;text-transform:uppercase;color:#C6241C;border:1px dashed #C6241C;padding:5px 10px;border-radius:6px">{{ t.placeholder }}</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+    <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="3">
+      <figure style="margin:0;padding:28px;border:1px dashed #C4C4BC;border-radius:12px;background:#FFFFFF;display:flex;flex-direction:column;gap:24px">
+        <i class="ph-fill ph-quotes" style="font-size:30px;color:#FD572A"></i>
+        <blockquote style="margin:0;font-size:19px;line-height:1.45;letter-spacing:-0.01em;color:#1F211C">{{ q.text }}</blockquote>
+        <figcaption style="margin-top:auto;font-size:14px;color:#5A5C54;line-height:1.45"><strong style="display:block;color:#1F211C;font-weight:550">{{ q.who }}</strong>{{ q.role }}</figcaption>
+      </figure>
+    </sc-for>
+  </div>
+</section>
+
+</div>
+
+<section id="quote" aria-labelledby="quote-h" style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:48px clamp(40px,6vw,96px)">
+    <div style="flex:1 1 360px;min-width:0;max-width:480px">
+      <h2 id="quote-h" style="margin:0;font-size:clamp(34px,4.4vw,60px);line-height:1;font-weight:550;letter-spacing:-0.035em;text-wrap:balance">{{ t.qH }}</h2>
+      <p style="margin:20px 0 0;font-size:17px;line-height:1.55;color:#C9CABF">{{ t.qP }}</p>
+      <div style="margin-top:36px;display:flex;flex-direction:column;gap:16px;font-size:16px">
+        <a href="https://wa.me/6212345678" style="display:flex;align-items:center;gap:12px;color:#FFFFFF" style-hover="color:#FD572A"><span style="width:44px;height:44px;border-radius:50%;background:#1E9E55;display:grid;place-items:center;font-size:22px;color:#FFFFFF"><i class="ph-fill ph-whatsapp-logo"></i></span>{{ t.waChat }} · +62 1234 5678</a>
+        <a href="tel:+6212345678" style="display:flex;align-items:center;gap:12px;color:#FFFFFF" style-hover="color:#FD572A"><span style="width:44px;height:44px;border-radius:50%;border:1px solid #4E5047;display:grid;place-items:center;font-size:20px"><i class="ph ph-phone"></i></span>{{ t.callUs }} · +62 21 1234 5678</a>
+      </div>
+    </div>
+    <form onSubmit="{{ submit }}" style="flex:1.3 1 420px;min-width:0;background:#FFFFFF;color:#1F211C;border-radius:14px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.fName }}<input required="" autocomplete="name" style="height:48px;border:1px solid #C4C4BC;border-radius:8px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#1F211C" style-focus="border-color:#1F211C;outline:2px solid #FD572A;outline-offset:1px"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.fCompany }}<input required="" autocomplete="organization" style="height:48px;border:1px solid #C4C4BC;border-radius:8px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#1F211C" style-focus="border-color:#1F211C;outline:2px solid #FD572A;outline-offset:1px"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;grid-column:1/-1">{{ t.fType }}
+        <select style="height:48px;border:1px solid #C4C4BC;border-radius:8px;padding:0 12px;font-size:16px;background:#FFFFFF;color:#1F211C">
+          <sc-for list="{{ buildingTypes }}" as="b" hint-placeholder-count="5"><option>{{ b }}</option></sc-for>
+        </select>
+      </label>
+      <fieldset style="grid-column:1/-1;border:0;margin:0;padding:0">
+        <legend style="font-size:14px;font-weight:500;margin-bottom:8px">{{ t.fServices }}</legend>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="0">
+            <label style="display:flex;align-items:center;gap:8px;border:1px solid #C4C4BC;border-radius:999px;padding:9px 14px;font-size:14px;cursor:pointer;background:#FFFFFF" style-hover="border-color:#1F211C"><input type="checkbox" style="accent-color:#1F211C;width:16px;height:16px;margin:0">{{ s.short }}</label>
+          </sc-for>
+        </div>
+      </fieldset>
+      <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:4px">
+        <button type="submit" style="border:0;background:#C6241C;color:#FFFFFF;font-weight:550;font-size:16px;padding:15px 22px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#A3181A">{{ t.cta }} <i class="ph ph-arrow-right"></i></button>
+        <p style="margin:0;font-size:13px;color:#5A5C54;flex:1 1 200px">{{ sentNote }}</p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const COPY = {
+  en: {
+    nav: ['Services', 'Industries', 'About Us', 'Careers', 'Contact'],
+    cta: 'Request a Quotation', cta2: 'Our Services',
+    eyebrow: 'Integrated facility services · Indonesia',
+    h1a: 'Clean, well-run buildings.', h1b: 'Every shift, on record.',
+    sub: 'Sunshine Facilities Group runs food, cleaning, maintenance, security and workforce services for buildings across Indonesia: one partner, one team on site, one report.',
+    certLine: 'HACCP · ISO 22000:2018 · SLHS certified',
+    heroCaption: 'One partner', heroCount: 'services',
+    hero: { open: 'Click to open', drag: 'or drag to rotate', included: 'What’s included', quote: 'Request a quotation', prev: 'Previous service', next: 'Next service', back: 'Back to all services', hintSplit: 'Drag to rotate · pick a service', reassemble: 'Reassemble', learn: 'Learn more', loading: 'Loading 3D view…', heroAria: 'Our five business lines' },
+    trustAria: 'Company facts and clients',
+    stats: [['10+', 'Years of operations'], ['18+', 'Cities served'], ['1,000+', 'Staff deployed'], ['5M+', 'Meals served a year']],
+    trusted: 'Trusted by',
+    svcKick: 'Services', svcH: 'Five business lines, one team you can call.',
+    svcP: 'Take one service or combine several. Either way you get a single contract, a single site lead and a single monthly report.',
+    explore: 'Explore', svcUnsure: 'Not sure which services your building needs?', svcUnsureCta: 'Book a site survey',
+    services: [
+      ['Food Services', 'Food', 'Hospital, corporate and industrial catering, from kitchen design to daily service.', ['Kitchen', 'Catering', 'Nutrition', 'Food Technology']],
+      ['Digital & Operational Integration', 'Digital', 'One system for ordering, stock and scheduling, with every job recorded and reported.', ['Ordering', 'Inventory', 'Analytics', 'Scheduling']],
+      ['Workforce Solutions', 'Workforce', 'Recruitment, deployment, training and management of on-site teams.', ['Recruitment', 'Deployment', 'Training', 'Management']],
+      ['Remote', 'Remote', 'Supply, production and on-site teams for mining, industrial and remote sites. Camp life, city standard.', ['Procurement', 'Production', 'Logistics', 'On-site Execution']],
+      ['Facility Management', 'Facility', 'Cleaning, technical maintenance, safety and environmental services for buildings.', ['Cleaning', 'Technical', 'Safety', 'Environmental']]
+    ],
+    servicePoints: [
+      ['Menus for patients, staff and canteens', 'Central and on-site kitchens under HACCP and ISO 22000', 'Kitchen design, setup and equipment', 'Daily temperature, hygiene and portion records'],
+      ['Online ordering for meals and supplies', 'Live inventory across kitchens and stores', 'Dashboards and monthly KPI reports', 'Paperless work orders with photo proof and digital sign-off'],
+      ['Recruitment and screening for on-site roles', 'Deployment with replacement cover, so no post is left empty', 'Induction and site-specific training', 'Supervision, payroll and HR administration'],
+      ['Procurement through 5 hubs and 60 retail points', 'Central production and camp kitchens', 'Logistics to remote and hard-to-reach sites', 'On-site teams for catering, housekeeping and upkeep'],
+      ['Cleaning: daily, deep and healthcare-grade', 'Technical: preventive maintenance for MEP and utilities', 'Safety: guards, access control, CCTV and fire safety', 'Environmental: pest control, landscaping and waste']
+    ],
+    whyKick: 'Why Sunshine', whyH: 'You see what was done, by whom, and when.',
+    why: [
+      ['ph-identification-badge', 'Trained, supervised staff', 'Every crew member is trained for the site before day one, and a supervisor checks the work on every shift.'],
+      ['ph-calendar-check', 'Scheduled preventive maintenance', 'Equipment is serviced on a calendar we agree with you, so breakdowns become the exception.'],
+      ['ph-device-mobile-camera', 'Digital reporting & proof of work', 'Each job is logged in our mobile app with before and after photos, a timestamp and a digital sign-off. No paper.'],
+      ['ph-phone-call', '24/7 response', 'One number, answered day and night, with escalation to your site lead.']
+    ],
+    woLabel: 'WORK ORDER', woDone: 'Completed', woSite: 'Site', woTask: 'Task', woTaskV: 'Deep clean, marble floor',
+    woCrew: 'Crew', woCrewV: '2 cleaners · 1 supervisor', woTime: 'Time', woBefore: 'Before', woAfter: 'After',
+    woBeforeAlt: 'Cleaner wiping a counter before the inspection', woAfterAlt: 'Lobby floor after machine scrubbing',
+    woSigned: 'Signed off by', woRole: 'Building Manager',
+    woCaption: 'A job record from the Sunshine field app, as your team receives it. Sample data.',
+    howKick: 'How we work', howH: 'From first walk-through to monthly review.',
+    steps: [
+      ['Site survey', 'We walk the building with your team and record what each area needs.'],
+      ['Proposal', 'Scope, staffing, schedule and price, itemised so you can compare vendors line by line.'],
+      ['Mobilisation', 'Crews recruited, trained and equipped, then handed over with a checklist.'],
+      ['Monitoring & reporting', 'Monthly reviews against agreed KPIs, with every job traceable in the app.']
+    ],
+    indKick: 'Industries', indH: 'Built around how each kind of building runs.',
+    indP: 'A hospital kitchen and a mining camp canteen have different rules. We staff and train for the site you have. Camp life, city standard.',
+    indImgAlt: 'Cooks at work in a commercial kitchen',
+    industries: [
+      ['ph-first-aid-kit', 'Healthcare', 'Clinical nutrition, patient meals and infection-aware cleaning.'],
+      ['ph-buildings', 'Corporate offices', 'Canteens, pantries, cleaning and building upkeep for workplaces.'],
+      ['ph-storefront', 'Retail & malls', 'Large-floor cleaning, security and food operations for retail.'],
+      ['ph-hard-hat', 'Industrial & mining', 'High-volume canteens and site services for remote operations.'],
+      ['ph-fork-knife', 'Hospitality & F&B', 'Kitchen management and dining service for hotels and restaurants.'],
+      ['ph-graduation-cap', 'Education', 'Meals, cleaning and safety for schools and campuses.'],
+      ['ph-house-line', 'Residential towers', 'Common-area cleaning, MEP upkeep and security for residents.']
+    ],
+    certKick: 'Certifications', certH: 'Audited food safety and hygiene.', certP: 'Our kitchens and processes are audited by independent bodies. Click a certificate to view it.', close: 'Close',
+    certs: [
+      ['iso-22000', 'ISO 22000:2018', 'Food safety management system, PT Sunshine Food International.', 'Valid until Sep 2027'],
+      ['haccp-cxc', 'HACCP · CXC 1-1969', 'Hazard analysis and critical control points, Codex Alimentarius.', 'Valid until Aug 2027'],
+      ['slhs', 'SLHS', 'Sertifikat Laik Higiene Sanitasi from the Indonesian health authority.', 'Issued by Dinas Kesehatan']
+    ],
+    tstH: 'What clients say', placeholder: 'Placeholder · replace with real quotes',
+    quotes: [
+      ['[Client quote about reliability of daily service. One or two sentences in the client’s own words.]', '[Name]', 'Facility Manager, [Hospital client]'],
+      ['[Client quote about digital reporting or transparency. Mention a concrete change.]', '[Name]', 'GA Head, [Corporate client]'],
+      ['[Client quote about response time or a problem that was solved quickly.]', '[Name]', 'Building Manager, [Mall client]']
+    ],
+    qH: 'Tell us about your building.', qP: 'We will arrange a site survey and send an itemised proposal. Prefer to talk first? Message us on WhatsApp.',
+    waChat: 'Chat on WhatsApp', callUs: 'Call',
+    fName: 'Full name', fCompany: 'Company', fType: 'Building type', fServices: 'Services needed',
+    sentIdle: 'Full form with area size, location and message on the Contact page.', sentDone: 'Thank you. Our team will contact you within one working day.',
+    buildingTypes: ['Office', 'Hospital', 'Mall / retail', 'F&B outlet', 'Residential tower', 'Industrial site', 'School / campus'],
+    fAddress: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia',
+    lippo: 'Part of the Lippo Group ecosystem.',
+    fContact: 'Contact', fLinks: 'Quick links', fFollow: 'Follow us'
+  },
+  id: {
+    nav: ['Layanan', 'Industri', 'Tentang Kami', 'Karier', 'Kontak'],
+    cta: 'Minta Penawaran', cta2: 'Layanan Kami',
+    eyebrow: 'Layanan fasilitas terpadu · Indonesia',
+    h1a: 'Gedung bersih dan terkelola.', h1b: 'Setiap shift, tercatat.',
+    sub: 'Sunshine Facilities Group menangani layanan makanan, kebersihan, perawatan, keamanan, dan tenaga kerja untuk gedung di seluruh Indonesia: satu mitra, satu tim di lokasi, satu laporan.',
+    certLine: 'Bersertifikat HACCP · ISO 22000:2018 · SLHS',
+    heroCaption: 'Satu mitra', heroCount: 'layanan',
+    hero: { open: 'Klik untuk membuka', drag: 'atau geser untuk memutar', included: 'Yang termasuk', quote: 'Minta penawaran', prev: 'Layanan sebelumnya', next: 'Layanan berikutnya', back: 'Kembali ke semua layanan', hintSplit: 'Geser untuk memutar · pilih layanan', reassemble: 'Susun ulang', learn: 'Selengkapnya', loading: 'Memuat tampilan 3D…', heroAria: 'Lima lini layanan kami' },
+    trustAria: 'Fakta perusahaan dan klien',
+    stats: [['10+', 'Tahun beroperasi'], ['18+', 'Kota dilayani'], ['1.000+', 'Staf di lapangan'], ['5 jt+', 'Porsi makanan per tahun']],
+    trusted: 'Dipercaya oleh',
+    svcKick: 'Layanan', svcH: 'Lima lini layanan, satu tim yang bisa Anda hubungi.',
+    svcP: 'Pilih satu layanan atau gabungkan beberapa. Anda tetap mendapat satu kontrak, satu penanggung jawab lokasi, dan satu laporan bulanan.',
+    explore: 'Lihat detail', svcUnsure: 'Belum yakin layanan apa yang dibutuhkan gedung Anda?', svcUnsureCta: 'Jadwalkan survei lokasi',
+    services: [
+      ['Layanan Makanan', 'Makanan', 'Katering rumah sakit, korporat, dan industri, dari desain dapur hingga layanan harian.', ['Dapur', 'Katering', 'Nutrisi', 'Teknologi Pangan']],
+      ['Integrasi Digital & Operasional', 'Digital', 'Satu sistem untuk pemesanan, stok, dan penjadwalan, dengan setiap pekerjaan tercatat dan dilaporkan.', ['Pemesanan', 'Inventaris', 'Analitik', 'Penjadwalan']],
+      ['Solusi Tenaga Kerja', 'Tenaga kerja', 'Rekrutmen, penempatan, pelatihan, dan pengelolaan tim di lokasi.', ['Rekrutmen', 'Penempatan', 'Pelatihan', 'Manajemen']],
+      ['Remote', 'Remote', 'Pasokan, produksi, dan tim di lokasi untuk tambang, industri, dan site terpencil. Camp life, city standard.', ['Pengadaan', 'Produksi', 'Logistik', 'Eksekusi di Lokasi']],
+      ['Manajemen Fasilitas', 'Fasilitas', 'Kebersihan, perawatan teknis, keselamatan, dan layanan lingkungan untuk gedung.', ['Kebersihan', 'Teknis', 'Keselamatan', 'Lingkungan']]
+    ],
+    servicePoints: [
+      ['Menu untuk pasien, karyawan, dan kantin', 'Dapur pusat dan dapur di lokasi dengan standar HACCP dan ISO 22000', 'Desain, pemasangan, dan peralatan dapur', 'Catatan harian suhu, higiene, dan porsi'],
+      ['Pemesanan online untuk makanan dan perlengkapan', 'Inventaris real-time di seluruh dapur dan gudang', 'Dashboard dan laporan KPI bulanan', 'Perintah kerja tanpa kertas dengan bukti foto dan tanda tangan digital'],
+      ['Rekrutmen dan seleksi untuk posisi di lokasi', 'Penempatan dengan tenaga pengganti agar tidak ada pos kosong', 'Orientasi dan pelatihan sesuai lokasi', 'Supervisi, penggajian, dan administrasi SDM'],
+      ['Pengadaan melalui 5 hub dan 60 titik ritel', 'Produksi pusat dan dapur camp', 'Logistik ke site terpencil dan sulit dijangkau', 'Tim di lokasi untuk katering, housekeeping, dan perawatan'],
+      ['Kebersihan: harian, menyeluruh, dan standar rumah sakit', 'Teknis: perawatan preventif untuk MEP dan utilitas', 'Keselamatan: petugas keamanan, kontrol akses, CCTV, dan proteksi kebakaran', 'Lingkungan: pengendalian hama, pertamanan, dan sampah']
+    ],
+    whyKick: 'Mengapa Sunshine', whyH: 'Anda tahu apa yang dikerjakan, oleh siapa, dan kapan.',
+    why: [
+      ['ph-identification-badge', 'Staf terlatih dan diawasi', 'Setiap anggota tim dilatih sesuai lokasi sebelum mulai bertugas, dan supervisor memeriksa pekerjaan di setiap shift.'],
+      ['ph-calendar-check', 'Perawatan preventif terjadwal', 'Peralatan dirawat sesuai jadwal yang kami sepakati bersama, sehingga kerusakan jarang terjadi.'],
+      ['ph-device-mobile-camera', 'Laporan digital & bukti kerja', 'Setiap pekerjaan dicatat di aplikasi kami dengan foto sebelum dan sesudah, waktu, dan tanda tangan digital. Tanpa kertas.'],
+      ['ph-phone-call', 'Respons 24/7', 'Satu nomor yang dijawab siang dan malam, dengan eskalasi ke penanggung jawab lokasi Anda.']
+    ],
+    woLabel: 'PERINTAH KERJA', woDone: 'Selesai', woSite: 'Lokasi', woTask: 'Tugas', woTaskV: 'Deep clean, lantai marmer',
+    woCrew: 'Tim', woCrewV: '2 petugas · 1 supervisor', woTime: 'Waktu', woBefore: 'Sebelum', woAfter: 'Sesudah',
+    woBeforeAlt: 'Petugas membersihkan meja sebelum inspeksi', woAfterAlt: 'Lantai lobi setelah dibersihkan dengan mesin',
+    woSigned: 'Disetujui oleh', woRole: 'Building Manager',
+    woCaption: 'Catatan pekerjaan dari aplikasi lapangan Sunshine, seperti yang diterima tim Anda. Data contoh.',
+    howKick: 'Cara kami bekerja', howH: 'Dari survei pertama hingga evaluasi bulanan.',
+    steps: [
+      ['Survei lokasi', 'Kami meninjau gedung bersama tim Anda dan mencatat kebutuhan setiap area.'],
+      ['Proposal', 'Lingkup, jumlah staf, jadwal, dan harga, dirinci agar mudah dibandingkan.'],
+      ['Mobilisasi', 'Tim direkrut, dilatih, dan dilengkapi, lalu diserahterimakan dengan daftar periksa.'],
+      ['Pemantauan & pelaporan', 'Evaluasi bulanan berdasarkan KPI, dengan setiap pekerjaan terlacak di aplikasi.']
+    ],
+    indKick: 'Industri', indH: 'Disesuaikan dengan cara setiap gedung beroperasi.',
+    indP: 'Dapur rumah sakit dan kantin site tambang punya aturan berbeda. Kami menyiapkan dan melatih tim sesuai lokasi Anda. Camp life, city standard.',
+    indImgAlt: 'Juru masak bekerja di dapur komersial',
+    industries: [
+      ['ph-first-aid-kit', 'Kesehatan', 'Gizi klinis, makanan pasien, dan kebersihan standar pengendalian infeksi.'],
+      ['ph-buildings', 'Perkantoran', 'Kantin, pantry, kebersihan, dan perawatan gedung kantor.'],
+      ['ph-storefront', 'Ritel & mal', 'Kebersihan area luas, keamanan, dan operasional makanan untuk ritel.'],
+      ['ph-hard-hat', 'Industri & tambang', 'Kantin berkapasitas besar dan layanan site untuk lokasi terpencil.'],
+      ['ph-fork-knife', 'Perhotelan & F&B', 'Manajemen dapur dan layanan makan untuk hotel dan restoran.'],
+      ['ph-graduation-cap', 'Pendidikan', 'Makanan, kebersihan, dan keamanan untuk sekolah dan kampus.'],
+      ['ph-house-line', 'Apartemen & hunian', 'Kebersihan area umum, perawatan MEP, dan keamanan untuk penghuni.']
+    ],
+    certKick: 'Sertifikasi', certH: 'Keamanan pangan dan higiene yang diaudit.', certP: 'Dapur dan proses kami diaudit oleh lembaga independen. Klik sertifikat untuk melihatnya.', close: 'Tutup',
+    certs: [
+      ['iso-22000', 'ISO 22000:2018', 'Sistem manajemen keamanan pangan, PT Sunshine Food International.', 'Berlaku hingga Sep 2027'],
+      ['haccp-cxc', 'HACCP · CXC 1-1969', 'Analisis bahaya dan titik kendali kritis, Codex Alimentarius.', 'Berlaku hingga Agu 2027'],
+      ['slhs', 'SLHS', 'Sertifikat Laik Higiene Sanitasi dari Dinas Kesehatan.', 'Diterbitkan Dinas Kesehatan']
+    ],
+    tstH: 'Kata klien kami', placeholder: 'Contoh · ganti dengan testimoni asli',
+    quotes: [
+      ['[Testimoni klien tentang keandalan layanan harian. Satu atau dua kalimat dengan kata-kata klien.]', '[Nama]', 'Facility Manager, [Klien rumah sakit]'],
+      ['[Testimoni klien tentang laporan digital atau transparansi. Sebutkan perubahan nyata.]', '[Nama]', 'Kepala GA, [Klien korporat]'],
+      ['[Testimoni klien tentang kecepatan respons atau masalah yang cepat terselesaikan.]', '[Nama]', 'Building Manager, [Klien mal]']
+    ],
+    qH: 'Ceritakan tentang gedung Anda.', qP: 'Kami akan menjadwalkan survei lokasi dan mengirim proposal terperinci. Ingin bicara dulu? Hubungi kami lewat WhatsApp.',
+    waChat: 'Chat via WhatsApp', callUs: 'Telepon',
+    fName: 'Nama lengkap', fCompany: 'Perusahaan', fType: 'Jenis gedung', fServices: 'Layanan yang dibutuhkan',
+    sentIdle: 'Formulir lengkap dengan luas area, lokasi, dan pesan ada di halaman Kontak.', sentDone: 'Terima kasih. Tim kami akan menghubungi Anda dalam satu hari kerja.',
+    buildingTypes: ['Perkantoran', 'Rumah sakit', 'Mal / ritel', 'Gerai F&B', 'Apartemen', 'Kawasan industri', 'Sekolah / kampus'],
+    fAddress: 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia',
+    lippo: 'Bagian dari ekosistem Lippo Group.',
+    fContact: 'Kontak', fLinks: 'Tautan', fFollow: 'Ikuti kami'
+  }
+};
+const CSSURL = u => 'url("' + u + '")';
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const LINES = [
+  { mark: 'food', photo: 'kitchen', base: '#EA2915', ink: '#C6241C', shade: '#C6241C', onInk: '#FFFFFF' },
+  { mark: 'digital', photo: 'mep-panel', base: '#28937A', ink: '#1F7360', shade: '#1F7360', onInk: '#FFFFFF' },
+  { mark: 'workforce', photo: 'team', base: '#5E9628', ink: '#4A7023', shade: '#4A7023', onInk: '#FFFFFF' },
+  { mark: 'remote', photo: 'technical', base: '#FD572A', ink: '#FD572A', shade: '#E04E2B', onInk: '#1F211C' },
+  { mark: 'facility', photo: 'lobby-cleaning', base: '#C6241C', ink: '#A3181A', shade: '#A3181A', onInk: '#FFFFFF' }
+];
+const CLIENTS = [['danone','Danone'],['cargill','Cargill'],['mandiri','Bank Mandiri'],['united-tractors','United Tractors'],['danantara','Danantara Indonesia'],['lippo-group','Lippo Group'],['lippo-malls','Lippo Malls'],['byd','BYD'],['savoria','Savoria'],['sph','Sekolah Pelita Harapan'],['darya-varia','Darya-Varia Laboratoria'],['st-carolus','RS St. Carolus Summarecon Serpong'],['permata-cibubur','RS Permata Cibubur'],['siloam','Siloam Hospitals'],['harapan-kita','RS Jantung Harapan Kita'],['fks-food','FKS Food'],['buma','BUMA'],['hpu','HPU'],['hpmu','PT Harapan Pangan Muslim']];
+
+class Component extends DCLogic {
+  state = { heroFocus: -1, lang: 'en', w: typeof window !== 'undefined' ? window.innerWidth : 1440, menu: false, sent: false };
+  Hero = this.makeHero();
+  Ribbon = function VenRibbon(props) {
+    const E = React.createElement;
+    const g1 = (props.gid || 'ven') + 'G1', g2 = (props.gid || 'ven') + 'G2';
+    const D = props.d || 'M -80 900 C 120 840 220 660 300 620 C 330 710 360 820 400 860 C 440 820 480 680 520 600 C 540 560 520 550 505 580 C 495 610 560 640 620 680 C 700 720 820 700 830 620 C 838 560 760 550 720 600 C 670 670 690 820 800 860 C 880 885 940 820 980 760 C 1010 710 1020 640 1030 620 C 1040 680 1030 780 1020 860 C 1060 680 1140 600 1200 620 C 1250 640 1240 760 1250 840 C 1260 880 1320 900 1400 850 C 1500 790 1600 760 1700 780';
+    const band = (w, op, dash, dur, delay, grad) => E('path', { d: D, pathLength: 2000, fill: 'none', stroke: 'url(#' + grad + ')', strokeWidth: w, strokeLinecap: 'round', strokeLinejoin: 'round', strokeOpacity: op, strokeDasharray: dash, style: { animation: 'sfgRibbon ' + dur + 's linear ' + delay + 's infinite' } });
+    return E('svg', { 'aria-hidden': 'true', 'data-ribbon': '', viewBox: props.vb || '0 0 1600 1400', preserveAspectRatio: 'xMidYMid slice', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' } },
+      E('defs', null,
+        E('linearGradient', { id: g1, x1: '0', y1: '0', x2: '1', y2: '0' },
+          E('stop', { offset: '0', stopColor: '#EA2915' }), E('stop', { offset: '.35', stopColor: '#FD572A' }), E('stop', { offset: '.7', stopColor: '#28937A' }), E('stop', { offset: '1', stopColor: '#5E9628' })),
+        E('linearGradient', { id: g2, x1: '0', y1: '0', x2: '1', y2: '0' },
+          E('stop', { offset: '0', stopColor: '#5E9628' }), E('stop', { offset: '.5', stopColor: '#C6241C' }), E('stop', { offset: '1', stopColor: '#FD572A' }))),
+      E('g', { style: props.still ? null : { animation: 'sfgFloat 14s ease-in-out infinite alternate' } },
+        E('path', { d: D, fill: 'none', stroke: 'url(#' + g1 + ')', strokeWidth: 2, strokeOpacity: .1, strokeLinecap: 'round' }),
+        props.extra ? E('path', { d: props.extra, fill: 'none', stroke: 'url(#' + g1 + ')', strokeWidth: 2, strokeOpacity: .1, strokeLinecap: 'round' }) : null,
+        band(56, .07, '520 1480', 34, 0, g1),
+        band(1.6, .32, '520 1480', 34, 0, g1),
+        band(26, .06, '360 1640', 34, -17, g2),
+        band(1.2, .26, '360 1640', 34, -17, g2)));
+  };
+  onHeroFocus = k => { if (k !== this.state.heroFocus) this.setState({ heroFocus: k }); };
+
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    this.onLang = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this.onLang);
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onKey = e => { if (e.key === 'Escape' && this.state.cert >= 0) this.setState({ cert: -1 }); };
+    window.addEventListener('keydown', this.onKey);
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this.onLang); window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); }
+  setLang(l) { this.setState({ lang: l }); try { localStorage.setItem('sfg-lang', l); } catch (e) {} document.documentElement.lang = l; }
+
+  makeHero() {
+    const R = React;
+    return function HeroPuzzle({ items, txt, side, onFocusChange }) {
+      const wrapRef = R.useRef(null), hostRef = R.useRef(null), labelRefs = R.useRef([]), hudRef = R.useRef(null), tagRef = R.useRef(null);
+      const sideRef = R.useRef(side); sideRef.current = side;
+      const api = R.useRef({ split: () => {}, focus: () => {} });
+      const [isSplit, setIsSplit] = R.useState(false);
+      const [focus, setFocus] = R.useState(-1);
+      const [status, setStatus] = R.useState('loading');
+      R.useEffect(() => { if (onFocusChange) onFocusChange(focus); }, [focus]);
+      R.useEffect(() => { const k = e => { if (e.key === 'Escape') api.current.focus(-1); }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, []);
+      R.useEffect(() => {
+        let dead = false, raf = 0, running = false, visible = true;
+        const cleanup = [];
+        (async () => {
+          let THREE;
+          try { THREE = await import(RES('three', new URL('assets/vendor/three.module.js', document.baseURI).href)); }
+          catch (e) { if (!dead) setStatus('error'); return; }
+          if (dead || !hostRef.current) return;
+          const mq = q => window.matchMedia && window.matchMedia(q).matches;
+          const reduce = mq('(prefers-reduced-motion: reduce)'), coarse = mq('(pointer: coarse)');
+          const host = hostRef.current, wrap = wrapRef.current;
+          const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+          const dom = renderer.domElement;
+          dom.style.cssText = 'display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab;outline:none';
+          host.appendChild(dom);
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
+          scene.add(new THREE.HemisphereLight(0xf2f2ec, 0x161813, 1.0));
+          const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(6, 8, 10); scene.add(key);
+          const rim = new THREE.DirectionalLight(0xfd572a, 1.5); rim.position.set(-8, -2, -8); scene.add(rim);
+          const group = new THREE.Group(); scene.add(group);
+
+          const LAT = Math.PI * 0.84, RB = 3, D = 0.22, RING = 5.4, N7 = items.length;
+          const WP = 2 * Math.PI * RB / N7, HP = 4.8, KL = 2.3, KH = 0.29 * KL, NX = 8, NT = 80;
+          const PER = 1, S = WP, ROWS = 1, GAP = 1;
+          let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+          const TAB = [[0.34, 0], [0.40, 0.02], [0.425, 0.05]];
+          for (let a = 235; a >= -55; a -= 14.5) { const r = a * Math.PI / 180; TAB.push([0.5 + 0.12 * Math.cos(r), 0.17 + 0.12 * Math.sin(r)]); }
+          TAB.push([0.575, 0.05], [0.60, 0.02], [0.66, 0]);
+          const resample = (pts, n) => {
+            const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+            const tot = L[L.length - 1], out = []; let j = 0;
+            for (let a = 0; a <= n; a++) { const d = tot * a / n; while (j < pts.length - 2 && L[j + 1] < d) j++; const f = (d - L[j]) / Math.max(1e-6, L[j + 1] - L[j]); out.push([pts[j][0] + (pts[j + 1][0] - pts[j][0]) * f, pts[j][1] + (pts[j + 1][1] - pts[j][1]) * f - HP / 2]); }
+            return out;
+          };
+          const seamPts = () => {
+            const sg = [rnd() < .5 ? 1 : -1, rnd() < .5 ? 1 : -1], cs = [HP * (.3 + (rnd() - .5) * .06), HP * (.7 + (rnd() - .5) * .06)];
+            const pts = [[0, 0]];
+            for (let q = 0; q < 2; q++) TAB.forEach(p => pts.push([sg[q] * p[1] * KL, cs[q] + (p[0] - .5) * KL]));
+            pts.push([0, HP]); return resample(pts, NT);
+          };
+          const seams = []; for (let k = 0; k < N7; k++) seams.push(seamPts());
+          const buildGeo = (Lc, Rc) => {
+            const Pa = [], I = [];
+            const idx = (x, y, z) => { Pa.push(x, y, z); return Pa.length / 3 - 1; };
+            const z1 = D / 2, z0 = -D / 2;
+            const grid = z => { const g = []; for (let a = 0; a <= NT; a++) { const row = []; for (let b = 0; b <= NX; b++) { const f = b / NX; row.push(idx(Lc[a][0] + (Rc[a][0] - Lc[a][0]) * f, Lc[a][1] + (Rc[a][1] - Lc[a][1]) * f, z)); } g.push(row); } return g; };
+            const F = grid(z1);
+            for (let a = 0; a < NT; a++) for (let b = 0; b < NX; b++) I.push(F[a][b], F[a][b + 1], F[a + 1][b + 1], F[a][b], F[a + 1][b + 1], F[a + 1][b]);
+            const fC = I.length;
+            const B = grid(z0);
+            for (let a = 0; a < NT; a++) for (let b = 0; b < NX; b++) I.push(B[a][b], B[a + 1][b + 1], B[a][b + 1], B[a][b], B[a + 1][b], B[a + 1][b + 1]);
+            const bC = I.length - fC;
+            const wall = pts => { const t = pts.map(p => idx(p[0], p[1], z1)), u = pts.map(p => idx(p[0], p[1], z0)); for (let i = 0; i < pts.length - 1; i++) I.push(t[i], u[i], u[i + 1], t[i], u[i + 1], t[i + 1]); };
+            const bot = [], top = [];
+            for (let b = 0; b <= NX; b++) { const f = b / NX; bot.push([Lc[0][0] + (Rc[0][0] - Lc[0][0]) * f, Lc[0][1]]); top.push([Rc[NT][0] + (Lc[NT][0] - Rc[NT][0]) * f, Rc[NT][1]]); }
+            wall(bot); wall(Rc); wall(top); wall(Lc.slice().reverse());
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(Pa, 3));
+            geo.setIndex(I);
+            geo.addGroup(0, fC, 0); geo.addGroup(fC, bC, 1); geo.addGroup(fC + bC, I.length - fC - bC, 2);
+            geo.computeVertexNormals();
+            return geo;
+          };
+
+          const loader = new THREE.TextureLoader();
+          const sideMat = new THREE.MeshStandardMaterial({ color: 0x2a2c26, roughness: .45, metalness: .25, emissive: 0xea2915, emissiveIntensity: .08 });
+          const backMat = new THREE.MeshStandardMaterial({ color: 0x2a2c26, roughness: .7, side: THREE.DoubleSide });
+          const textures = [];
+          const loadImg = src => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+          const ballMats = [];
+          const photoMats = items.map(it => {
+            const m = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .6, metalness: .04, side: THREE.DoubleSide });
+            const bmM = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .5, metalness: .05, side: THREE.DoubleSide });
+            ballMats.push(bmM);
+            const TH = 1024, TW = Math.round(TH * (WP + 2 * KH) / HP);
+            const c = document.createElement('canvas'); c.width = TW; c.height = TH; const g = c.getContext('2d');
+            g.fillStyle = it.base; g.fillRect(0, 0, TW, TH);
+            const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4; m.map = tex; textures.push(tex);
+            const c2 = document.createElement('canvas'); c2.width = TW; c2.height = TH; const g2 = c2.getContext('2d');
+            g2.fillStyle = it.base; g2.fillRect(0, 0, TW, TH);
+            const tex2 = new THREE.CanvasTexture(c2); tex2.colorSpace = THREE.SRGBColorSpace; tex2.anisotropy = 4; bmM.map = tex2; textures.push(tex2);
+            Promise.all([loadImg(it.photoUrl), loadImg(it.markUrl)]).then(([ph, mk]) => {
+              if (dead) return;
+              const ix = TW * KH / (WP + 2 * KH), iw = TW - 2 * ix;
+              g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(0, 0); g.lineTo(TW, 0); g.lineTo(TW, 190); g.lineTo(0, 260); g.closePath(); g.fill();
+              const ms = 150, mh = ms * mk.height / mk.width; g.drawImage(mk, ix + 44, 44, ms, mh);
+              const PS = iw * .86, ph2 = PS * mk.height / mk.width;
+              const o = document.createElement('canvas'); o.width = Math.round(PS); o.height = Math.round(ph2); const og = o.getContext('2d');
+              og.drawImage(mk, 0, 0, o.width, o.height); og.globalCompositeOperation = 'source-in';
+              const sc = Math.max(o.width / ph.width, o.height / ph.height); og.drawImage(ph, (o.width - ph.width * sc) / 2, (o.height - ph.height * sc) / 2, ph.width * sc, ph.height * sc);
+              g.drawImage(o, ix + (iw - PS) / 2, TH - ph2 - 70);
+              tex.needsUpdate = true;
+              const s2 = Math.max(TW / ph.width, TH / ph.height);
+              g2.drawImage(ph, (TW - ph.width * s2) / 2, (TH - ph.height * s2) / 2, ph.width * s2, ph.height * s2);
+              g2.globalAlpha = .3; g2.fillStyle = it.base; g2.fillRect(0, 0, TW, TH); g2.globalAlpha = 1;
+              const gr2 = g2.createLinearGradient(0, TH * .55, 0, TH); gr2.addColorStop(0, 'rgba(0,0,0,0)'); gr2.addColorStop(1, it.ink); g2.fillStyle = gr2; g2.globalAlpha = .7; g2.fillRect(0, TH * .55, TW, TH * .45); g2.globalAlpha = 1;
+              tex2.needsUpdate = true;
+            }).catch(() => {});
+            return m;
+          });
+
+          const pieces = [], sideMats = [];
+          const mat4 = new THREE.Matrix4();
+          const panelTh = k => ((k + .5) / N7) * Math.PI * 2;
+          for (let k = 0; k < N7; k++) {
+            const th = panelTh(k);
+            const Nk = new THREE.Vector3(Math.sin(th), 0, Math.cos(th)), Rk = new THREE.Vector3(Math.cos(th), 0, -Math.sin(th)), Uk = new THREE.Vector3(0, 1, 0);
+            const q0 = new THREE.Quaternion().setFromRotationMatrix(mat4.makeBasis(Rk, Uk, Nk));
+            const Lc = seams[(k + N7 - 1) % N7].map(p => [-WP / 2 + p[0], p[1]]);
+            const Rc = seams[k].map(p => [WP / 2 + p[0], p[1]]);
+            const geo = buildGeo(Lc, Rc);
+            const pos = geo.attributes.position, n = pos.count, uvA = new Float32Array(n * 2), mp = new Float32Array(n * 3);
+            for (let v = 0; v < n; v++) {
+              const x = pos.getX(v), y = pos.getY(v), z = pos.getZ(v);
+              uvA[v * 2] = (x + WP / 2 + KH) / (WP + 2 * KH); uvA[v * 2 + 1] = y / HP + .5;
+              const dl = (x / WP) * (Math.PI * 2 / N7), lat = (y / HP) * LAT, r = RB + z;
+              const px = r * Math.cos(lat) * Math.sin(dl), py = r * Math.sin(lat), pz = r * Math.cos(lat) * Math.cos(dl) - RB;
+              mp[v * 3] = px; mp[v * 3 + 1] = py; mp[v * 3 + 2] = pz;
+            }
+            geo.setAttribute('uv', new THREE.BufferAttribute(uvA, 2));
+            const tmp = new THREE.BufferGeometry(); tmp.setAttribute('position', new THREE.BufferAttribute(mp, 3)); tmp.setIndex(geo.index); tmp.computeVertexNormals();
+            geo.morphAttributes.position = [tmp.attributes.position]; geo.morphAttributes.normal = [tmp.attributes.normal];
+            const sm = sideMat.clone(); sm.color.set(items[k].ink); sideMats.push(sm);
+            const bk = backMat.clone(); bk.color.set(items[k].ink).multiplyScalar(.5); sideMats.push(bk);
+            const mesh = new THREE.Mesh(geo, [ballMats[k], bk, sm]);
+            mesh.updateMorphTargets(); mesh.morphTargetInfluences[0] = 1;
+            const pA = Nk.clone().multiplyScalar(RB), pB = Nk.clone().multiplyScalar(RING);
+            mesh.userData = { k, pA, nA: Nk, qA: q0, pB, qB: q0, nB: Nk, side: sm, photo: photoMats[k], q: 0, flash: 0, on: false, locked: false, hv: Rk.clone().multiplyScalar((k % 2 ? 1 : -1) * WP / 2), delay: k / (N7 - 1) * .4, up: (rnd() - .5) * 2.2, spin: k % 2 ? 1 : -1, ph: th * 2 };
+            const ud = mesh.userData; ud.ballM = ballMats[k]; ud.posterM = photoMats[k];
+            ud.pX = Nk.clone().multiplyScalar(RING * 1.9).addScaledVector(Uk, (rnd() - .5) * 4).addScaledVector(Rk, (rnd() - .5) * 2.5);
+            const tAx = new THREE.Vector3(rnd() - .5, rnd() - .5, rnd() - .5).normalize();
+            ud.qT = q0.clone().multiply(new THREE.Quaternion().setFromAxisAngle(tAx, (k % 2 ? 1 : -1) * 2.4));
+            mesh.position.copy(pA); mesh.quaternion.copy(q0);
+            group.add(mesh); pieces.push(mesh);
+          }
+          const capA = (Math.PI / 2 - LAT / 2) + 0.03;
+          const capT = new THREE.Mesh(new THREE.SphereGeometry(RB + .03, 32, 4, 0, Math.PI * 2, 0, capA), sideMat);
+          const capB = new THREE.Mesh(new THREE.SphereGeometry(RB + .03, 32, 4, 0, Math.PI * 2, Math.PI - capA, capA), sideMat);
+          group.add(capT, capB);
+          const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 3), new THREE.MeshBasicMaterial({ color: 0xfd572a }));
+          const glow = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 2), new THREE.MeshBasicMaterial({ color: 0xea2915, transparent: true, opacity: .2, depthWrite: false }));
+          const coreLight = new THREE.PointLight(0xfd572a, 0, 40, 1.4);
+          group.add(core, glow, coreLight);
+          const rp = new Float32Array(N7 * 6);
+          for (let k = 0; k < N7; k++) { const th = panelTh(k); rp.set([0, 0, 0, Math.sin(th) * (RING - .3), 0, Math.cos(th) * (RING - .3)], k * 6); }
+          const rayGeo = new THREE.BufferGeometry(); rayGeo.setAttribute('position', new THREE.BufferAttribute(rp, 3));
+          const rays = new THREE.LineSegments(rayGeo, new THREE.LineBasicMaterial({ color: 0xea2915, transparent: true, opacity: 0 }));
+          group.add(rays);
+          const arcMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
+          const arcMat2 = new THREE.MeshBasicMaterial({ color: 0xea2915, transparent: true, opacity: 0 });
+          const torA = new THREE.Mesh(new THREE.TorusGeometry(1.55, .045, 8, 72), arcMat);
+          const torB = new THREE.Mesh(new THREE.TorusGeometry(2.05, .02, 6, 96), arcMat2);
+          group.add(torA, torB);
+          const gc = document.createElement('canvas'); gc.width = gc.height = 128;
+          const gx = gc.getContext('2d'), gr = gx.createRadialGradient(64, 64, 0, 64, 64, 64);
+          gr.addColorStop(0, 'rgba(255,180,150,1)'); gr.addColorStop(.4, 'rgba(234,41,21,.42)'); gr.addColorStop(1, 'rgba(234,41,21,0)');
+          gx.fillStyle = gr; gx.fillRect(0, 0, 128, 128);
+          const glowTex = new THREE.CanvasTexture(gc); glowTex.colorSpace = THREE.SRGBColorSpace;
+          const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: .4 }));
+          scene.add(halo);
+          const shock = new THREE.Mesh(new THREE.RingGeometry(.93, 1, 96), new THREE.MeshBasicMaterial({ color: 0xfd572a, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide }));
+          shock.visible = false; scene.add(shock);
+
+          const st = { s: 0, target: 0, focus: -1, hover: 0, hv: 0, cx: 0, cy: 0, rpx: 0, shockT: 9, cur: '', fa: new Array(N7).fill(0), yaw: 0.5, pitch: 0.22, tYaw: 0.5, tPitch: 0.22, vYaw: 0 };
+          let W = 1, Hh = 1, last = performance.now(), clock = 0, drag = null;
+          const kick = () => { if (!running && visible && !document.hidden && !dead) { running = true; last = performance.now(); raf = requestAnimationFrame(loop); } };
+          api.current.split = b => { if (b && !st.target) st.shockT = -.12; st.target = b ? 1 : 0; if (!b) { st.focus = -1; setFocus(-1); } setIsSplit(!!b); kick(); };
+          api.current.focus = k => {
+            if (!st.target) { st.target = 1; st.shockT = -.12; setIsSplit(true); }
+            st.focus = k; setFocus(k);
+            if (k >= 0) { let ty = -panelTh(k); while (ty - st.tYaw > Math.PI) ty -= Math.PI * 2; while (ty - st.tYaw < -Math.PI) ty += Math.PI * 2; st.tYaw = ty; st.tPitch = 0.06; st.vYaw = 0; }
+            kick();
+          };
+          const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+          const click = ev => {
+            const r = dom.getBoundingClientRect();
+            if (!st.target) { if (Math.hypot(ev.clientX - r.left - st.cx, ev.clientY - r.top - st.cy) < st.rpx * 1.15) api.current.split(true); return; }
+            ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+            ray.setFromCamera(ndc, camera);
+            const hit = ray.intersectObjects(pieces, false)[0];
+            api.current.focus(hit ? hit.object.userData.k : -1);
+          };
+          const onDown = ev => { drag = { x: ev.clientX, y: ev.clientY, m: 0 }; dom.style.cursor = 'grabbing'; try { dom.setPointerCapture(ev.pointerId); } catch (e) {} kick(); };
+          const onMove = ev => {
+            if (!drag) { const r = dom.getBoundingClientRect(); st.hover = !st.target && Math.hypot(ev.clientX - r.left - st.cx, ev.clientY - r.top - st.cy) < st.rpx * 1.15 ? 1 : 0; return; }
+            const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.x = ev.clientX; drag.y = ev.clientY; drag.m += Math.abs(dx) + Math.abs(dy);
+            st.tYaw += dx * .0065; st.vYaw = dx * .0065;
+            if (!coarse) st.tPitch = Math.max(-.55, Math.min(.6, st.tPitch + dy * .004));
+          };
+          const onUp = ev => { if (!drag) return; const m = drag.m; drag = null; dom.style.cursor = 'grab'; if (m < 6) click(ev); };
+          const onCancel = () => { drag = null; st.hover = 0; dom.style.cursor = 'grab'; };
+          dom.addEventListener('pointerdown', onDown); dom.addEventListener('pointermove', onMove); dom.addEventListener('pointerup', onUp); dom.addEventListener('pointercancel', onCancel); dom.addEventListener('pointerleave', onCancel);
+          const resize = () => { W = Math.max(1, wrap.clientWidth); Hh = Math.max(1, wrap.clientHeight); renderer.setSize(W, Hh, false); camera.aspect = W / Hh; camera.updateProjectionMatrix(); kick(); };
+          const ro = new ResizeObserver(resize); ro.observe(wrap);
+          const iob = new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }, { threshold: 0.01 }); iob.observe(wrap);
+          const onVis = () => { if (!document.hidden) kick(); }; document.addEventListener('visibilitychange', onVis);
+
+          const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v;
+          const io3 = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+          const back = p => { const c1 = 1.7, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+          const qS = new THREE.Quaternion(), ax = new THREE.Vector3(), a1 = new THREE.Vector3(), ctrl = new THREE.Vector3(), lp = new THREE.Vector3(), cam = new THREE.Vector3();
+          const Yax = new THREE.Vector3(0, 1, 0), qH = new THREE.Quaternion(), qHA = new THREE.Quaternion(), hp = new THREE.Vector3();
+          const outC = p => 1 - Math.pow(1 - p, 3);
+          const outB = p => { const c1 = .9, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+          const PH = HP, DMAX = .4, tf = 2 * Math.tan(17.5 * Math.PI / 180);
+          const loop = now => {
+            if (dead) return;
+            if (!visible || document.hidden) { running = false; return; }
+            const dt = Math.min(.05, (now - last) / 1000); last = now; clock += dt;
+            const dir = st.target > st.s ? 1 : st.target < st.s ? -1 : 0;
+            st.s = clamp(st.s + dir * (reduce ? 1 : dt / 2.1));
+            const s = st.s, se = io3(s);
+            if (!drag) { st.tYaw += st.vYaw; st.vYaw *= .9; if (st.focus < 0 && !reduce) st.tYaw += dt * (s > .5 ? .05 : .16); }
+            st.yaw += (st.tYaw - st.yaw) * Math.min(1, dt * 5); st.pitch += (st.tPitch - st.pitch) * Math.min(1, dt * 5);
+            group.rotation.set(st.pitch, st.yaw, 0);
+            for (let k = 0; k < N7; k++) st.fa[k] += ((st.focus === k ? 1 : 0) - st.fa[k]) * Math.min(1, dt * 4);
+            const asp = W / Hh, sd = sideRef.current, narrow = !sd && asp < .9;
+            st.hv += (st.hover - st.hv) * Math.min(1, dt * 8);
+            const dBall = (2 * RB / (sd ? .56 : .6)) / (tf * Math.min(1, asp));
+            const ringW = narrow ? (WP + 2 * KH) * 1.25 : 2 * RING + WP + 2 * KH;
+            const fr = sd ? .56 : .92;
+            const dRing = narrow ? ringW / .92 / (tf * asp) + RING : Math.max(ringW / fr / (tf * asp), (PH + 1.4) / .7 / tf) + RING * .55;
+            camera.position.set(0, .3 * se, dBall + (dRing - dBall) * se); camera.lookAt(0, 0, 0);
+            const cxF = sd ? .72 - .01 * se : .5, cyF = sd ? .5 : .46;
+            camera.setViewOffset(W, Hh, -(cxF - .5) * W, (.5 - cyF) * Hh, W, Hh);
+            let fmax = 0; for (let k = 0; k < N7; k++) fmax = Math.max(fmax, st.fa[k]);
+            const sideGlow = .12 + .2 * (.5 + .5 * Math.sin(clock * 2.4)) + .35 * st.hv;
+            for (let n = 0; n < pieces.length; n++) {
+              const m = pieces[n], u = m.userData;
+              const q = clamp(s * (1 + DMAX) - u.delay); u.q = q;
+              if (q > 0 && !u.on) { u.on = true; u.flash = 1; } else if (q <= 0) u.on = false;
+              if (q >= 1 && !u.locked) { u.locked = true; u.flash = 1.5; } else if (q < 1) u.locked = false;
+              u.flash *= Math.exp(-dt * 4.5);
+              if (q <= 0) {
+                const w = reduce ? 0 : .06 * Math.max(0, Math.sin(clock * 1.4 + u.ph)) + .12 * st.hv;
+                m.position.copy(u.pA).addScaledVector(u.nA, w); m.quaternion.copy(u.qA); m.morphTargetInfluences[0] = 1;
+              } else if (q >= 1) {
+                m.position.copy(u.pB).addScaledVector(u.nB, RING * .55 * io3(st.fa[u.k])); m.quaternion.copy(u.qB); m.morphTargetInfluences[0] = 0;
+              } else {
+                const pU = clamp(q / .12), pO = clamp((q - .12) / .38), pI = clamp((q - .5) / .5);
+                if (pI <= 0) {
+                  const eo = outC(pO);
+                  hp.copy(u.pA).addScaledVector(u.nA, .5 * io3(pU));
+                  m.position.lerpVectors(hp, u.pX, eo);
+                  m.quaternion.slerpQuaternions(u.qA, u.qT, eo);
+                } else {
+                  m.position.lerpVectors(u.pX, u.pB, outB(pI));
+                  m.quaternion.slerpQuaternions(u.qT, u.qB, io3(Math.min(1, pI * 1.15)));
+                }
+                m.morphTargetInfluences[0] = 1 - io3(clamp((q - .12) / .45));
+              }
+              const f = u.flash, pb = io3(q);
+              u.side.emissiveIntensity = (1 - se) * sideGlow + se * .06 + 1.8 * f;
+              m.scale.setScalar(1 + .3 * io3(st.fa[u.k]));
+              const L = (.86 + .14 * pb + .4 * f + .1 * st.hv * (1 - s)) * (1 - .6 * fmax * (1 - st.fa[u.k]));
+              u.photo.color.setRGB(L, L, L); u.ballM.color.setRGB(L, L, L);
+              const wm = q >= .985 ? u.posterM : u.ballM; if (m.material[0] !== wm) m.material[0] = wm;
+            }
+            const cs = 1 - clamp(s * 5);
+            capT.visible = capB.visible = cs > .01; capT.scale.setScalar(Math.max(.01, cs)); capB.scale.setScalar(Math.max(.01, cs));
+            sideMat.emissiveIntensity = (1 - se) * sideGlow;
+            const cr = .35 + .55 * se + .03 * Math.sin(clock * 3);
+            core.scale.setScalar(cr); glow.scale.setScalar(cr * (1.55 + .15 * Math.sin(clock * 2.2)));
+            coreLight.intensity = 50 * se;
+            arcMat.opacity = .95 * se; arcMat2.opacity = .7 * se; torA.visible = torB.visible = se > .02;
+            torA.scale.setScalar(cr); torB.scale.setScalar(cr);
+            torA.rotation.set(clock * 1.3, clock * .4, 0); torB.rotation.set(1.1, -clock * .9, clock * .3);
+            rays.material.opacity = .45 * clamp((s - .6) / .4);
+            const hb = RB * 2.9 * (1 + .04 * Math.sin(clock * 2.4)) * (1 + .06 * st.hv);
+            halo.scale.setScalar(hb + (cr * 6.5 - hb) * se);
+            halo.material.opacity = (1 - se) * (.3 + .1 * Math.sin(clock * 2.4) + .3 * st.hv) + se * .6;
+            if (st.shockT < 1.2) {
+              st.shockT += dt;
+              const p = clamp(st.shockT / 1.0);
+              shock.visible = st.shockT > 0 && p < 1;
+              shock.quaternion.copy(camera.quaternion);
+              shock.scale.setScalar(RB * (1.02 + 3.6 * (1 - Math.pow(1 - p, 3))));
+              shock.material.opacity = .85 * Math.pow(1 - p, 1.6);
+            } else shock.visible = false;
+            group.updateMatrixWorld();
+            const dist = camera.position.length();
+            lp.set(0, 0, 0).project(camera);
+            st.cx = (lp.x * .5 + .5) * W; st.cy = (-lp.y * .5 + .5) * Hh; st.rpx = RB * Hh / (dist * tf);
+            const rH = (RB * 1.3 + (cr * 2.6 - RB * 1.3) * se) * Hh / (dist * tf);
+            if (hudRef.current) { hudRef.current.style.transform = 'translate(' + (st.cx - 100) + 'px,' + (st.cy - 100) + 'px) scale(' + (rH / 100) + ')'; hudRef.current.style.opacity = (.75 + .25 * st.hv) * (1 - se); }
+            if (tagRef.current) { const tv = 1 - clamp(s * 4); tagRef.current.style.transform = 'translate(' + st.cx + 'px,' + (st.cy + st.rpx * 1.26 + 18) + 'px) translateX(-50%)'; tagRef.current.style.opacity = tv; tagRef.current.style.pointerEvents = tv > .5 ? 'auto' : 'none'; }
+            const want = drag ? 'grabbing' : (st.hover ? 'pointer' : 'grab');
+            if (want !== st.cur) { dom.style.cursor = want; st.cur = want; }
+            for (let k = 0; k < N7; k++) {
+              const el = labelRefs.current[k]; if (!el) continue;
+              const lo = clamp((pieces[k].userData.q - .9) / .1) * clamp((s - .5) / .2);
+              if (lo <= 0) { el.style.opacity = 0; continue; }
+              const th = panelTh(k), rr = RING + RING * .55 * io3(st.fa[k]);
+              lp.set(Math.sin(th) * rr, PH / 2 + .5, Math.cos(th) * rr).applyMatrix4(group.matrixWorld);
+              ax.set(Math.sin(th), 0, Math.cos(th)).applyQuaternion(group.quaternion);
+              cam.copy(camera.position).sub(lp).normalize();
+              const facing = ax.dot(cam);
+              lp.project(camera);
+              el.style.transform = 'translate(' + ((lp.x * .5 + .5) * W) + 'px,' + ((-lp.y * .5 + .5) * Hh) + 'px) translate(-50%,-100%)';
+              el.style.opacity = facing > .2 ? lo * (1 - fmax) : 0;
+            }
+            renderer.render(scene, camera);
+            raf = requestAnimationFrame(loop);
+          };
+          resize();
+          setStatus('ready');
+          cleanup.push(() => {
+            ro.disconnect(); iob.disconnect(); document.removeEventListener('visibilitychange', onVis);
+            dom.removeEventListener('pointerdown', onDown); dom.removeEventListener('pointermove', onMove); dom.removeEventListener('pointerup', onUp); dom.removeEventListener('pointercancel', onCancel);
+            pieces.forEach(p => p.geometry.dispose()); capT.geometry.dispose(); capB.geometry.dispose(); core.geometry.dispose(); glow.geometry.dispose(); rayGeo.dispose();
+            photoMats.forEach(m => m.dispose()); textures.forEach(t => t.dispose()); sideMat.dispose(); backMat.dispose(); sideMats.forEach(m => m.dispose());
+            torA.geometry.dispose(); torB.geometry.dispose(); arcMat.dispose(); arcMat2.dispose(); glowTex.dispose(); halo.material.dispose(); shock.geometry.dispose(); shock.material.dispose();
+            dom.removeEventListener('pointerleave', onCancel);
+            renderer.dispose(); dom.remove();
+          });
+        })();
+        return () => { dead = true; cancelAnimationFrame(raf); cleanup.forEach(f => f()); };
+      }, []);
+
+      const pill = { display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(22,24,19,0.78)', border: '1px solid #44463E', color: '#EDEDE6', borderRadius: 999, padding: '9px 14px', fontSize: 14, fontWeight: 500, backdropFilter: 'blur(6px)', fontFamily: 'inherit' };
+      const fItem = focus >= 0 ? items[focus] : null;
+      const E = R.createElement;
+      const svgC = (r, st) => E('circle', { cx: 100, cy: 100, r, fill: 'none', ...st });
+      const region = side ? { left: '46%', right: 'clamp(20px,4vw,48px)' } : { left: 16, right: 16 };
+      return E('div', { ref: wrapRef, style: { position: 'absolute', inset: 0, overflow: 'hidden' } },
+        E('div', { ref: hostRef, 'aria-hidden': 'true', style: { position: 'absolute', inset: 0 } }),
+        E('div', { ref: hudRef, 'aria-hidden': 'true', 'data-hud': '', style: { position: 'absolute', left: 0, top: 0, width: 200, height: 200, pointerEvents: 'none', opacity: 0, willChange: 'transform' } },
+          E('div', { style: { position: 'absolute', inset: 8, borderRadius: '50%', border: '1.5px solid rgba(253,87,42,0.7)', boxShadow: '0 0 18px rgba(234,41,21,0.45), inset 0 0 18px rgba(234,41,21,0.25)' } }),
+          !isSplit ? E('div', { style: { position: 'absolute', inset: 8, borderRadius: '50%', border: '1.5px solid rgba(253,87,42,0.6)', animation: 'sfgPing 2.6s ease-out infinite' } }) : null),
+        status !== 'ready' ? E('p', { style: { position: 'absolute', left: side ? '72%' : '50%', top: '46%', transform: 'translate(-50%,-50%)', margin: 0, color: '#C9CABF', fontSize: 15 } }, status === 'error' ? '' : txt.loading) : null,
+        status === 'ready' ? E('button', { ref: tagRef, type: 'button', onClick: () => api.current.split(true), style: { position: 'absolute', left: 0, top: 0, opacity: 0, display: 'flex', alignItems: 'center', gap: 10, minHeight: 44, padding: '0 18px', borderRadius: 999, border: '1px solid #FD572A', background: 'rgba(22,24,19,0.82)', color: '#FFFFFF', fontSize: 15, fontWeight: 500, fontFamily: 'inherit', cursor: 'pointer', whiteSpace: 'nowrap', boxShadow: '0 0 28px rgba(234,41,21,0.35)', backdropFilter: 'blur(6px)' } },
+          E('span', { style: { width: 8, height: 8, borderRadius: '50%', background: '#FD572A', boxShadow: '0 0 10px #FD572A', animation: 'sfgDot 1.6s ease-in-out infinite' } }),
+          txt.open, E('span', { style: { color: '#C9CABF', fontSize: 13 } }, txt.drag)) : null,
+        items.map((it, k) => E('div', { key: k, ref: el => { labelRefs.current[k] = el; }, 'aria-hidden': 'true', style: { position: 'absolute', left: 0, top: 0, opacity: 0, pointerEvents: 'none', display: 'flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', color: '#FFFFFF', fontSize: 15, fontWeight: 500, textShadow: '0 1px 8px rgba(22,24,19,0.9)', borderLeft: '3px solid ' + it.base, paddingLeft: 8 } },
+          E('span', { style: { background: it.ink, color: it.onInk, fontSize: 12, fontWeight: 600, padding: '3px 6px', borderRadius: 3, textShadow: 'none' } }, it.n), it.title)),
+        isSplit ? E('div', { style: { position: 'absolute', ...region, top: 20, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 10, pointerEvents: 'none' } },
+          E('span', { style: pill }, E('i', { className: 'ph ph-hand-grabbing', style: { color: '#FD572A', fontSize: 17 } }), txt.hintSplit),
+          E('button', { type: 'button', onClick: () => api.current.split(false), style: { ...pill, cursor: 'pointer', pointerEvents: 'auto', minHeight: 44 } }, E('i', { className: 'ph ph-arrows-in', style: { color: '#FD572A', fontSize: 17 } }), txt.reassemble)) : null,
+        fItem ? (() => {
+          const nb = (label, icon, fn) => E('button', { type: 'button', 'aria-label': label, onClick: fn, style: { width: 44, height: 44, borderRadius: 4, border: '1px solid #D6D6CF', background: '#FFFFFF', color: '#1F211C', cursor: 'pointer', display: 'grid', placeItems: 'center', fontSize: 18 } }, E('i', { className: 'ph ' + icon }));
+          const rule = fItem.onInk === '#FFFFFF' ? 'rgba(255,255,255,0.28)' : 'rgba(31,33,28,0.28)';
+          return E('div', { role: 'region', 'aria-label': fItem.title, 'aria-live': 'polite', style: { position: 'absolute', zIndex: 3, ...(side ? { left: 'clamp(20px,4vw,48px)', top: '50%', transform: 'translateY(-50%)', width: 'min(460px, 38vw)', maxHeight: 'calc(100% - 48px)' } : { left: 12, right: 12, bottom: 12, maxHeight: 'calc(100% - 24px)' }), overflowY: 'auto', boxSizing: 'border-box', background: fItem.ink, color: fItem.onInk, borderRadius: 4, boxShadow: '0 30px 60px -20px rgba(0,0,0,0.6)' } },
+            E('div', { style: { background: '#FFFFFF', padding: side ? '20px 22px 40px' : '16px 16px 32px', clipPath: 'polygon(0 0,100% 0,100% 58%,0 100%)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 } },
+              E('img', { src: fItem.markUrl, alt: '', style: { width: side ? 60 : 48, height: 'auto', display: 'block' } }),
+              E('div', { style: { display: 'flex', gap: 6 } },
+                nb(txt.prev, 'ph-arrow-left', () => api.current.focus((focus + items.length - 1) % items.length)),
+                nb(txt.next, 'ph-arrow-right', () => api.current.focus((focus + 1) % items.length)),
+                nb(txt.back, 'ph-x', () => api.current.focus(-1)))),
+            E('div', { style: { padding: side ? '4px 28px 28px' : '0 20px 20px' } },
+              E('p', { style: { margin: 0, fontSize: 13, fontWeight: 600, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.04em' } }, fItem.n + ' / ' + String(items.length).padStart(2, '0')),
+              E('h3', { style: { margin: '6px 0 0', fontSize: side ? 32 : 26, lineHeight: 1.05, fontWeight: 550, letterSpacing: '-0.025em' } }, fItem.title),
+              E('p', { style: { margin: '14px 0 0', fontSize: 16, lineHeight: 1.55 } }, fItem.desc),
+              E('p', { style: { margin: '22px 0 8px', fontSize: 13, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' } }, txt.included),
+              E('ul', { style: { listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column' } },
+                (fItem.points || []).map((p, i) => E('li', { key: i, style: { display: 'grid', gridTemplateColumns: '24px 1fr', gap: 10, padding: '10px 0', borderTop: '1px solid ' + rule, fontSize: 15, lineHeight: 1.45 } },
+                  E('i', { className: 'ph-fill ph-check-circle', style: { fontSize: 20, marginTop: 1 } }), p))),
+              E('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 22 } },
+                E('a', { href: '#quote', style: { display: 'flex', alignItems: 'center', gap: 10, background: '#FFFFFF', color: '#1F211C', fontWeight: 550, fontSize: 15, padding: '14px 18px', borderRadius: 4 } }, txt.quote, E('i', { className: 'ph ph-arrow-right' })),
+                E('a', { href: 'Service%20Detail.dc.html?line=' + fItem.mark, style: { display: 'flex', alignItems: 'center', gap: 10, border: '1.5px solid ' + fItem.onInk, color: fItem.onInk, fontWeight: 500, fontSize: 15, padding: '13px 18px', borderRadius: 4 } }, txt.learn))));
+        })() : null,
+        (side || isSplit) ? E('div', { role: 'group', 'aria-label': txt.heroAria, style: { position: 'absolute', ...region, bottom: side ? 28 : 16, display: 'flex', flexWrap: side ? 'wrap' : 'nowrap', gap: 8, overflowX: side ? 'visible' : 'auto', scrollbarWidth: 'none' } },
+          items.map((it, k) => {
+            const on = focus === k;
+            return E('button', { key: k, type: 'button', 'aria-pressed': on, onClick: () => api.current.focus(on ? -1 : k), style: { flex: 'none', display: 'flex', alignItems: 'center', gap: 8, minHeight: 44, padding: '0 14px', borderRadius: 999, border: '1px solid ' + (on ? it.ink : '#44463E'), background: on ? it.ink : 'rgba(22,24,19,0.78)', color: on ? it.onInk : '#EDEDE6', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', backdropFilter: 'blur(6px)' } },
+              E('span', { style: { fontSize: 12, fontWeight: 600, color: on ? it.onInk : it.base } }, it.n), it.title);
+          })) : null
+      );
+    };
+  }
+
+  renderVals() {
+    const { lang, w, menu, sent } = this.state;
+    const t = COPY[lang];
+    const certs = t.certs.map((c, i) => ({ file: c[0], url: RES('cert-' + c[0], 'assets/certificates/' + c[0] + '.png'), urlCss: CSSURL(RES('cert-' + c[0], 'assets/certificates/' + c[0] + '.png')), title: c[1], desc: c[2], meta: c[3], aria: c[1] + ' certificate', open: () => this.setState({ cert: i }) }));
+    const ci = this.state.cert;
+    const mobile = w < 760, wide = w >= 1080, heroSide = w >= 960;
+    const services = t.services.map((s, i) => ({ ...LINES[i], markUrl: RES('sg-' + LINES[i].mark, 'assets/brand/sg-' + LINES[i].mark + '.svg'), photoUrl: RES('photo-' + LINES[i].photo, 'assets/photos/' + LINES[i].photo + '.png'), markCss: CSSURL(RES('sg-' + LINES[i].mark, 'assets/brand/sg-' + LINES[i].mark + '.svg')), photoCss: CSSURL(RES('photo-' + LINES[i].photo, 'assets/photos/' + LINES[i].photo + '.png')), title: s[0], short: s[1], desc: s[2], tags: s[3], points: t.servicePoints[i], n: String(i + 1).padStart(2, '0') }));
+    return {
+      t, nav: t.nav, wide, narrow: !wide, notMobile: !mobile, menu, menuOpen: menu && !wide,
+      isEn: lang === 'en', isId: lang === 'id',
+      enBg: lang === 'en' ? '#1F211C' : 'transparent', enFg: lang === 'en' ? '#FFFFFF' : '#45473F',
+      idBg: lang === 'id' ? '#1F211C' : 'transparent', idFg: lang === 'id' ? '#FFFFFF' : '#45473F',
+      setEn: () => this.setLang('en'), setId: () => this.setLang('id'),
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })), closeMenu: () => this.setState({ menu: false }),
+      stats: t.stats.map(s => ({ value: s[0], label: s[1] })),
+      clients: CLIENTS.map(c => { const url = RES('client-' + c[0], 'assets/clients/' + c[0] + '.png'); return { file: c[0], url, urlCss: CSSURL(url), name: c[1] }; }),
+      services,
+      why: t.why.map(x => ({ icon: x[0], title: x[1], desc: x[2] })),
+      steps: t.steps.map((x, i) => ({ n: String(i + 1).padStart(2, '0'), title: x[0], desc: x[1] })),
+      industries: t.industries.map(x => ({ icon: x[0], title: x[1], desc: x[2] })),
+      quotes: t.quotes.map(x => ({ text: x[0], who: x[1], role: x[2] })),
+      buildingTypes: t.buildingTypes,
+      sentNote: sent ? t.sentDone : t.sentIdle,
+      certs, certOpen: ci != null && ci >= 0, cert: ci != null && ci >= 0 ? certs[ci] : certs[0], closeCert: () => this.setState({ cert: -1 }),
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      woBefore: CSSURL(RES('photo-cleaning', 'assets/photos/cleaning.png')), woAfter: CSSURL(RES('photo-lobby-cleaning', 'assets/photos/lobby-cleaning.png')),
+      ribbon: React.createElement(this.Ribbon),
+      ribbonSte: React.createElement(this.Ribbon, { gid: 'ste', still: true, vb: '0 0 1600 700', d: 'M -125 600 C 75 600 275 560 345 500 C 415 440 475 220 575 160 C 675 100 735 160 695 200 C 655 240 515 240 525 320 C 535 400 715 400 695 480 C 675 560 515 560 495 500 C 475 440 575 450 655 470 C 735 490 835 470 865 380 C 895 290 905 200 885 180 C 865 160 850 220 850 300 C 850 380 855 500 915 500 C 975 500 1045 460 1095 420 C 1145 380 1175 320 1135 310 C 1095 300 1045 360 1065 430 C 1085 500 1175 510 1255 480 C 1335 450 1435 420 1675 420', extra: 'M 775 300 C 835 290 925 288 985 298' }),
+      hero: React.createElement(this.Hero, { items: services, txt: t.hero, side: heroSide, onFocusChange: this.onHeroFocus }),
+      heroTextOp: heroSide && this.state.heroFocus >= 0 ? 0 : 1, heroZ: this.state.heroFocus >= 0 ? 2 : 0,
+      heroMinH: heroSide ? 'clamp(600px, calc(100svh - 72px), 900px)' : 'auto',
+      heroCanvasPos: heroSide ? 'absolute' : 'relative', heroCanvasH: heroSide ? 'auto' : '460px',
+      heroPad: heroSide ? 'clamp(40px,6vw,88px) clamp(20px,4vw,48px)' : '40px 20px 0', heroGlowX: heroSide ? '72%' : '50%'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Service · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+<dc-import name="SiteHeader" active="services" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+<main>
+<section style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,4vw,48px) 0">
+  <nav aria-label="Breadcrumb" style="font-size:14px;color:#5A5C54;display:flex;flex-wrap:wrap;gap:8px"><a href="SFG%20Home%20v2.dc.html" style="color:#5A5C54">{{ t.home }}</a><span aria-hidden="true">/</span><a href="Services.dc.html" style="color:#5A5C54">{{ t.services }}</a><span aria-hidden="true">/</span><span aria-current="page" style="color:#1F211C">{{ l.title }}</span></nav>
+</section>
+
+<section aria-labelledby="svc-h" style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,4vw,48px) 0">
+  <div style="position:relative;background:{{ l.ink }};color:{{ l.onInk }};border-radius:4px;overflow:hidden;min-height:clamp(520px,60vw,620px);display:flex;flex-direction:column">
+    <div style="background:#FFFFFF;padding:clamp(20px,3vw,32px) clamp(20px,3vw,40px) clamp(56px,7vw,96px);clip-path:polygon(0 0,100% 0,100% 45%,0 100%);display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div aria-hidden="true" style="width:clamp(64px,7vw,96px);aspect-ratio:1/1;background:{{ l.markCss }} left top/contain no-repeat"></div>
+      <span style="font-size:14px;color:#5A5C54;font-variant-numeric:tabular-nums">{{ l.n }} / 05</span>
+    </div>
+    <div style="position:relative;z-index:1;padding:0 clamp(20px,3vw,40px) clamp(28px,4vw,48px);max-width:620px;display:flex;flex-direction:column;gap:18px;flex:1">
+      <h1 id="svc-h" style="margin:0;font-size:clamp(38px,5.4vw,72px);line-height:0.98;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">{{ l.title }}</h1>
+      <p style="margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.55;max-width:520px">{{ l.lead }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:12px">
+        <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;background:#FFFFFF;color:#1F211C;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px" style-hover="background:#F4F4F1;color:#1F211C">{{ t.quote }} <i class="ph ph-arrow-right"></i></a>
+        <a href="https://wa.me/6212345678" style="display:flex;align-items:center;gap:10px;border:1.5px solid {{ l.onInk }};color:{{ l.onInk }};font-weight:500;font-size:16px;padding:15px 22px;border-radius:4px" style-hover="color:{{ l.onInk }};background:rgba(255,255,255,0.12)"><i class="ph-fill ph-whatsapp-logo"></i>WhatsApp</a>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:absolute;right:-4%;bottom:-6%;width:min(54%,560px);aspect-ratio:1/1;background:{{ l.photoCss }} center/cover;filter:grayscale(1);-webkit-mask:{{ l.markCss }} center/contain no-repeat;mask:{{ l.markCss }} center/contain no-repeat;opacity:{{ photoOp }}"></div>
+  </div>
+</section>
+
+<section aria-label="{{ t.other }}" style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,4vw,48px) 0">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+    <span style="font-size:14px;color:#5A5C54;margin-right:4px">{{ t.other }}</span>
+    <sc-for list="{{ switcher }}" as="s" hint-placeholder-count="5">
+      <a href="{{ s.href }}" aria-current="{{ s.current }}" style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid {{ s.border }};background:{{ s.bg }};color:{{ s.fg }};font-size:14px;font-weight:500" style-hover="border-color:#1F211C;color:{{ s.fg }}"><span style="width:8px;height:8px;background:{{ s.base }}"></span>{{ s.title }}</a>
+    </sc-for>
+  </div>
+</section>
+
+<sc-if value="{{ hasFacts }}" hint-placeholder-val="{{ true }}">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(20px,4vw,48px) 0">
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:24px 32px">
+      <sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column-reverse;gap:6px;border-left:3px solid {{ l.base }};padding-left:16px">
+          <dt style="font-size:14px;color:#5A5C54;line-height:1.4">{{ f.label }}</dt>
+          <dd style="margin:0;font-size:clamp(32px,3.4vw,46px);font-weight:550;letter-spacing:-0.03em;line-height:1">{{ f.value }}</dd>
+        </div>
+      </sc-for>
+    </dl>
+  </section>
+</sc-if>
+
+<section aria-labelledby="inc-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+  <h2 id="inc-h" style="margin:0 0 32px;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.included }}</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+      <div style="padding:24px;border:1px solid #E6E6E1;border-radius:4px;display:flex;flex-direction:column;gap:14px;background:#FFFFFF">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <h3 style="margin:0;font-size:20px;font-weight:550;letter-spacing:-0.01em;line-height:1.2">{{ g.title }}</h3>
+          <span style="font-size:13px;color:#5A5C54;font-variant-numeric:tabular-nums">{{ g.n }}</span>
+        </div>
+        <sc-if value="{{ g.hasDesc }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:15px;line-height:1.55;color:#45473F">{{ g.desc }}</p></sc-if>
+        <sc-if value="{{ g.hasItems }}" hint-placeholder-val="{{ true }}">
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4"><li style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #EFEFEA;font-size:15px"><span style="width:8px;height:8px;flex:none;background:{{ l.base }}"></span>{{ it }}</li></sc-for>
+          </ul>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+    <h2 style="margin:0 0 12px;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.mapH }}</h2>
+    <p style="margin:0 0 28px;font-size:16px;line-height:1.55;color:#45473F;max-width:620px">{{ t.mapP }}</p>
+    <div role="img" aria-label="{{ t.mapAlt }}" style="width:100%;aspect-ratio:1855/722;background:#FFFFFF {{ mapCss }} center/contain no-repeat;border:1px solid #E6E6E1;border-radius:4px"></div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ hasCerts }}" hint-placeholder-val="{{ false }}">
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+    <h2 style="margin:0 0 28px;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.certH }}</h2>
+    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px">
+      <li style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid #E6E6E1;border-radius:4px;font-size:16px;font-weight:500"><i class="ph ph-seal-check" style="font-size:24px;color:#C6241C"></i>ISO 22000:2018</li>
+      <li style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid #E6E6E1;border-radius:4px;font-size:16px;font-weight:500"><i class="ph ph-seal-check" style="font-size:24px;color:#C6241C"></i>HACCP · CXC 1-1969</li>
+      <li style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid #E6E6E1;border-radius:4px;font-size:16px;font-weight:500"><i class="ph ph-seal-check" style="font-size:24px;color:#C6241C"></i>SLHS</li>
+    </ul>
+  </section>
+</sc-if>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+  <div style="background:#1F211C;color:#FFFFFF;border-radius:4px;padding:clamp(28px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,5vw,72px)">
+    <div style="flex:1 1 320px;min-width:0">
+      <h2 style="margin:0;font-size:clamp(26px,3vw,38px);line-height:1.08;font-weight:550;letter-spacing:-0.025em;text-wrap:balance">{{ t.proofH }}</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.55;color:#D6D7CE;max-width:460px">{{ t.proofP }}</p>
+    </div>
+    <ul style="flex:1 1 320px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+      <sc-for list="{{ proof }}" as="p" hint-placeholder-count="4"><li style="display:grid;grid-template-columns:32px 1fr;gap:12px;padding:14px 0;border-top:1px solid #3A3C35;font-size:16px;line-height:1.45"><i class="ph {{ p.icon }}" style="font-size:24px;color:#FD572A"></i>{{ p.text }}</li></sc-for>
+    </ul>
+  </div>
+</section>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+  <h2 style="margin:0 0 20px;font-size:clamp(24px,2.6vw,32px);line-height:1.1;font-weight:550;letter-spacing:-0.02em">{{ t.indH }}</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <sc-for list="{{ industries }}" as="i" hint-placeholder-count="4"><a href="Industries.dc.html" style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D6D6CF;font-size:15px" style-hover="border-color:#1F211C"><i class="ph {{ i.icon }}" style="font-size:18px"></i>{{ i.title }}</a></sc-for>
+  </div>
+</section>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between">
+  <div style="max-width:640px">
+    <h2 style="margin:0;font-size:clamp(30px,3.8vw,52px);line-height:1;font-weight:550;letter-spacing:-0.035em;text-wrap:balance">{{ t.ctaH }}</h2>
+    <p style="margin:18px 0 0;font-size:17px;line-height:1.55;color:#45473F">{{ t.ctaP }}</p>
+  </div>
+  <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;background:#C6241C;color:#FFFFFF;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px" style-hover="background:#A3181A;color:#FFFFFF">{{ t.quote }} <i class="ph ph-arrow-right"></i></a>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;line&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;food&quot;,&quot;digital&quot;,&quot;workforce&quot;,&quot;remote&quot;,&quot;facility&quot;],&quot;default&quot;:&quot;facility&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const LINES = {
+  food: { mark: 'food', photo: 'kitchen', base: '#EA2915', ink: '#C6241C', onInk: '#FFFFFF', n: '01', certs: true },
+  digital: { mark: 'digital', photo: 'mep-panel', base: '#28937A', ink: '#1F7360', onInk: '#FFFFFF', n: '02' },
+  workforce: { mark: 'workforce', photo: 'team', base: '#5E9628', ink: '#4A7023', onInk: '#FFFFFF', n: '03' },
+  remote: { mark: 'remote', photo: 'technical', base: '#FD572A', ink: '#FD572A', onInk: '#1F211C', n: '04', map: true },
+  facility: { mark: 'facility', photo: 'lobby-cleaning', base: '#C6241C', ink: '#A3181A', onInk: '#FFFFFF', n: '05' }
+};
+const ORDER = ['food', 'digital', 'workforce', 'remote', 'facility'];
+const IND = { healthcare: 'ph-first-aid-kit', corporate: 'ph-buildings', retail: 'ph-storefront', industrial: 'ph-hard-hat', hospitality: 'ph-fork-knife', education: 'ph-graduation-cap', residential: 'ph-house-line' };
+const LINE_IND = { food: ['healthcare', 'corporate', 'industrial', 'hospitality', 'education'], digital: ['healthcare', 'corporate', 'industrial'], workforce: ['healthcare', 'corporate', 'retail', 'industrial', 'hospitality', 'residential'], remote: ['industrial'], facility: ['healthcare', 'corporate', 'retail', 'education', 'residential'] };
+const COPY = {
+  en: {
+    home: 'Home', services: 'Services', quote: 'Request a Quotation', other: 'Other services', included: 'What’s included',
+    mapH: 'Where we deliver', mapP: 'Five distribution hubs and 60 retail distribution points connect our kitchens and stores to sites across Indonesia, including Timika lowland and highland.', mapAlt: 'Map of Indonesia showing Sunshine distribution hubs and coverage',
+    certH: 'Certified food safety',
+    proofH: 'Every job, on record.', proofP: 'Whichever line you choose, the work is logged in our field app so your team can check what was done, by whom and when.',
+    proof: [['ph-camera', 'Before and after photos for each task'], ['ph-clock', 'Start and finish time with location'], ['ph-signature', 'Digital sign-off by your building team'], ['ph-chart-line-up', 'Monthly KPI review with your site lead']],
+    indH: 'Industries we serve with this line',
+    ind: { healthcare: 'Healthcare', corporate: 'Corporate offices', retail: 'Retail & malls', industrial: 'Industrial & mining', hospitality: 'Hospitality & F&B', education: 'Education', residential: 'Residential towers' },
+    ctaH: 'Tell us about your site.', ctaP: 'We will arrange a survey and send an itemised proposal for this service.',
+    lines: {
+      food: { title: 'Food Services', lead: 'End-to-end food service solutions: safe, nutritious and efficient food service across industries.',
+        facts: [['5M+', 'Meals served a year'], ['80+', 'Dietitians'], ['200+', 'Cooks'], ['30+', 'Projects']],
+        groups: [['Kitchen Operations', null, ['Catering services', 'Kitchen management', 'Kitchen design & layout', 'Kitchen equipment planning', 'Coffee & pantry management', 'Restaurant & cafeteria management']], ['Nutrition & Wellness', null, ['Clinical nutrition', 'Dietitian consultancy', 'Menu engineering', 'Special diet programs']], ['Food Technology', null, ['Hospital ordering system', 'CRM & ticketing', 'Digital kitchen solutions']], ['Sectors', null, ['Healthcare', 'Corporate', 'Industrial', 'Events']]] },
+      digital: { title: 'Digital & Operational Integration', lead: 'Systems for ordering, stock, scheduling and reporting, so every service runs on one record.',
+        facts: [],
+        groups: [['Ordering', null, ['Hospital ordering system', 'Online orders for meals and supplies']], ['Inventory', null, ['Live stock across kitchens and stores', 'Supplier and delivery records']], ['Analytics', null, ['Dashboards per site', 'Monthly KPI reports']], ['Scheduling', null, ['Attendance and shifts', 'Paperless work orders with photo proof']]] },
+      workforce: { title: 'Workforce Solutions', lead: 'Your operations. Our people. One seamless workforce solution.',
+        facts: [['1,000+', 'Employees'], ['18+', 'Cities']],
+        groups: [['Recruitment and Selection', 'Sourcing, screening, and selecting qualified personnel based on role requirements, operational standards, and client needs.'], ['Workforce Deployment', 'Efficient placement and onboarding of personnel across multiple locations, functions, and operational environments.'], ['Training and Development', 'Role-specific training, service standards, safety protocols, and continuous capability development.'], ['Workforce Management', 'Managing attendance, shifts, staffing requirements, documentation, and day-to-day workforce administration.'], ['Performance Management', 'Monitoring workforce performance through defined KPIs, regular evaluations, and continuous improvement programs.'], ['Payroll and Administration', 'Streamlining payroll, employment documentation, and workforce administration for greater accuracy and operational efficiency.'], ['Digital Workforce Management', 'Technology-enabled visibility across attendance, scheduling, workforce performance, and operational reporting.']] },
+      remote: { title: 'Remote', lead: 'Integrated supply chain excellence: procurement, production, logistics and on-site execution for remote operations. Camp life, city standard.',
+        facts: [['5', 'Distribution hubs'], ['60', 'Retail distribution points'], ['Timika', 'Lowland & highland']],
+        groups: [['Procurement', 'Sourcing food and operating supplies through our hubs, with supplier quality checks.'], ['Production', 'Central production and camp kitchens run to the same food safety system.'], ['Logistics', 'Scheduled deliveries to remote and hard-to-reach sites.'], ['On-site Execution', 'Teams on site for catering, housekeeping and upkeep.']] },
+      facility: { title: 'Facility Management', lead: 'Keeping facilities running at their best.',
+        facts: [['18+', 'Cities'], ['10+', 'Years'], ['24/7', 'Response line']],
+        groups: [['Cleaning and Hygiene', null, ['Daily cleaning', 'Deep cleaning', 'Healthcare cleaning', 'Waste management']], ['Technical Support', null, ['Kitchen equipment maintenance', 'Preventive maintenance', 'Facility maintenance', 'Upgrade, retrofit & technical projects', 'Energy optimization']], ['Safety and Security', null, ['Access & security management', 'Security surveillance', 'Fire safety & prevention', 'Visitor & front-of-house management']], ['Environmental Services', null, ['Pest control', 'Waste & recycling', 'Sustainability support', 'Gardening']]] }
+    }
+  },
+  id: {
+    home: 'Beranda', services: 'Layanan', quote: 'Minta Penawaran', other: 'Layanan lain', included: 'Yang termasuk',
+    mapH: 'Jangkauan kami', mapP: 'Lima hub distribusi dan 60 titik distribusi ritel menghubungkan dapur dan gudang kami ke lokasi di seluruh Indonesia, termasuk Timika dataran rendah dan dataran tinggi.', mapAlt: 'Peta Indonesia yang menunjukkan hub distribusi dan jangkauan Sunshine',
+    certH: 'Keamanan pangan bersertifikat',
+    proofH: 'Setiap pekerjaan, tercatat.', proofP: 'Lini apa pun yang Anda pilih, pekerjaan dicatat di aplikasi lapangan kami sehingga tim Anda dapat memeriksa apa yang dikerjakan, oleh siapa, dan kapan.',
+    proof: [['ph-camera', 'Foto sebelum dan sesudah untuk setiap tugas'], ['ph-clock', 'Waktu mulai dan selesai beserta lokasi'], ['ph-signature', 'Tanda tangan digital oleh tim gedung Anda'], ['ph-chart-line-up', 'Evaluasi KPI bulanan bersama penanggung jawab lokasi']],
+    indH: 'Industri yang kami layani dengan lini ini',
+    ind: { healthcare: 'Kesehatan', corporate: 'Perkantoran', retail: 'Ritel & mal', industrial: 'Industri & tambang', hospitality: 'Perhotelan & F&B', education: 'Pendidikan', residential: 'Apartemen & hunian' },
+    ctaH: 'Ceritakan tentang lokasi Anda.', ctaP: 'Kami akan menjadwalkan survei dan mengirim proposal terperinci untuk layanan ini.',
+    lines: {
+      food: { title: 'Layanan Makanan', lead: 'Solusi layanan makanan menyeluruh: aman, bergizi, dan efisien di berbagai industri.',
+        facts: [['5 jt+', 'Porsi per tahun'], ['80+', 'Ahli gizi'], ['200+', 'Juru masak'], ['30+', 'Proyek']],
+        groups: [['Operasional Dapur', null, ['Layanan katering', 'Manajemen dapur', 'Desain & tata letak dapur', 'Perencanaan peralatan dapur', 'Manajemen kopi & pantry', 'Manajemen restoran & kafetaria']], ['Gizi & Kesehatan', null, ['Gizi klinis', 'Konsultasi ahli gizi', 'Rekayasa menu', 'Program diet khusus']], ['Teknologi Pangan', null, ['Sistem pemesanan rumah sakit', 'CRM & tiket', 'Solusi dapur digital']], ['Sektor', null, ['Kesehatan', 'Korporat', 'Industri', 'Acara']]] },
+      digital: { title: 'Integrasi Digital & Operasional', lead: 'Sistem untuk pemesanan, stok, penjadwalan, dan pelaporan, sehingga setiap layanan berjalan dalam satu catatan.',
+        facts: [],
+        groups: [['Pemesanan', null, ['Sistem pemesanan rumah sakit', 'Pesanan online untuk makanan dan perlengkapan']], ['Inventaris', null, ['Stok real-time di seluruh dapur dan gudang', 'Catatan pemasok dan pengiriman']], ['Analitik', null, ['Dashboard per lokasi', 'Laporan KPI bulanan']], ['Penjadwalan', null, ['Absensi dan shift', 'Perintah kerja tanpa kertas dengan bukti foto']]] },
+      workforce: { title: 'Solusi Tenaga Kerja', lead: 'Operasional Anda. Orang-orang kami. Satu solusi tenaga kerja yang menyatu.',
+        facts: [['1.000+', 'Karyawan'], ['18+', 'Kota']],
+        groups: [['Rekrutmen dan Seleksi', 'Mencari, menyaring, dan memilih personel yang memenuhi syarat sesuai kebutuhan peran, standar operasional, dan kebutuhan klien.'], ['Penempatan Tenaga Kerja', 'Penempatan dan orientasi personel secara efisien di berbagai lokasi, fungsi, dan lingkungan operasional.'], ['Pelatihan dan Pengembangan', 'Pelatihan sesuai peran, standar layanan, protokol keselamatan, dan pengembangan kemampuan berkelanjutan.'], ['Manajemen Tenaga Kerja', 'Mengelola absensi, shift, kebutuhan staf, dokumentasi, dan administrasi tenaga kerja harian.'], ['Manajemen Kinerja', 'Memantau kinerja tenaga kerja melalui KPI, evaluasi rutin, dan program perbaikan berkelanjutan.'], ['Penggajian dan Administrasi', 'Menyederhanakan penggajian, dokumen kepegawaian, dan administrasi tenaga kerja agar lebih akurat dan efisien.'], ['Manajemen Tenaga Kerja Digital', 'Visibilitas berbasis teknologi atas absensi, penjadwalan, kinerja tenaga kerja, dan pelaporan operasional.']] },
+      remote: { title: 'Remote', lead: 'Rantai pasok terpadu: pengadaan, produksi, logistik, dan eksekusi di lokasi untuk operasi terpencil. Camp life, city standard.',
+        facts: [['5', 'Hub distribusi'], ['60', 'Titik distribusi ritel'], ['Timika', 'Dataran rendah & tinggi']],
+        groups: [['Pengadaan', 'Pengadaan bahan makanan dan perlengkapan operasional melalui hub kami, dengan pemeriksaan mutu pemasok.'], ['Produksi', 'Produksi pusat dan dapur camp dengan sistem keamanan pangan yang sama.'], ['Logistik', 'Pengiriman terjadwal ke lokasi terpencil dan sulit dijangkau.'], ['Eksekusi di Lokasi', 'Tim di lokasi untuk katering, housekeeping, dan perawatan.']] },
+      facility: { title: 'Manajemen Fasilitas', lead: 'Menjaga fasilitas tetap beroperasi dengan prima.',
+        facts: [['18+', 'Kota'], ['10+', 'Tahun'], ['24/7', 'Layanan respons']],
+        groups: [['Kebersihan dan Higiene', null, ['Pembersihan harian', 'Pembersihan menyeluruh', 'Pembersihan standar rumah sakit', 'Pengelolaan sampah']], ['Dukungan Teknis', null, ['Perawatan peralatan dapur', 'Perawatan preventif', 'Perawatan fasilitas', 'Peningkatan, retrofit & proyek teknis', 'Optimalisasi energi']], ['Keselamatan dan Keamanan', null, ['Manajemen akses & keamanan', 'Pengawasan keamanan', 'Keselamatan & pencegahan kebakaran', 'Manajemen tamu & resepsionis']], ['Layanan Lingkungan', null, ['Pengendalian hama', 'Sampah & daur ulang', 'Dukungan keberlanjutan', 'Pertamanan']]] }
+    }
+  }
+};
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const CSSURL = u => 'url("' + u + '")';
+const A = (id, p) => CSSURL(RES(id, p));
+class Component extends DCLogic {
+  state = { lang: 'en', urlKey: null };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    try { const k = new URLSearchParams(location.search).get('line'); if (k && LINES[k]) this.setState({ urlKey: k }); } catch (e) {}
+    this._l = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this._l);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this._l); }
+  renderVals() {
+    const { lang } = this.state;
+    const key = this.state.urlKey || (LINES[this.props.line] ? this.props.line : 'facility');
+    const t = COPY[lang], L = LINES[key], c = t.lines[key];
+    if (typeof document !== 'undefined') document.title = c.title + ' · Sunshine Facilities Group';
+    return {
+      t,
+      l: { ...L, title: c.title, lead: c.lead, markCss: A('sg-' + L.mark, 'assets/brand/sg-' + L.mark + '.svg'), photoCss: A('photo-' + L.photo, 'assets/photos/' + L.photo + '.png') },
+      mapCss: A('photo-supply-map', 'assets/photos/supply-map.png'),
+      photoOp: 1,
+      switcher: ORDER.map(k => { const on = k === key; return { title: t.lines[k].title, base: LINES[k].base, href: 'Service%20Detail.dc.html?line=' + k, current: on ? 'page' : undefined, bg: on ? '#1F211C' : '#FFFFFF', fg: on ? '#FFFFFF' : '#1F211C', border: on ? '#1F211C' : '#D6D6CF' }; }),
+      hasFacts: c.facts.length > 0, facts: c.facts.map(f => ({ value: f[0], label: f[1] })),
+      groups: c.groups.map((g, i) => ({ n: String(i + 1).padStart(2, '0'), title: g[0], desc: g[1] || '', hasDesc: !!g[1], items: g[2] || [], hasItems: !!g[2] })),
+      hasMap: !!L.map, hasCerts: !!L.certs,
+      proof: t.proof.map(p => ({ icon: p[0], text: p[1] })),
+      industries: LINE_IND[key].map(k => ({ icon: IND[k], title: t.ind[k] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

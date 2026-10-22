@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Admin · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#F4F4F1;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:2px}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;background:#F4F4F1;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+  <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+    <aside style="width:248px;flex:none;background:#1F211C;color:#EDEDE6;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;box-sizing:border-box">
+      <div style="padding:22px 22px 18px;border-bottom:1px solid #33352E;display:flex;flex-direction:column;gap:10px">
+        <img src="assets/brand/sfg-logo-white.png" alt="Sunshine Facilities Group" style="height:30px;width:auto;align-self:flex-start">
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A8A99F">{{ t.admin }}</span>
+      </div>
+      <nav aria-label="{{ t.content }}" style="padding:12px;display:flex;flex-direction:column;gap:2px;flex:1;overflow-y:auto">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
+          <button type="button" onClick="{{ n.go }}" aria-current="{{ n.current }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-left:3px solid {{ n.bar }};border-radius:0 4px 4px 0;background:{{ n.bg }};color:{{ n.fg }};font-size:15px;cursor:pointer;text-align:left" style-hover="background:#2A2C26;color:#FFFFFF"><i class="ph {{ n.icon }}" style="font-size:20px"></i><span style="flex:1">{{ n.label }}</span><span style="font-size:12px;color:#A8A99F;font-variant-numeric:tabular-nums">{{ n.count }}</span></button>
+        </sc-for>
+      </nav>
+      <a href="SFG%20Home%20v2.dc.html" style="margin:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:0 14px;border:1px solid #44463E;border-radius:4px;color:#EDEDE6;font-size:14px" style-hover="border-color:#FD572A;color:#FFFFFF">{{ t.viewSite }} <i class="ph ph-arrow-up-right"></i></a>
+    </aside>
+  </sc-if>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#1F211C;color:#EDEDE6;padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+        <img src="assets/brand/sfg-logo-white.png" alt="Sunshine Facilities Group" style="height:26px;width:auto">
+        <label style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:#C9CABF">{{ t.section }}
+          <select value="{{ sec }}" onChange="{{ onSec }}" style="height:40px;border:1px solid #44463E;border-radius:4px;background:#2A2C26;color:#FFFFFF;padding:0 10px;font-size:15px"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="8"><option value="{{ n.key }}">{{ n.label }}</option></sc-for></select>
+        </label>
+      </div>
+    </sc-if>
+
+    <header style="background:#FFFFFF;border-bottom:1px solid #E6E6E1;padding:clamp(16px,3vw,28px) clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between">
+      <div style="min-width:0;max-width:560px">
+        <p style="margin:0 0 6px;font-size:13px;color:#5A5C54">{{ t.content }}</p>
+        <h1 style="margin:0;font-size:clamp(26px,3vw,34px);font-weight:550;letter-spacing:-0.02em">{{ secLabel }}</h1>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#45473F">{{ secDesc }}</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <span style="position:relative;display:block;flex:1 1 220px"><i class="ph ph-magnifying-glass" aria-hidden="true" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:18px;color:#5A5C54"></i><input type="search" aria-label="{{ t.search }}" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.search }}" style="width:100%;box-sizing:border-box;height:44px;border:1px solid #C4C4BC;border-radius:4px;padding:0 12px 0 38px;font-size:15px;background:#FFFFFF;color:#1F211C"></span>
+        <sc-if value="{{ hasGroupFilter }}" hint-placeholder-val="{{ false }}">
+          <select aria-label="{{ t.group }}" value="{{ group }}" onChange="{{ onGroup }}" style="height:44px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:15px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.allGroups }}</option><sc-for list="{{ groups }}" as="g" hint-placeholder-count="6"><option value="{{ g }}">{{ g }}</option></sc-for></select>
+        </sc-if>
+        <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+          <select aria-label="{{ t.type }}" value="{{ mtype }}" onChange="{{ onMtype }}" style="height:44px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:15px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.allTypes }}</option><sc-for list="{{ mtypes }}" as="m" hint-placeholder-count="4"><option value="{{ m }}">{{ m }}</option></sc-for></select>
+        </sc-if>
+        <button type="button" onClick="{{ exportCsv }}" disabled="{{ noRows }}" title="{{ exportWhy }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;color:#1F211C;font-size:15px;cursor:pointer;opacity:{{ exportOp }}" style-hover="border-color:#1F211C"><i class="ph ph-download-simple" style="font-size:18px"></i>{{ t.export }}</button>
+        <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+          <label style="position:relative;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:4px;background:#C6241C;color:#FFFFFF;font-size:15px;font-weight:550;cursor:pointer" style-hover="background:#A3181A"><input type="file" accept="image/*" onChange="{{ onUpload }}" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden"><i class="ph ph-upload-simple" style="font-size:18px"></i>{{ t.upload }}</label>
+        </sc-if>
+        <sc-if value="{{ isTable }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ add }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border:0;border-radius:4px;background:#C6241C;color:#FFFFFF;font-size:15px;font-weight:550;cursor:pointer" style-hover="background:#A3181A"><i class="ph ph-plus" style="font-size:18px"></i>{{ addLabel }}</button>
+        </sc-if>
+      </div>
+    </header>
+
+    <main style="padding:clamp(16px,3vw,28px) clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:14px;color:#45473F">
+        <p aria-live="polite" style="margin:0">{{ countText }}</p>
+        <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:13px;color:#5A5C54">{{ exportWhy }}</p></sc-if>
+      </div>
+
+      <sc-if value="{{ isTable }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#FFFFFF;border:1px solid #E6E6E1;border-radius:4px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:680px">
+            <thead><tr>
+              <sc-for list="{{ cols }}" as="c" hint-placeholder-count="5"><th scope="col" style="text-align:left;padding:12px 16px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54;border-bottom:1px solid #E6E6E1;white-space:nowrap">{{ c }}</th></sc-for>
+              <th scope="col" style="text-align:right;padding:12px 16px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54;border-bottom:1px solid #E6E6E1">{{ t.actions }}</th>
+            </tr></thead>
+            <tbody>
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+                <tr style="border-bottom:1px solid #EFEFEA" style-hover="background:#FAFAF8">
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="5">
+                    <td style="padding:10px 16px;vertical-align:middle;max-width:320px">
+                      <sc-if value="{{ c.isThumb }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ c.alt }}" style="width:64px;height:44px;border:1px solid #E6E6E1;border-radius:4px;background:#FFFFFF url({{ c.url }}) center/contain no-repeat"></div></sc-if>
+                      <sc-if value="{{ c.isStatus }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:13px;font-weight:500;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:{{ c.fg }}"></span>{{ c.text }}</span></sc-if>
+                      <sc-if value="{{ c.isSwatch }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums"><span style="width:18px;height:18px;border-radius:3px;background:{{ c.text }};border:1px solid rgba(31,33,28,0.15)"></span>{{ c.text }}</span></sc-if>
+                      <sc-if value="{{ c.isText }}" hint-placeholder-val="{{ true }}"><span style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:{{ c.color }}">{{ c.text }}</span></sc-if>
+                    </td>
+                  </sc-for>
+                  <td style="padding:8px 16px;text-align:right;white-space:nowrap">
+                    <div style="display:inline-flex;gap:6px">
+                      <button type="button" onClick="{{ r.edit }}" aria-label="{{ r.editLabel }}" style="width:40px;height:40px;border:1px solid #D6D6CF;border-radius:4px;background:#FFFFFF;color:#1F211C;cursor:pointer;display:grid;place-items:center;font-size:18px" style-hover="border-color:#1F211C"><i class="ph ph-pencil-simple"></i></button>
+                      <button type="button" onClick="{{ r.del }}" aria-label="{{ r.delLabel }}" style="width:40px;height:40px;border:1px solid #D6D6CF;border-radius:4px;background:#FFFFFF;color:#A3181A;cursor:pointer;display:grid;place-items:center;font-size:18px" style-hover="border-color:#A3181A"><i class="ph ph-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:40px 20px;text-align:center;color:#45473F;font-size:15px">{{ t.empty }}</p></sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+        <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px">
+          <sc-for list="{{ media }}" as="m" hint-placeholder-count="12">
+            <li style="background:#FFFFFF;border:1px solid #E6E6E1;border-radius:4px;overflow:hidden;display:flex;flex-direction:column">
+              <div role="img" aria-label="{{ m.name }}" style="aspect-ratio:4/3;background:#F4F4F1 url({{ m.url }}) center/contain no-repeat;border-bottom:1px solid #E6E6E1"></div>
+              <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:13px">
+                <span style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.name }}</span>
+                <span style="color:#5A5C54">{{ m.type }} · {{ m.usage }}</span>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:4px">
+                  <sc-if value="{{ m.inUse }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#5A5C54">{{ t.inUse }}</span></sc-if>
+                  <button type="button" onClick="{{ m.del }}" disabled="{{ m.inUse }}" aria-label="{{ m.delLabel }}" title="{{ m.delWhy }}" style="margin-left:auto;width:36px;height:36px;border:1px solid #D6D6CF;border-radius:4px;background:#FFFFFF;color:#A3181A;cursor:pointer;display:grid;place-items:center;font-size:16px;opacity:{{ m.delOp }}"><i class="ph ph-trash"></i></button>
+                </div>
+              </div>
+            </li>
+          </sc-for>
+        </ul>
+        <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:40px 20px;text-align:center;color:#45473F;font-size:15px;background:#FFFFFF;border:1px dashed #C4C4BC;border-radius:4px">{{ t.empty }}</p></sc-if>
+      </sc-if>
+    </main>
+  </div>
+
+  <sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeEdit }}" style="position:fixed;inset:0;background:rgba(22,24,19,0.5);z-index:90"></div>
+    <aside role="dialog" aria-modal="true" aria-labelledby="dr-h" style="position:fixed;top:0;right:0;bottom:0;width:min(580px,100vw);background:#FFFFFF;z-index:91;display:flex;flex-direction:column;box-shadow:-20px 0 40px -20px rgba(22,24,19,0.4)">
+      <header style="padding:18px 22px;border-bottom:1px solid #E6E6E1;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div><p style="margin:0;font-size:13px;color:#5A5C54">{{ secLabel }}</p><h2 id="dr-h" style="margin:2px 0 0;font-size:22px;font-weight:550;letter-spacing:-0.015em">{{ drawerTitle }}</h2></div>
+        <button type="button" onClick="{{ closeEdit }}" aria-label="{{ t.close }}" style="width:44px;height:44px;border:1px solid #D6D6CF;border-radius:4px;background:#FFFFFF;cursor:pointer;display:grid;place-items:center;font-size:20px;color:#1F211C"><i class="ph ph-x"></i></button>
+      </header>
+      <div style="flex:1;overflow-y:auto;padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;align-content:start">
+        <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:6px;grid-column:{{ f.span }}">
+            <label for="{{ f.id }}" style="font-size:14px;font-weight:500">{{ f.label }}{{ f.star }}</label>
+            <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}"><input id="{{ f.id }}" type="{{ f.inputType }}" value="{{ f.value }}" onChange="{{ f.onChange }}" style="height:46px;border:1px solid {{ f.border }};border-radius:4px;padding:0 12px;font-size:15px;color:#1F211C;background:#FFFFFF"></sc-if>
+            <sc-if value="{{ f.isTextarea }}" hint-placeholder-val="{{ false }}"><textarea id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.onChange }}" rows="4" style="border:1px solid {{ f.border }};border-radius:4px;padding:10px 12px;font-size:15px;line-height:1.5;resize:vertical;color:#1F211C"></textarea></sc-if>
+            <sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.onChange }}" style="height:46px;border:1px solid {{ f.border }};border-radius:4px;padding:0 10px;font-size:15px;background:#FFFFFF;color:#1F211C"><sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for></select></sc-if>
+            <sc-if value="{{ f.isImage }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+                <div role="img" aria-label="{{ f.label }}" style="width:132px;height:96px;border:1px solid #E6E6E1;border-radius:4px;background:#F4F4F1 url({{ f.value }}) center/contain no-repeat;display:grid;place-items:center;color:#5A5C54;font-size:12px">{{ f.emptyText }}</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <button id="{{ f.id }}" type="button" onClick="{{ f.pick }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;font-size:14px;cursor:pointer;color:#1F211C"><i class="ph ph-images"></i>{{ t.choose }}</button>
+                  <sc-if value="{{ f.hasValue }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ f.clear }}" style="min-height:36px;padding:0 10px;border:0;background:transparent;font-size:13px;color:#A3181A;cursor:pointer;text-align:left">{{ t.remove }}</button></sc-if>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ f.isToggle }}" hint-placeholder-val="{{ false }}">
+              <label style="display:flex;align-items:center;gap:10px;font-size:15px;cursor:pointer;opacity:{{ f.toggleOp }}"><input id="{{ f.id }}" type="checkbox" checked="{{ f.checked }}" disabled="{{ f.disabled }}" onChange="{{ f.onToggle }}" style="width:20px;height:20px;accent-color:#1F211C;margin:0">{{ f.toggleLabel }}</label>
+            </sc-if>
+            <sc-if value="{{ f.hasHint }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:13px;line-height:1.45;color:{{ f.hintColor }}">{{ f.hint }}</p></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <footer style="padding:16px 22px;border-top:1px solid #E6E6E1;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <button type="button" onClick="{{ saveEdit }}" disabled="{{ cantSave }}" style="border:0;background:{{ saveBg }};color:#FFFFFF;font-weight:550;font-size:15px;min-height:44px;padding:0 20px;border-radius:4px;cursor:{{ saveCursor }}">{{ t.save }}</button>
+        <button type="button" onClick="{{ closeEdit }}" style="min-height:44px;padding:0 16px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;font-size:15px;cursor:pointer;color:#1F211C">{{ t.cancel }}</button>
+        <sc-if value="{{ isExisting }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ delCurrent }}" style="margin-left:auto;min-height:44px;padding:0 12px;border:0;background:transparent;font-size:14px;color:#A3181A;cursor:pointer;display:flex;align-items:center;gap:6px"><i class="ph ph-trash"></i>{{ t.del }}</button></sc-if>
+        <p aria-live="polite" style="flex:1 1 100%;margin:0;font-size:13px;color:#45473F">{{ saveWhy }}</p>
+      </footer>
+    </aside>
+  </sc-if>
+
+  <sc-if value="{{ confirming }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(22,24,19,0.55);z-index:95;display:grid;place-items:center;padding:16px">
+      <div role="alertdialog" aria-modal="true" aria-labelledby="cf-h" style="width:min(440px,100%);background:#FFFFFF;border-radius:4px;padding:24px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,0.5)">
+        <h2 id="cf-h" style="margin:0;font-size:20px;font-weight:550">{{ confirmTitle }}</h2>
+        <p style="margin:0;font-size:15px;line-height:1.5;color:#45473F">{{ t.cantUndo }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+          <button type="button" onClick="{{ doDelete }}" style="border:0;background:#A3181A;color:#FFFFFF;font-weight:550;font-size:15px;min-height:44px;padding:0 18px;border-radius:4px;cursor:pointer">{{ t.del }}</button>
+          <button type="button" onClick="{{ cancelDelete }}" style="min-height:44px;padding:0 16px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;font-size:15px;cursor:pointer;color:#1F211C">{{ t.cancel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ picking }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(22,24,19,0.55);z-index:96;display:grid;place-items:center;padding:16px">
+      <div role="dialog" aria-modal="true" aria-labelledby="pk-h" style="width:min(900px,100%);max-height:86vh;background:#FFFFFF;border-radius:4px;display:flex;flex-direction:column;box-shadow:0 30px 60px -20px rgba(0,0,0,0.5)">
+        <header style="padding:16px 20px;border-bottom:1px solid #E6E6E1;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <h2 id="pk-h" style="margin:0;font-size:20px;font-weight:550;flex:1 1 200px">{{ t.pickH }}</h2>
+          <input type="search" aria-label="{{ t.search }}" value="{{ pq }}" onChange="{{ onPq }}" placeholder="{{ t.search }}" style="flex:1 1 200px;height:42px;border:1px solid #C4C4BC;border-radius:4px;padding:0 12px;font-size:15px">
+          <button type="button" onClick="{{ closePick }}" aria-label="{{ t.close }}" style="width:42px;height:42px;border:1px solid #D6D6CF;border-radius:4px;background:#FFFFFF;cursor:pointer;display:grid;place-items:center;font-size:20px;color:#1F211C"><i class="ph ph-x"></i></button>
+        </header>
+        <ul style="list-style:none;margin:0;padding:16px 20px 20px;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
+          <sc-for list="{{ pickList }}" as="m" hint-placeholder-count="12">
+            <li><button type="button" onClick="{{ m.choose }}" aria-pressed="{{ m.on }}" style="width:100%;padding:0;border:2px solid {{ m.border }};border-radius:4px;background:#FFFFFF;cursor:pointer;overflow:hidden;text-align:left;color:#1F211C" style-hover="border-color:#1F211C">
+              <div aria-hidden="true" style="aspect-ratio:4/3;background:#F4F4F1 url({{ m.url }}) center/contain no-repeat"></div>
+              <span style="display:block;padding:8px 10px;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.name }}</span>
+            </button></li>
+          </sc-for>
+        </ul>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99;background:#1F211C;color:#FFFFFF;padding:12px 18px;border-radius:4px;font-size:15px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px -10px rgba(0,0,0,0.5)"><i class="ph-fill ph-check-circle" style="color:#7BC47F"></i>{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TODAY = '2026-10-09';
+const KEY = 'sfg-cms-v1';
+const PH = n => 'assets/photos/' + n + '.png', CL = n => 'assets/clients/' + n + '.png', CE = n => 'assets/certificates/' + n + '.png';
+const CLIENTS = [['danone', 'Danone', 'Corporate offices'], ['cargill', 'Cargill', 'Corporate offices'], ['mandiri', 'Bank Mandiri', 'Corporate offices'], ['united-tractors', 'United Tractors', 'Industrial & mining'], ['danantara', 'Danantara Indonesia', 'Corporate offices'], ['lippo-group', 'Lippo Group', 'Retail & malls'], ['lippo-malls', 'Lippo Malls', 'Retail & malls'], ['byd', 'BYD', 'Industrial & mining'], ['savoria', 'Savoria', 'Hospitality & F&B'], ['sph', 'Sekolah Pelita Harapan', 'Education'], ['darya-varia', 'Darya-Varia Laboratoria', 'Corporate offices'], ['st-carolus', 'RS St. Carolus Summarecon Serpong', 'Healthcare'], ['permata-cibubur', 'RS Permata Cibubur', 'Healthcare'], ['siloam', 'Siloam Hospitals', 'Healthcare'], ['harapan-kita', 'RS Jantung Harapan Kita', 'Healthcare'], ['fks-food', 'FKS Food', 'Hospitality & F&B'], ['buma', 'BUMA', 'Industrial & mining'], ['hpu', 'HPU', 'Industrial & mining'], ['hpmu', 'PT Harapan Pangan Muslim', 'Hospitality & F&B']];
+const MEDIA_SEED = [
+  ...['kitchen', 'cleaning', 'technical', 'security', 'gardening', 'lobby-cleaning', 'mep-panel', 'team', 'city-aerial', 'tower', 'supply-map'].map(n => ({ url: PH(n), name: n + '.png', type: 'Photo' })),
+  ...CLIENTS.map(c => ({ url: CL(c[0]), name: c[0] + '.png', type: 'Logo' })),
+  ...['iso-22000', 'haccp-cxc', 'slhs', 'halal'].map(n => ({ url: CE(n), name: n + '.png', type: 'Certificate' })),
+  ...['sfg-logo-primary.png', 'sfg-logo-white.png', 'sfg-logo-black.png', 'sg-food.svg', 'sg-digital.svg', 'sg-workforce.svg', 'sg-remote.svg', 'sg-facility.svg'].map(n => ({ url: 'assets/brand/' + n, name: n, type: 'Brand' }))
+];
+const P = (group, key, valEn, valId) => ({ group, key, valEn, valId: valId || valEn });
+const PARAMS_SEED = [
+  P('Building types', 'office', 'Office', 'Perkantoran'), P('Building types', 'hospital', 'Hospital', 'Rumah sakit'), P('Building types', 'retail', 'Mall / retail', 'Mal / ritel'), P('Building types', 'fnb', 'F&B outlet', 'Gerai F&B'), P('Building types', 'residential', 'Residential tower', 'Apartemen'), P('Building types', 'industrial', 'Industrial / mining site', 'Kawasan industri / tambang'), P('Building types', 'education', 'School / campus', 'Sekolah / kampus'),
+  P('Industries', 'healthcare', 'Healthcare', 'Kesehatan'), P('Industries', 'corporate', 'Corporate offices', 'Perkantoran'), P('Industries', 'retail', 'Retail & malls', 'Ritel & mal'), P('Industries', 'industrial', 'Industrial & mining', 'Industri & tambang'), P('Industries', 'hospitality', 'Hospitality & F&B', 'Perhotelan & F&B'), P('Industries', 'education', 'Education', 'Pendidikan'), P('Industries', 'residential', 'Residential towers', 'Apartemen & hunian'),
+  ...['Jakarta', 'Tangerang', 'Bekasi', 'Bandung', 'Semarang', 'Surabaya', 'Medan', 'Timika'].map(c => P('Locations', c.toLowerCase(), c)),
+  P('Job types', 'ft', 'Full-time', 'Penuh waktu'), P('Job types', 'ct', 'Contract', 'Kontrak'), P('Job types', 'in', 'Internship', 'Magang'),
+  P('Brand colours', 'food', '#EA2915'), P('Brand colours', 'digital', '#28937A'), P('Brand colours', 'workforce', '#5E9628'), P('Brand colours', 'remote', '#FD572A'), P('Brand colours', 'facility', '#C6241C'),
+  P('Contact', 'whatsapp', '+62 1234 5678'), P('Contact', 'phone', '+62 21 1234 5678'), P('Contact', 'email', 'hello@sunshinefacility.com'), P('Contact', 'address', 'Lorem ipsum dolor sit amet 12, Tangerang, Banten, Indonesia'),
+  P('Stats', 'years', '10+'), P('Stats', 'cities', '18+'), P('Stats', 'employees', '1,000+', '1.000+'), P('Stats', 'meals', '5M+', '5 jt+')
+];
+const pg = (page, section, titleEn, titleId, bodyEn, bodyId, image, published) => ({ page, section, titleEn, titleId, bodyEn, bodyId, image: image || '', published: published !== false, updated: '2026-10-08' });
+const SEED = {
+  pages: [
+    pg('Home', 'Hero', 'Clean, well-run buildings. Every shift, on record.', 'Gedung bersih dan terkelola. Setiap shift, tercatat.', 'Sunshine Facilities Group runs food, cleaning, maintenance, security and workforce services for buildings across Indonesia.', 'Sunshine Facilities Group menangani layanan makanan, kebersihan, perawatan, keamanan, dan tenaga kerja untuk gedung di seluruh Indonesia.'),
+    pg('Home', 'Why Sunshine', 'You see what was done, by whom, and when.', 'Anda tahu apa yang dikerjakan, oleh siapa, dan kapan.', '', '', PH('lobby-cleaning')),
+    pg('Home', 'Certifications', 'Audited food safety and hygiene.', 'Keamanan pangan dan higiene yang diaudit.', 'Our kitchens and processes are audited by independent bodies.', 'Dapur dan proses kami diaudit oleh lembaga independen.'),
+    pg('Services', 'Hero', 'Five business lines. One partner on site.', 'Lima lini layanan. Satu mitra di lokasi.', '', ''),
+    pg('Industries', 'Hero', 'Built around how each kind of building runs.', 'Disesuaikan dengan cara setiap gedung beroperasi.', '', ''),
+    pg('About Us', 'Story', 'One integrated solution partner.', 'Satu mitra solusi terpadu.', '', '', PH('kitchen')),
+    pg('About Us', 'Vision & mission', 'Vision & mission', 'Visi & misi', '', '', '', false),
+    pg('Careers', 'Hero', 'Your operations. Our people.', 'Operasional Anda. Orang-orang kami.', '', '', PH('team')),
+    pg('Contact', 'Hero', 'Request a quotation.', 'Minta penawaran.', '', '')
+  ],
+  services: [
+    { order: '1', key: 'food', titleEn: 'Food Services', titleId: 'Layanan Makanan', descEn: 'Hospital, corporate and industrial catering, from kitchen design to daily service.', descId: 'Katering rumah sakit, korporat, dan industri, dari desain dapur hingga layanan harian.', color: '#EA2915', image: PH('kitchen'), published: true },
+    { order: '2', key: 'digital', titleEn: 'Digital & Operational Integration', titleId: 'Integrasi Digital & Operasional', descEn: 'One system for ordering, stock and scheduling, with every job recorded.', descId: 'Satu sistem untuk pemesanan, stok, dan penjadwalan, dengan setiap pekerjaan tercatat.', color: '#28937A', image: PH('mep-panel'), published: true },
+    { order: '3', key: 'workforce', titleEn: 'Workforce Solutions', titleId: 'Solusi Tenaga Kerja', descEn: 'Recruitment, deployment, training and management of on-site teams.', descId: 'Rekrutmen, penempatan, pelatihan, dan pengelolaan tim di lokasi.', color: '#5E9628', image: PH('team'), published: true },
+    { order: '4', key: 'remote', titleEn: 'Remote', titleId: 'Remote', descEn: 'Supply, production and on-site teams for remote sites. Camp life, city standard.', descId: 'Pasokan, produksi, dan tim di lokasi untuk site terpencil. Camp life, city standard.', color: '#FD572A', image: PH('technical'), published: true },
+    { order: '5', key: 'facility', titleEn: 'Facility Management', titleId: 'Manajemen Fasilitas', descEn: 'Cleaning, technical maintenance, safety and environmental services.', descId: 'Kebersihan, perawatan teknis, keselamatan, dan layanan lingkungan.', color: '#C6241C', image: PH('lobby-cleaning'), published: true }
+  ],
+  clients: CLIENTS.map((c, i) => ({ name: c[1], logo: CL(c[0]), industry: c[2], order: String(i + 1), published: true })),
+  certificates: [
+    { name: 'ISO 22000:2018', issuer: '', validUntil: '2027-09-30', image: CE('iso-22000'), published: true },
+    { name: 'HACCP · CXC 1-1969', issuer: '', validUntil: '2027-08-31', image: CE('haccp-cxc'), published: true },
+    { name: 'SLHS', issuer: 'Dinas Kesehatan', validUntil: '', image: CE('slhs'), published: true },
+    { name: 'Halal', issuer: '', validUntil: '2025-08-25', image: CE('halal'), published: false }
+  ],
+  careers: [
+    ['Cook', 'Juru Masak', 'Food Services', 'Tangerang', 'Full-time'], ['Clinical Dietitian', 'Ahli Gizi Klinis', 'Food Services', 'Jakarta', 'Full-time'], ['Cleaning Supervisor', 'Supervisor Kebersihan', 'Facility Management', 'Surabaya', 'Full-time'], ['MEP Technician', 'Teknisi MEP', 'Facility Management', 'Tangerang', 'Full-time'], ['Security Officer', 'Petugas Keamanan', 'Facility Management', 'Bekasi', 'Contract'], ['Camp Catering Supervisor', 'Supervisor Katering Camp', 'Remote', 'Timika', 'Contract'], ['HR & Payroll Officer', 'Staf HR & Penggajian', 'Workforce Solutions', 'Jakarta', 'Full-time'], ['Field App Support', 'Dukungan Aplikasi Lapangan', 'Digital & Operational Integration', 'Tangerang', 'Full-time']
+  ].map(j => ({ titleEn: j[0], titleId: j[1], line: j[2], location: j[3], type: j[4], closing: '2026-11-30', summaryEn: '', summaryId: '', published: true })),
+  testimonials: [
+    { quoteEn: '[Client quote about reliability of daily service.]', quoteId: '[Testimoni klien tentang keandalan layanan harian.]', name: '[Name]', role: 'Facility Manager', company: '[Hospital client]', published: false },
+    { quoteEn: '[Client quote about digital reporting or transparency.]', quoteId: '[Testimoni klien tentang laporan digital atau transparansi.]', name: '[Name]', role: 'GA Head', company: '[Corporate client]', published: false },
+    { quoteEn: '[Client quote about response time.]', quoteId: '[Testimoni klien tentang kecepatan respons.]', name: '[Name]', role: 'Building Manager', company: '[Mall client]', published: false }
+  ],
+  media: MEDIA_SEED,
+  params: PARAMS_SEED
+};
+const F = (k, label, type, extra) => ({ k, label, type, ...(extra || {}) });
+const DEFS = {
+  pages: { icon: 'ph-file-text', label: 'Pages', one: 'section', nameKey: 'titleEn', desc: 'Titles, text and images for each page section, in English and Bahasa Indonesia.',
+    list: [['page', 'Page'], ['section', 'Section'], ['titleEn', 'Title (EN)'], ['updated', 'Updated'], ['_status', 'Status', 'status']],
+    fields: [F('page', 'Page', 'select', { req: true, opts: () => ['Home', 'Services', 'Service detail', 'Industries', 'About Us', 'Careers', 'Contact'] }), F('section', 'Section', 'text', { req: true }), F('titleEn', 'Title (EN)', 'text', { req: true }), F('titleId', 'Title (ID)', 'text', { req: true }), F('bodyEn', 'Body (EN)', 'textarea'), F('bodyId', 'Body (ID)', 'textarea'), F('image', 'Image', 'image'), F('published', 'Published', 'toggle')] },
+  services: { icon: 'ph-squares-four', label: 'Services', one: 'service line', nameKey: 'titleEn', desc: 'The five business lines shown on Home, Services, Service detail and the hero ball.',
+    list: [['image', 'Image', 'thumb'], ['order', '#'], ['titleEn', 'Title (EN)'], ['color', 'Colour', 'swatch'], ['_status', 'Status', 'status']],
+    fields: [F('titleEn', 'Title (EN)', 'text', { req: true }), F('titleId', 'Title (ID)', 'text', { req: true }), F('key', 'Key', 'text', { req: true, hint: 'Used in page links, e.g. ?line=food. Lowercase, no spaces.' }), F('order', 'Order', 'number', { req: true }), F('descEn', 'Description (EN)', 'textarea', { req: true }), F('descId', 'Description (ID)', 'textarea', { req: true }), F('color', 'Brand colour', 'select', { req: true, param: 'Brand colours' }), F('image', 'Photo', 'image', { req: true }), F('published', 'Published', 'toggle')] },
+  clients: { icon: 'ph-handshake', label: 'Clients', one: 'client', nameKey: 'name', desc: 'Logos in the Home trust bar and on the Industries page.',
+    list: [['logo', 'Logo', 'thumb'], ['name', 'Name'], ['industry', 'Industry'], ['order', 'Order'], ['_status', 'Status', 'status']],
+    fields: [F('name', 'Name', 'text', { req: true }), F('industry', 'Industry', 'select', { req: true, param: 'Industries' }), F('order', 'Order', 'number'), F('logo', 'Logo', 'image', { req: true, hint: 'PNG with transparent background works best.' }), F('published', 'Published', 'toggle')] },
+  certificates: { icon: 'ph-seal-check', label: 'Certificates', one: 'certificate', nameKey: 'name', desc: 'Shown on Home, About and Food Services. Expired certificates cannot be published.',
+    list: [['image', 'Image', 'thumb'], ['name', 'Certificate'], ['issuer', 'Issuer'], ['validUntil', 'Valid until'], ['_status', 'Status', 'status']],
+    fields: [F('name', 'Certificate name', 'text', { req: true }), F('issuer', 'Issuer', 'text'), F('validUntil', 'Valid until', 'date', { hint: 'Leave empty if the certificate has no expiry date.' }), F('image', 'Certificate image (first page)', 'image', { req: true }), F('published', 'Published', 'toggle')] },
+  careers: { icon: 'ph-briefcase', label: 'Careers', one: 'opening', nameKey: 'titleEn', desc: 'Openings on the Careers page.',
+    list: [['titleEn', 'Position'], ['line', 'Service line'], ['location', 'Location'], ['type', 'Type'], ['closing', 'Closes'], ['_status', 'Status', 'status']],
+    fields: [F('titleEn', 'Position (EN)', 'text', { req: true }), F('titleId', 'Position (ID)', 'text', { req: true }), F('line', 'Service line', 'select', { req: true, fromServices: true }), F('location', 'Location', 'select', { req: true, param: 'Locations' }), F('type', 'Type', 'select', { req: true, param: 'Job types' }), F('closing', 'Closing date', 'date'), F('summaryEn', 'Summary (EN)', 'textarea'), F('summaryId', 'Summary (ID)', 'textarea'), F('published', 'Published', 'toggle')] },
+  testimonials: { icon: 'ph-quotes', label: 'Testimonials', one: 'testimonial', nameKey: 'name', desc: 'Client quotes on Home. The three seeded rows are placeholders and stay unpublished.',
+    list: [['name', 'Name'], ['company', 'Company'], ['quoteEn', 'Quote (EN)'], ['_status', 'Status', 'status']],
+    fields: [F('quoteEn', 'Quote (EN)', 'textarea', { req: true }), F('quoteId', 'Quote (ID)', 'textarea', { req: true }), F('name', 'Name', 'text', { req: true }), F('role', 'Role', 'text'), F('company', 'Company', 'text', { req: true }), F('published', 'Published', 'toggle')] },
+  media: { icon: 'ph-images', label: 'Media library', desc: 'Every image used on the site. Images in use cannot be deleted.' },
+  params: { icon: 'ph-sliders-horizontal', label: 'Parameters', one: 'parameter', nameKey: 'valEn', desc: 'Values used in forms and filters: building types, industries, locations, job types, brand colours, contact details and stats.',
+    list: [['group', 'Group'], ['key', 'Key'], ['valEn', 'Value (EN)'], ['valId', 'Value (ID)']],
+    fields: [F('group', 'Group', 'text', { req: true, hint: 'Use an existing group name to add to it, or type a new one.' }), F('key', 'Key', 'text', { req: true }), F('valEn', 'Value (EN)', 'text', { req: true }), F('valId', 'Value (ID)', 'text', { req: true })] }
+};
+const ORDER = ['pages', 'services', 'clients', 'certificates', 'careers', 'testimonials', 'media', 'params'];
+let uid = 0;
+const withIds = d => { const o = {}; Object.keys(d).forEach(k => { o[k] = d[k].map(r => ({ _id: r._id || k[0] + (++uid), ...r })); }); return o; };
+const fmtDate = s => { if (!s) return '—'; const d = new Date(s + 'T00:00:00'); return isNaN(d) ? s : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); };
+const expired = r => !!(r.validUntil && r.validUntil < TODAY);
+const esc = v => String(v == null ? '' : v).replace(/\|/g, '/').replace(/\r?\n/g, ' ');
+const T = { admin: 'Content admin', content: 'Content', viewSite: 'View site', section: 'Section', search: 'Search', group: 'Group', allGroups: 'All groups', type: 'Type', allTypes: 'All types', export: 'Export CSV', upload: 'Upload', actions: 'Actions', empty: 'Nothing matches your search.', inUse: 'In use', close: 'Close', choose: 'Choose from media', remove: 'Remove image', save: 'Save', cancel: 'Cancel', del: 'Delete', cantUndo: 'This cannot be undone.', pickH: 'Choose an image', noImage: 'No image' };
+class Component extends DCLogic {
+  state = { sec: 'pages', data: withIds(SEED), q: '', group: '', mtype: '', edit: null, confirm: null, pick: null, pq: '', toast: '', w: typeof window !== 'undefined' ? window.innerWidth : 1440 };
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && s.pages) this.setState({ data: withIds({ ...SEED, ...s }) }); } catch (e) {}
+    this.r = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.r);
+    this.k = e => { if (e.key === 'Escape') { if (this.state.pick) this.setState({ pick: null }); else if (this.state.confirm) this.setState({ confirm: null }); else if (this.state.edit) this.setState({ edit: null }); } };
+    window.addEventListener('keydown', this.k);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.r); window.removeEventListener('keydown', this.k); clearTimeout(this.tt); }
+  persist(data, msg) {
+    let note = msg;
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { note = msg + ' (this session only: browser storage is full)'; }
+    this.setState({ data, toast: note }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+  status(sec, r) {
+    if (sec === 'certificates' && expired(r)) return { text: 'Expired', bg: '#FDEAE7', fg: '#A3181A' };
+    return r.published ? { text: 'Published', bg: '#E3F0E5', fg: '#1F6B34' } : { text: 'Draft', bg: '#EFEFEA', fg: '#45473F' };
+  }
+  usage(url) { const d = this.state.data; let n = 0; Object.keys(d).forEach(k => { if (k === 'media') return; d[k].forEach(r => { Object.values(r).forEach(v => { if (v === url) n++; }); }); }); return n; }
+  setDraft(k, v) { this.setState(s => ({ edit: { ...s.edit, draft: { ...s.edit.draft, [k]: v } } })); }
+  renderVals() {
+    const { sec, data, q, group, mtype, edit, confirm, pick, pq, toast, w } = this.state;
+    const def = DEFS[sec], isMedia = sec === 'media', ql = q.trim().toLowerCase();
+    const match = r => !ql || Object.values(r).some(v => typeof v === 'string' && !v.startsWith('data:') && v.toLowerCase().includes(ql));
+    let rows = data[sec].filter(match);
+    if (sec === 'params' && group) rows = rows.filter(r => r.group === group);
+    if (isMedia && mtype) rows = rows.filter(r => r.type === mtype);
+    const groups = [...new Set(data.params.map(p => p.group))];
+    const vals = {
+      t: T, wide: w >= 960, narrow: w < 960, sec, q, group, mtype, toast, hasToast: !!toast,
+      onSec: e => this.setState({ sec: e.target.value, q: '', group: '', mtype: '' }),
+      nav: ORDER.map(k => ({ key: k, label: DEFS[k].label, icon: DEFS[k].icon, count: data[k].length, current: k === sec ? 'page' : undefined, bg: k === sec ? '#33352E' : 'transparent', fg: k === sec ? '#FFFFFF' : '#C9CABF', bar: k === sec ? '#EA2915' : 'transparent', go: () => this.setState({ sec: k, q: '', group: '', mtype: '' }) })),
+      secLabel: def.label, secDesc: def.desc, isMedia, isTable: !isMedia, hasGroupFilter: sec === 'params', groups, mtypes: ['Photo', 'Logo', 'Certificate', 'Brand'],
+      onQ: e => this.setState({ q: e.target.value }), onGroup: e => this.setState({ group: e.target.value }), onMtype: e => this.setState({ mtype: e.target.value }),
+      countText: rows.length === data[sec].length ? rows.length + ' items' : 'Showing ' + rows.length + ' of ' + data[sec].length,
+      noRows: rows.length === 0, exportOp: rows.length ? 1 : 0.45, exportWhy: rows.length ? 'Download these rows as a pipe-delimited CSV' : 'Nothing to export: no rows match the current search.',
+      addLabel: 'Add ' + (def.one || 'item'),
+      exportCsv: () => {
+        if (!rows.length) return;
+        const keys = isMedia ? ['name', 'type', 'url'] : [...def.fields.map(f => f.k), ...(def.list.some(c => c[0] === '_status') ? ['_status'] : [])];
+        const head = isMedia ? ['Name', 'Type', 'URL'] : [...def.fields.map(f => f.label), ...(keys.includes('_status') ? ['Status'] : [])];
+        const lines = [head.join('|'), ...rows.map(r => keys.map(k => k === '_status' ? this.status(sec, r).text : (k === 'url' && String(r.url).startsWith('data:') ? '(uploaded)' : esc(r[k]))).join('|'))];
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' })); a.download = 'sfg-' + sec + '-' + TODAY + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+        this.setState({ toast: 'Exported ' + rows.length + ' rows' }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2600);
+      },
+      add: () => { const draft = {}; def.fields.forEach(f => { draft[f.k] = f.type === 'toggle' ? false : ''; }); if (sec === 'params' && group) draft.group = group; this.setState({ edit: { id: null, draft } }); }
+    };
+    if (!isMedia) {
+      vals.cols = def.list.map(c => c[1]);
+      vals.rows = rows.map(r => {
+        const name = r[def.nameKey] || def.one;
+        return {
+          editLabel: 'Edit ' + name, delLabel: 'Delete ' + name,
+          edit: () => this.setState({ edit: { id: r._id, draft: { ...r } } }),
+          del: () => this.setState({ confirm: { id: r._id, name } }),
+          cells: def.list.map(([k, , kind]) => {
+            if (kind === 'thumb') return { isThumb: true, url: r[k] || '', alt: name };
+            if (kind === 'status') return { isStatus: true, ...this.status(sec, r) };
+            if (kind === 'swatch') return { isSwatch: true, text: r[k] || '' };
+            const isDate = ['updated', 'validUntil', 'closing'].includes(k);
+            const text = isDate ? fmtDate(r[k]) : (r[k] || '—');
+            return { isText: true, text, color: sec === 'certificates' && k === 'validUntil' && expired(r) ? '#A3181A' : (r[k] ? '#1F211C' : '#5A5C54') };
+          })
+        };
+      });
+    } else {
+      vals.media = rows.map(m => { const n = this.usage(m.url); return { name: m.name, type: m.type, url: m.url, usage: n ? 'Used ' + n + '×' : 'Not used', inUse: n > 0, delOp: n > 0 ? 0.4 : 1, delLabel: 'Delete ' + m.name, delWhy: n > 0 ? 'Can’t delete: used in ' + n + ' item' + (n > 1 ? 's' : '') + '. Replace it there first.' : 'Delete image', del: () => { if (!n) this.setState({ confirm: { id: m._id, name: m.name } }); } }; });
+      vals.onUpload = e => {
+        const fl = e.target.files && e.target.files[0]; if (!fl) return;
+        const rd = new FileReader();
+        rd.onload = () => { const d = this.state.data; this.persist({ ...d, media: [{ _id: 'm' + Date.now(), url: rd.result, name: fl.name, type: 'Photo' }, ...d.media] }, 'Uploaded ' + fl.name); };
+        rd.readAsDataURL(fl); e.target.value = '';
+      };
+    }
+    vals.editing = !!edit; vals.isExisting = !!(edit && edit.id);
+    if (edit && !isMedia) {
+      const d = edit.draft, isExp = sec === 'certificates' && expired(d);
+      vals.drawerTitle = edit.id ? (d[def.nameKey] || 'Edit') : 'New ' + def.one;
+      const miss = def.fields.filter(f => f.req && !String(d[f.k] == null ? '' : d[f.k]).trim()).map(f => f.label);
+      vals.fields = def.fields.map(f => {
+        const v = d[f.k];
+        const o = { id: 'f-' + f.k, label: f.label, star: f.req ? ' *' : '', span: ['textarea', 'image', 'toggle'].includes(f.type) ? '1 / -1' : 'auto', border: f.req && !String(v == null ? '' : v).trim() ? '#C4C4BC' : '#C4C4BC', hasHint: !!f.hint, hint: f.hint || '', hintColor: '#5A5C54' };
+        const onChange = e => this.setDraft(f.k, e.target.value);
+        if (f.type === 'textarea') return { ...o, isTextarea: true, value: v || '', onChange };
+        if (f.type === 'select') {
+          const opts = f.opts ? f.opts() : f.param ? data.params.filter(p => p.group === f.param).map(p => p.valEn) : f.fromServices ? data.services.map(s => s.titleEn) : [];
+          return { ...o, isSelect: true, value: v || '', onChange, options: [{ value: '', label: 'Choose…' }, ...opts.map(x => ({ value: x, label: x }))] };
+        }
+        if (f.type === 'image') return { ...o, isImage: true, value: v || '', hasValue: !!v, emptyText: v ? '' : T.noImage, pick: () => this.setState({ pick: { k: f.k }, pq: '' }), clear: () => this.setDraft(f.k, '') };
+        if (f.type === 'toggle') return { ...o, isToggle: true, checked: !!v && !isExp, disabled: isExp, toggleOp: isExp ? 0.5 : 1, toggleLabel: (!!v && !isExp) ? 'Published on the site' : 'Draft (hidden from the site)', onToggle: e => this.setDraft(f.k, e.target.checked), hasHint: isExp, hint: isExp ? 'Can’t publish: this certificate expired on ' + fmtDate(d.validUntil) + '. Upload the renewed certificate and update the date.' : '', hintColor: '#A3181A' };
+        return { ...o, isText: true, inputType: f.type === 'number' ? 'number' : f.type === 'date' ? 'date' : 'text', value: v == null ? '' : v, onChange };
+      });
+      vals.cantSave = miss.length > 0;
+      vals.saveBg = miss.length ? '#8A8B83' : '#C6241C'; vals.saveCursor = miss.length ? 'not-allowed' : 'pointer';
+      vals.saveWhy = miss.length ? 'To save, fill in: ' + miss.join(', ') + '.' : (edit.id ? 'Changes go live when you save.' : 'Ready to save.');
+      vals.saveEdit = () => {
+        if (miss.length) return;
+        const row = { ...d, updated: TODAY }; if (isExp) row.published = false;
+        const list = data[sec]; let next;
+        if (edit.id) next = list.map(r => r._id === edit.id ? row : r); else { row._id = sec[0] + Date.now(); next = [row, ...list]; }
+        this.setState({ edit: null }); this.persist({ ...data, [sec]: next }, 'Saved ' + (row[def.nameKey] || def.one));
+      };
+      vals.delCurrent = () => this.setState({ confirm: { id: edit.id, name: d[def.nameKey] || def.one } });
+    }
+    vals.closeEdit = () => this.setState({ edit: null });
+    vals.confirming = !!confirm; vals.confirmTitle = confirm ? 'Delete “' + confirm.name + '”?' : '';
+    vals.doDelete = () => { const id = confirm.id; this.setState({ confirm: null, edit: null }); this.persist({ ...data, [sec]: data[sec].filter(r => r._id !== id) }, 'Deleted ' + confirm.name); };
+    vals.cancelDelete = () => this.setState({ confirm: null });
+    vals.picking = !!pick; vals.pq = pq; vals.onPq = e => this.setState({ pq: e.target.value }); vals.closePick = () => this.setState({ pick: null });
+    if (pick) {
+      const pl = pq.trim().toLowerCase(), cur = edit && edit.draft[pick.k];
+      vals.pickList = data.media.filter(m => !pl || (m.name + ' ' + m.type).toLowerCase().includes(pl)).map(m => ({ name: m.name, url: m.url, on: m.url === cur, border: m.url === cur ? '#C6241C' : '#E6E6E1', choose: () => { this.setDraft(pick.k, m.url); this.setState({ pick: null }); } }));
+    }
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

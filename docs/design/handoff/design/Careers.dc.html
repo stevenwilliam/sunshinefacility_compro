@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Careers · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+<dc-import name="SiteHeader" active="careers" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+<main>
+<section style="max-width:1280px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(20px,4vw,48px) 0">
+  <nav aria-label="Breadcrumb" style="font-size:14px;color:#5A5C54;display:flex;gap:8px;margin-bottom:20px"><a href="SFG%20Home%20v2.dc.html" style="color:#5A5C54">{{ t.home }}</a><span aria-hidden="true">/</span><span aria-current="page" style="color:#1F211C">{{ t.kick }}</span></nav>
+  <div style="position:relative;background:#4A7023;color:#FFFFFF;border-radius:4px;overflow:hidden;min-height:clamp(460px,48vw,560px);display:flex;flex-direction:column">
+    <div style="background:#FFFFFF;padding:clamp(20px,3vw,32px) clamp(20px,3vw,40px) clamp(56px,7vw,96px);clip-path:polygon(0 0,100% 0,100% 45%,0 100%)"><div aria-hidden="true" style="width:clamp(64px,7vw,96px);aspect-ratio:1/1;background:{{ a.sgWork }} left top/contain no-repeat"></div></div>
+    <div style="position:relative;z-index:1;padding:0 clamp(20px,3vw,40px) clamp(28px,4vw,48px);max-width:620px;display:flex;flex-direction:column;gap:18px">
+      <h1 style="margin:0;font-size:clamp(38px,5.4vw,72px);line-height:0.98;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">{{ t.h1 }}</h1>
+      <p style="margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.55;max-width:480px">{{ t.intro }}</p>
+      <a href="#openings" style="align-self:flex-start;display:flex;align-items:center;gap:10px;background:#FFFFFF;color:#1F211C;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px" style-hover="background:#F4F4F1;color:#1F211C">{{ t.see }} <i class="ph ph-arrow-down"></i></a>
+    </div>
+    <div aria-hidden="true" style="position:absolute;right:-4%;bottom:-6%;width:min(52%,540px);aspect-ratio:1/1;background:{{ a.team }} center/cover;filter:grayscale(1);-webkit-mask:{{ a.sgWork }} center/contain no-repeat;mask:{{ a.sgWork }} center/contain no-repeat"></div>
+  </div>
+</section>
+
+<section aria-labelledby="why-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0">
+  <h2 id="why-h" style="margin:0 0 32px;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em;max-width:640px;text-wrap:balance">{{ t.whyH }}</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:32px 24px">
+    <sc-for list="{{ why }}" as="w" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid #1F211C">
+        <i class="ph {{ w.icon }}" style="font-size:30px;color:#4A7023"></i>
+        <h3 style="margin:6px 0 0;font-size:20px;font-weight:550;letter-spacing:-0.01em">{{ w.title }}</h3>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#45473F">{{ w.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="openings" aria-labelledby="op-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0;scroll-margin-top:88px">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:24px">
+    <h2 id="op-h" style="margin:0;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.opH }}</h2>
+    <span style="font-size:12px;font-weight:550;letter-spacing:0.06em;text-transform:uppercase;color:#C6241C;border:1px dashed #C6241C;padding:5px 10px;border-radius:4px">{{ t.sample }}</span>
+  </div>
+  <div role="search" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px;padding:16px;background:#F4F4F1;border-radius:4px">
+    <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;grid-column:span 1">{{ t.search }}
+      <span style="position:relative;display:block"><i class="ph ph-magnifying-glass" aria-hidden="true" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:18px;color:#5A5C54"></i><input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.searchPh }}" style="width:100%;box-sizing:border-box;height:46px;border:1px solid #C4C4BC;border-radius:4px;padding:0 12px 0 38px;font-size:16px;background:#FFFFFF;color:#1F211C"></span>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500">{{ t.fLine }}
+      <select value="{{ fLine }}" onChange="{{ onLine }}" style="height:46px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:16px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.all }}</option><sc-for list="{{ lineOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500">{{ t.fLoc }}
+      <select value="{{ fLoc }}" onChange="{{ onLoc }}" style="height:46px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:16px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.all }}</option><sc-for list="{{ locOpts }}" as="o" hint-placeholder-count="6"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500">{{ t.fType }}
+      <select value="{{ fType }}" onChange="{{ onType }}" style="height:46px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:16px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.all }}</option><sc-for list="{{ typeOpts }}" as="o" hint-placeholder-count="2"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select>
+    </label>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 8px">
+    <p aria-live="polite" style="margin:0;font-size:14px;color:#45473F">{{ countText }}</p>
+    <div style="display:flex;align-items:center;gap:10px">
+      <sc-if value="{{ noFilters }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px;color:#5A5C54">{{ t.clearWhy }}</span></sc-if>
+      <button type="button" onClick="{{ clear }}" disabled="{{ noFilters }}" style="min-height:40px;padding:0 14px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;color:#1F211C;font-size:14px;cursor:pointer;opacity:{{ clearOp }}">{{ t.clear }}</button>
+    </div>
+  </div>
+  <ul style="list-style:none;margin:0;padding:0;border-top:1px solid #E6E6E1">
+    <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="6">
+      <li style="border-bottom:1px solid #E6E6E1">
+        <button type="button" onClick="{{ j.toggle }}" aria-expanded="{{ j.open }}" style="width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding:20px 0;background:transparent;border:0;cursor:pointer;text-align:left;color:#1F211C">
+          <span style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:20px;font-weight:550;letter-spacing:-0.01em">{{ j.title }}</span>
+            <span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#45473F"><span style="width:8px;height:8px;background:{{ j.color }}"></span>{{ j.line }}</span>
+          </span>
+          <span style="display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:#45473F"><span style="display:flex;align-items:center;gap:6px"><i class="ph ph-map-pin"></i>{{ j.loc }}</span><span style="display:flex;align-items:center;gap:6px"><i class="ph ph-clock"></i>{{ j.type }}</span></span>
+          <i class="ph {{ j.chev }}" aria-hidden="true" style="font-size:20px"></i>
+        </button>
+        <sc-if value="{{ j.open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 0 24px;display:flex;flex-wrap:wrap;gap:20px 48px">
+            <p style="flex:1 1 300px;margin:0;font-size:16px;line-height:1.55;color:#45473F;max-width:520px">{{ j.summary }}</p>
+            <div style="flex:1 1 280px;min-width:0">
+              <p style="margin:0 0 8px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.req }}</p>
+              <ul style="margin:0;padding:0;list-style:none">
+                <sc-for list="{{ j.reqs }}" as="r" hint-placeholder-count="3"><li style="display:grid;grid-template-columns:22px 1fr;gap:8px;padding:6px 0;font-size:15px;line-height:1.45"><i class="ph ph-check" style="color:#4A7023;margin-top:2px"></i>{{ r }}</li></sc-for>
+              </ul>
+              <button type="button" onClick="{{ j.apply }}" style="margin-top:14px;display:flex;align-items:center;gap:10px;background:#C6241C;color:#FFFFFF;border:0;font-weight:550;font-size:15px;padding:14px 18px;border-radius:4px;cursor:pointer" style-hover="background:#A3181A">{{ t.apply }} <i class="ph ph-arrow-right"></i></button>
+            </div>
+          </div>
+        </sc-if>
+      </li>
+    </sc-for>
+  </ul>
+  <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:40px 20px;text-align:center;border:1px dashed #C4C4BC;border-radius:4px;margin-top:12px;color:#45473F;font-size:16px">{{ t.empty }}</div>
+  </sc-if>
+</section>
+
+<section id="apply" aria-labelledby="ap-h" style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px);scroll-margin-top:88px">
+  <div style="background:#1F211C;color:#FFFFFF;border-radius:4px;padding:clamp(24px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,5vw,72px)">
+    <div style="flex:1 1 280px;min-width:0;max-width:420px">
+      <h2 id="ap-h" style="margin:0;font-size:clamp(28px,3.2vw,42px);line-height:1.05;font-weight:550;letter-spacing:-0.03em">{{ t.apH }}</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.55;color:#D6D7CE">{{ t.apP }}</p>
+    </div>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="flex:1.4 1 380px;background:#FFFFFF;color:#1F211C;border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+        <i class="ph ph-check-circle" style="font-size:40px;color:#4A7023"></i>
+        <p style="margin:0;font-size:22px;font-weight:550">{{ t.sentH }}</p>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#45473F">{{ t.sentP }}</p>
+        <button type="button" onClick="{{ reset }}" style="margin-top:8px;min-height:44px;padding:0 16px;border:1px solid #C4C4BC;border-radius:4px;background:#FFFFFF;cursor:pointer;font-size:15px">{{ t.another }}</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" novalidate="" style="flex:1.4 1 380px;min-width:0;background:#FFFFFF;color:#1F211C;border-radius:4px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.name }} *<input value="{{ f.name }}" onChange="{{ set.name }}" autocomplete="name" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.phone }} *<input value="{{ f.phone }}" onChange="{{ set.phone }}" type="tel" autocomplete="tel" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.email }} *<input value="{{ f.email }}" onChange="{{ set.email }}" type="email" autocomplete="email" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 14px;font-size:16px;color:#1F211C"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">{{ t.position }} *
+          <select value="{{ f.position }}" onChange="{{ set.position }}" style="height:48px;border:1px solid #C4C4BC;border-radius:4px;padding:0 10px;font-size:16px;background:#FFFFFF;color:#1F211C"><option value="">{{ t.choose }}</option><sc-for list="{{ posOpts }}" as="o" hint-placeholder-count="8"><option value="{{ o }}">{{ o }}</option></sc-for></select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;grid-column:1/-1">{{ t.cv }} *
+          <input type="file" accept=".pdf,.doc,.docx" onChange="{{ onFile }}" style="padding:10px;border:1px dashed #C4C4BC;border-radius:4px;font-size:15px;background:#F4F4F1">
+          <span style="font-size:13px;font-weight:400;color:{{ fileColor }}">{{ fileNote }}</span>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;grid-column:1/-1">{{ t.msg }}<textarea value="{{ f.msg }}" onChange="{{ set.msg }}" rows="4" style="border:1px solid #C4C4BC;border-radius:4px;padding:12px 14px;font-size:16px;resize:vertical;color:#1F211C"></textarea></label>
+        <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <button type="submit" disabled="{{ cantSend }}" style="border:0;background:{{ sendBg }};color:#FFFFFF;font-weight:550;font-size:16px;padding:15px 22px;border-radius:4px;cursor:{{ sendCursor }};display:flex;align-items:center;gap:10px">{{ t.send }} <i class="ph ph-paper-plane-tilt"></i></button>
+          <p style="margin:0;font-size:13px;color:#45473F;flex:1 1 200px">{{ sendWhy }}</p>
+        </div>
+      </form>
+    </sc-if>
+  </div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const LINE = { food: '#EA2915', digital: '#28937A', workforce: '#5E9628', remote: '#FD572A', facility: '#C6241C' };
+const JOBS = [
+  { line: 'food', loc: 'Tangerang', type: 'ft', en: ['Cook', 'Prepare patient and staff meals in a hospital kitchen run to HACCP and ISO 22000.', ['Two years’ experience in a commercial kitchen', 'Food handler certificate', 'Able to work shifts']], id: ['Juru Masak', 'Menyiapkan makanan pasien dan staf di dapur rumah sakit dengan standar HACCP dan ISO 22000.', ['Pengalaman dua tahun di dapur komersial', 'Sertifikat penjamah makanan', 'Bersedia bekerja shift']] },
+  { line: 'food', loc: 'Jakarta', type: 'ft', en: ['Clinical Dietitian', 'Plan therapeutic diets with the hospital care team and check meals against each patient’s order.', ['Bachelor’s degree in nutrition', 'Active STR registration', 'Hospital experience preferred']], id: ['Ahli Gizi Klinis', 'Merencanakan diet terapi bersama tim perawatan rumah sakit dan memeriksa makanan sesuai pesanan pasien.', ['S1 Gizi', 'STR aktif', 'Diutamakan berpengalaman di rumah sakit']] },
+  { line: 'facility', loc: 'Surabaya', type: 'ft', en: ['Cleaning Supervisor', 'Lead a cleaning crew in a commercial building and record every check in the field app.', ['Three years’ cleaning experience, one as team leader', 'Comfortable using a smartphone app', 'Able to work shifts']], id: ['Supervisor Kebersihan', 'Memimpin tim kebersihan di gedung komersial dan mencatat setiap pemeriksaan di aplikasi lapangan.', ['Pengalaman tiga tahun di bidang kebersihan, satu tahun sebagai ketua tim', 'Terbiasa menggunakan aplikasi smartphone', 'Bersedia bekerja shift']] },
+  { line: 'facility', loc: 'Tangerang', type: 'ft', en: ['MEP Technician', 'Carry out preventive maintenance on HVAC, electrical and plumbing systems on a set schedule.', ['Vocational diploma in electrical or mechanical', 'Two years’ building maintenance experience', 'Electrical competency certificate preferred']], id: ['Teknisi MEP', 'Melakukan perawatan preventif sistem HVAC, listrik, dan plumbing sesuai jadwal.', ['Lulusan SMK/D3 listrik atau mesin', 'Pengalaman dua tahun di perawatan gedung', 'Diutamakan memiliki sertifikat kompetensi kelistrikan']] },
+  { line: 'facility', loc: 'Bekasi', type: 'ct', en: ['Security Officer', 'Manage access, patrols and visitor registration at a corporate site.', ['Gada Pratama certificate', 'Good communication with visitors', 'Able to work night shifts']], id: ['Petugas Keamanan', 'Mengelola akses, patroli, dan registrasi tamu di lokasi korporat.', ['Sertifikat Gada Pratama', 'Komunikasi yang baik dengan tamu', 'Bersedia bekerja shift malam']] },
+  { line: 'remote', loc: 'Timika', type: 'ct', en: ['Camp Catering Supervisor', 'Run daily catering for a remote camp on a rotation roster, from stock to service.', ['Three years’ catering supervision', 'Experience at remote or mining sites', 'Willing to work on rotation']], id: ['Supervisor Katering Camp', 'Menjalankan katering harian untuk camp terpencil dengan jadwal rotasi, dari stok hingga penyajian.', ['Pengalaman tiga tahun sebagai supervisor katering', 'Berpengalaman di lokasi terpencil atau tambang', 'Bersedia bekerja dengan sistem rotasi']] },
+  { line: 'workforce', loc: 'Jakarta', type: 'ft', en: ['HR & Payroll Officer', 'Handle payroll, contracts and attendance records for on-site teams across several clients.', ['Bachelor’s degree in any field', 'Two years’ payroll experience', 'Knowledge of BPJS and PPh 21']], id: ['Staf HR & Penggajian', 'Mengelola penggajian, kontrak, dan absensi tim di lokasi untuk beberapa klien.', ['S1 semua jurusan', 'Pengalaman dua tahun di penggajian', 'Memahami BPJS dan PPh 21']] },
+  { line: 'digital', loc: 'Tangerang', type: 'ft', en: ['Field App Support', 'Support site teams and clients on our field and ordering apps, and turn feedback into fixes.', ['Diploma or degree in IT', 'One year in application support', 'Patient with non-technical users']], id: ['Dukungan Aplikasi Lapangan', 'Mendukung tim lokasi dan klien dalam menggunakan aplikasi lapangan dan pemesanan, serta meneruskan masukan menjadi perbaikan.', ['D3 atau S1 TI', 'Pengalaman satu tahun di dukungan aplikasi', 'Sabar menghadapi pengguna non-teknis']] }
+];
+const COPY = {
+  en: {
+    home: 'Home', kick: 'Careers', see: 'See open positions',
+    h1: 'Your operations. Our people.', intro: 'Over 1,000 people across 18+ cities keep hospitals, offices, malls and remote sites running. Join them.',
+    whyH: 'Why people stay with Sunshine',
+    why: [['ph-graduation-cap', 'Training before day one', 'Role-specific training, service standards and safety protocols, then continuous development.'], ['ph-path', 'Room to grow', 'Move between sites, sectors and service lines as your skills grow.'], ['ph-device-mobile', 'Digital tools', 'Attendance, schedules and work orders in one app, so less time goes on paperwork.'], ['ph-buildings', 'Part of Lippo Indonesia', 'Stable work inside one of Indonesia’s largest business ecosystems.']],
+    opH: 'Open positions', sample: 'Sample openings', search: 'Search', searchPh: 'Job title or keyword', fLine: 'Service line', fLoc: 'Location', fType: 'Type', all: 'All',
+    types: { ft: 'Full-time', ct: 'Contract' }, lines: { food: 'Food Services', digital: 'Digital & Operational', workforce: 'Workforce Solutions', remote: 'Remote', facility: 'Facility Management' },
+    count: (n, m) => 'Showing ' + n + ' of ' + m + ' positions', clear: 'Clear filters', clearWhy: 'No filters applied', empty: 'No positions match these filters. Try clearing them, or send us an open application below.',
+    req: 'Requirements', apply: 'Apply for this role',
+    apH: 'Apply now', apP: 'Send your details and CV. Our recruitment team replies within five working days. Not seeing your role? Choose “Open application”.',
+    name: 'Full name', phone: 'Phone / WhatsApp', email: 'Email', position: 'Position', choose: 'Choose a position', open: 'Open application', cv: 'CV', msg: 'Message (optional)',
+    fileIdle: 'PDF or Word, up to 5 MB', fileBig: 'This file is over 5 MB. Please upload a smaller file.', fileOk: n => 'Attached: ' + n,
+    send: 'Send application', ready: 'Ready to send.', missing: 'To send, add: ', fields: { name: 'full name', phone: 'phone', email: 'a valid email', position: 'position', cv: 'CV' },
+    sentH: 'Application received', sentP: 'Thank you. We will review your application and contact you within five working days.', another: 'Send another application'
+  },
+  id: {
+    home: 'Beranda', kick: 'Karier', see: 'Lihat lowongan',
+    h1: 'Operasional Anda. Orang-orang kami.', intro: 'Lebih dari 1.000 orang di 18+ kota menjaga rumah sakit, kantor, mal, dan site terpencil tetap berjalan. Bergabunglah bersama mereka.',
+    whyH: 'Mengapa orang bertahan di Sunshine',
+    why: [['ph-graduation-cap', 'Pelatihan sebelum mulai bertugas', 'Pelatihan sesuai peran, standar layanan, dan protokol keselamatan, lalu pengembangan berkelanjutan.'], ['ph-path', 'Ruang untuk berkembang', 'Pindah antar lokasi, sektor, dan lini layanan seiring berkembangnya kemampuan Anda.'], ['ph-device-mobile', 'Alat kerja digital', 'Absensi, jadwal, dan perintah kerja dalam satu aplikasi, sehingga lebih sedikit waktu untuk administrasi.'], ['ph-buildings', 'Bagian dari Lippo Indonesia', 'Pekerjaan yang stabil di dalam salah satu ekosistem bisnis terbesar di Indonesia.']],
+    opH: 'Lowongan', sample: 'Contoh lowongan', search: 'Cari', searchPh: 'Nama posisi atau kata kunci', fLine: 'Lini layanan', fLoc: 'Lokasi', fType: 'Jenis', all: 'Semua',
+    types: { ft: 'Penuh waktu', ct: 'Kontrak' }, lines: { food: 'Layanan Makanan', digital: 'Digital & Operasional', workforce: 'Solusi Tenaga Kerja', remote: 'Remote', facility: 'Manajemen Fasilitas' },
+    count: (n, m) => 'Menampilkan ' + n + ' dari ' + m + ' posisi', clear: 'Hapus filter', clearWhy: 'Belum ada filter', empty: 'Tidak ada posisi yang sesuai. Coba hapus filter, atau kirim lamaran terbuka di bawah.',
+    req: 'Persyaratan', apply: 'Lamar posisi ini',
+    apH: 'Lamar sekarang', apP: 'Kirim data diri dan CV Anda. Tim rekrutmen kami membalas dalam lima hari kerja. Posisi Anda tidak ada? Pilih “Lamaran terbuka”.',
+    name: 'Nama lengkap', phone: 'Telepon / WhatsApp', email: 'Email', position: 'Posisi', choose: 'Pilih posisi', open: 'Lamaran terbuka', cv: 'CV', msg: 'Pesan (opsional)',
+    fileIdle: 'PDF atau Word, maksimal 5 MB', fileBig: 'File lebih dari 5 MB. Silakan unggah file yang lebih kecil.', fileOk: n => 'Terlampir: ' + n,
+    send: 'Kirim lamaran', ready: 'Siap dikirim.', missing: 'Untuk mengirim, lengkapi: ', fields: { name: 'nama lengkap', phone: 'telepon', email: 'email yang valid', position: 'posisi', cv: 'CV' },
+    sentH: 'Lamaran diterima', sentP: 'Terima kasih. Kami akan meninjau lamaran Anda dan menghubungi Anda dalam lima hari kerja.', another: 'Kirim lamaran lain'
+  }
+};
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const CSSURL = u => 'url("' + u + '")';
+const A = (id, p) => CSSURL(RES(id, p));
+class Component extends DCLogic {
+  state = { lang: 'en', q: '', fLine: '', fLoc: '', fType: '', open: -1, f: { name: '', phone: '', email: '', position: '', msg: '' }, file: null, fileBig: false, sent: false };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    this._l = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this._l);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this._l); }
+  setF(k, v) { this.setState(s => ({ f: { ...s.f, [k]: v } })); }
+  renderVals() {
+    const { lang, q, fLine, fLoc, fType, open, f, file, fileBig, sent } = this.state;
+    const t = COPY[lang];
+    const ql = q.trim().toLowerCase();
+    const list = JOBS.map((j, i) => ({ j, i })).filter(({ j }) =>
+      (!fLine || j.line === fLine) && (!fLoc || j.loc === fLoc) && (!fType || j.type === fType) &&
+      (!ql || (j[lang][0] + ' ' + j[lang][1] + ' ' + t.lines[j.line] + ' ' + j.loc).toLowerCase().includes(ql)));
+    const noFilters = !q && !fLine && !fLoc && !fType;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email);
+    const miss = [];
+    if (!f.name.trim()) miss.push(t.fields.name);
+    if (!f.phone.trim()) miss.push(t.fields.phone);
+    if (!emailOk) miss.push(t.fields.email);
+    if (!f.position) miss.push(t.fields.position);
+    if (!file || fileBig) miss.push(t.fields.cv);
+    const cantSend = miss.length > 0;
+    const set = {};
+    ['name', 'phone', 'email', 'position', 'msg'].forEach(k => { set[k] = e => this.setF(k, e.target.value); });
+    return {
+      a: { sgWork: A('sg-workforce', 'assets/brand/sg-workforce.svg'), team: A('photo-team', 'assets/photos/team.png') },
+      t, q, fLine, fLoc, fType, f, set, sent, notSent: !sent,
+      onQ: e => this.setState({ q: e.target.value }), onLine: e => this.setState({ fLine: e.target.value }),
+      onLoc: e => this.setState({ fLoc: e.target.value }), onType: e => this.setState({ fType: e.target.value }),
+      lineOpts: Object.keys(t.lines).map(k => ({ v: k, l: t.lines[k] })),
+      locOpts: [...new Set(JOBS.map(j => j.loc))].sort(),
+      typeOpts: Object.keys(t.types).map(k => ({ v: k, l: t.types[k] })),
+      countText: t.count(list.length, JOBS.length), noFilters, clearOp: noFilters ? 0.45 : 1,
+      clear: () => this.setState({ q: '', fLine: '', fLoc: '', fType: '' }),
+      empty: list.length === 0,
+      jobs: list.map(({ j, i }) => ({
+        title: j[lang][0], summary: j[lang][1], reqs: j[lang][2], line: t.lines[j.line], color: LINE[j.line], loc: j.loc, type: t.types[j.type],
+        open: open === i, chev: open === i ? 'ph-caret-up' : 'ph-caret-down',
+        toggle: () => this.setState({ open: open === i ? -1 : i }),
+        apply: () => { this.setF('position', j[lang][0]); const el = document.getElementById('apply'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); }
+      })),
+      posOpts: [...JOBS.map(j => j[lang][0]), t.open],
+      onFile: e => { const fl = e.target.files && e.target.files[0]; this.setState({ file: fl ? fl.name : null, fileBig: !!(fl && fl.size > 5 * 1024 * 1024) }); },
+      fileNote: fileBig ? t.fileBig : file ? t.fileOk(file) : t.fileIdle, fileColor: fileBig ? '#C6241C' : '#5A5C54',
+      cantSend, sendBg: cantSend ? '#8A8B83' : '#C6241C', sendCursor: cantSend ? 'not-allowed' : 'pointer',
+      sendWhy: cantSend ? t.missing + miss.join(', ') + '.' : t.ready,
+      submit: e => { e.preventDefault(); if (!cantSend) this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false, f: { name: '', phone: '', email: '', position: '', msg: '' }, file: null, fileBig: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

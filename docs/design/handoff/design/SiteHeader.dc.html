@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header style="background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid #E6E6E1;font-family:'Nohemi',system-ui,sans-serif;color:#1F211C">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:72px;display:flex;align-items:center;gap:32px">
+    <a href="SFG%20Home%20v2.dc.html" aria-label="Sunshine Facilities Group home" style="display:flex;align-items:center;flex:none"><span role="img" aria-label="Sunshine Facilities Group" style="display:block;height:34px;width:138px;background:{{ logoCss }} left center/contain no-repeat"></span></a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Main" style="display:flex;gap:26px;font-size:15px;margin-left:8px">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+          <a href="{{ n.href }}" aria-current="{{ n.current }}" style="color:{{ n.color }};font-weight:{{ n.weight }};padding:24px 0 22px;border-bottom:2px solid {{ n.line }}" style-hover="color:#1F211C">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:14px">
+      <div role="group" aria-label="Language" style="display:flex;border:1px solid #D6D6CF;border-radius:999px;padding:3px;font-size:13px;font-weight:500">
+        <button type="button" onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="border:0;border-radius:999px;padding:6px 10px;cursor:pointer;background:{{ enBg }};color:{{ enFg }}">EN</button>
+        <button type="button" onClick="{{ setId }}" aria-pressed="{{ isId }}" style="border:0;border-radius:999px;padding:6px 10px;cursor:pointer;background:{{ idBg }};color:{{ idFg }}">ID</button>
+      </div>
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+        <a href="Contact.dc.html" style="background:#C6241C;color:#FFFFFF;font-weight:550;font-size:15px;padding:12px 18px;border-radius:4px;white-space:nowrap" style-hover="background:#A3181A;color:#FFFFFF">{{ cta }}</a>
+      </sc-if>
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menu }}" style="width:44px;height:44px;border:1px solid #D6D6CF;background:#FFFFFF;border-radius:4px;font-size:22px;color:#1F211C;cursor:pointer;display:grid;place-items:center"><i class="ph {{ menuIcon }}"></i></button>
+      </sc-if>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Mobile" style="border-top:1px solid #E6E6E1;padding:8px clamp(20px,4vw,48px) 20px;display:flex;flex-direction:column;background:#FFFFFF">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+        <a href="{{ n.href }}" aria-current="{{ n.current }}" style="font-size:20px;padding:14px 0;border-bottom:1px solid #EFEFEA;color:{{ n.color }};font-weight:{{ n.weight }}">{{ n.label }}</a>
+      </sc-for>
+      <a href="Contact.dc.html" style="margin-top:16px;background:#C6241C;color:#FFFFFF;font-weight:550;text-align:center;padding:15px;border-radius:4px">{{ cta }}</a>
+    </nav>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;72px&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;services&quot;,&quot;industries&quot;,&quot;about&quot;,&quot;careers&quot;,&quot;contact&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const NAV = { en: ['Home', 'Services', 'Industries', 'About Us', 'Careers', 'Contact'], id: ['Beranda', 'Layanan', 'Industri', 'Tentang Kami', 'Karier', 'Kontak'] };
+const HREF = ['SFG%20Home%20v2.dc.html', 'Services.dc.html', 'Industries.dc.html', 'About.dc.html', 'Careers.dc.html', 'Contact.dc.html'];
+const KEYS = ['home', 'services', 'industries', 'about', 'careers', 'contact'];
+class Component extends DCLogic {
+  state = { lang: 'en', w: typeof window !== 'undefined' ? window.innerWidth : 1440, menu: false };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') { this.setState({ lang: l }); document.documentElement.lang = l; } } catch (e) {}
+    this.r = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.r);
+    this.o = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this.o);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.r); window.removeEventListener('sfg-lang', this.o); }
+  setLang(l) {
+    try { localStorage.setItem('sfg-lang', l); } catch (e) {}
+    document.documentElement.lang = l;
+    this.setState({ lang: l });
+    window.dispatchEvent(new CustomEvent('sfg-lang', { detail: l }));
+  }
+  renderVals() {
+    const { lang, w, menu } = this.state;
+    const active = this.props.active || '';
+    const wide = w >= 1080;
+    return {
+      logoCss: 'url("' + RES('logo-primary', 'assets/brand/sfg-logo-primary.png') + '")',
+      wide, narrow: !wide, notMobile: w >= 640, menu, menuOpen: menu && !wide, menuIcon: menu ? 'ph-x' : 'ph-list',
+      cta: lang === 'en' ? 'Request a Quotation' : 'Minta Penawaran',
+      nav: NAV[lang].map((label, i) => {
+        const on = KEYS[i] === active;
+        return { label, href: HREF[i], current: on ? 'page' : undefined, color: on ? '#1F211C' : '#45473F', weight: on ? 550 : 450, line: on ? '#C6241C' : 'transparent' };
+      }),
+      isEn: lang === 'en', isId: lang === 'id',
+      enBg: lang === 'en' ? '#1F211C' : 'transparent', enFg: lang === 'en' ? '#FFFFFF' : '#45473F',
+      idBg: lang === 'id' ? '#1F211C' : 'transparent', idFg: lang === 'id' ? '#FFFFFF' : '#45473F',
+      setEn: () => this.setLang('en'), setId: () => this.setLang('id'),
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu }))
+    };
+  }
+}
+</script>
+</body>
+</html>

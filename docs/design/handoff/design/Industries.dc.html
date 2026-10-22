@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Industries · Sunshine Facilities Group</title>
+<link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+<link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+<style>
+@font-face{font-family:"Nohemi";src:url("assets/fonts/Nohemi-VF.ttf") format("truetype");font-weight:100 900;font-display:swap}
+body{margin:0;background:#FFFFFF;color:#1F211C;font-family:"Nohemi",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F211C;text-decoration:none}a:hover{color:#C6241C}
+*:focus-visible{outline:2px solid #C6241C;outline-offset:3px}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FFFFFF;color:#1F211C;font-family:'Nohemi',system-ui,sans-serif">
+<dc-import name="SiteHeader" active="industries" hint-size="100%,72px" style="position:sticky;top:0;z-index:50"></dc-import>
+<main>
+<section style="background:#1F211C;color:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,88px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:32px clamp(32px,6vw,96px);align-items:flex-end">
+    <div style="flex:1.4 1 420px;min-width:0">
+      <nav aria-label="Breadcrumb" style="font-size:14px;color:#C9CABF;display:flex;gap:8px;margin-bottom:28px"><a href="SFG%20Home%20v2.dc.html" style="color:#C9CABF" style-hover="color:#FFFFFF">{{ t.home }}</a><span aria-hidden="true">/</span><span aria-current="page" style="color:#FFFFFF">{{ t.kick }}</span></nav>
+      <p style="margin:0 0 18px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:#C9CABF"><span style="width:28px;height:3px;background:#FD572A;border-radius:2px"></span>{{ t.kick }}</p>
+      <h1 style="margin:0;font-size:clamp(38px,5.4vw,72px);line-height:1;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">{{ t.h1 }}</h1>
+    </div>
+    <p style="flex:1 1 320px;min-width:0;max-width:460px;margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.55;color:#D6D7CE">{{ t.intro }}</p>
+  </div>
+</section>
+
+<section aria-label="{{ t.kick }}" style="max-width:1280px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(20px,4vw,48px) clamp(56px,7vw,104px)">
+  <sc-for list="{{ industries }}" as="i" hint-placeholder-count="7">
+    <article style="display:flex;flex-wrap:wrap;gap:24px clamp(32px,5vw,72px);padding:clamp(28px,4vw,48px) 0;border-bottom:1px solid #E6E6E1">
+      <div style="flex:1.2 1 360px;min-width:0;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="width:52px;height:52px;flex:none;border-radius:4px;background:#F4F4F1;display:grid;place-items:center;font-size:28px"><i class="ph {{ i.icon }}"></i></span>
+          <h2 style="margin:0;font-size:clamp(26px,2.8vw,36px);line-height:1.05;font-weight:550;letter-spacing:-0.025em">{{ i.title }}</h2>
+        </div>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#45473F;max-width:560px">{{ i.desc }}</p>
+        <p style="margin:6px 0 0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.lines }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ i.lines }}" as="l" hint-placeholder-count="3"><a href="{{ l.href }}" style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #D6D6CF;font-size:14px;font-weight:500" style-hover="border-color:#1F211C"><span style="width:8px;height:8px;background:{{ l.base }}"></span>{{ l.title }}</a></sc-for>
+        </div>
+      </div>
+      <div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <sc-if value="{{ i.hasClients }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#5A5C54">{{ t.clients }}</p>
+          <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">
+            <sc-for list="{{ i.clients }}" as="c" hint-placeholder-count="3"><li style="height:72px;border:1px solid #EFEFEA;border-radius:4px;padding:12px 14px;box-sizing:border-box"><div role="img" aria-label="{{ c.name }}" style="width:100%;height:100%;background:{{ c.urlCss }} center/contain no-repeat"></div></li></sc-for>
+          </ul>
+        </sc-if>
+        <sc-if value="{{ i.noClients }}" hint-placeholder-val="{{ false }}">
+          <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;padding:20px;border:1px dashed #C4C4BC;border-radius:4px;font-size:15px;color:#45473F" style-hover="border-color:#1F211C">{{ t.noClients }} <i class="ph ph-arrow-right"></i></a>
+        </sc-if>
+      </div>
+    </article>
+  </sc-for>
+</section>
+
+<section style="background:#F4F4F1;border-top:1px solid #E6E6E1">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between">
+    <div style="max-width:640px">
+      <h2 style="margin:0;font-size:clamp(30px,3.8vw,52px);line-height:1;font-weight:550;letter-spacing:-0.035em;text-wrap:balance">{{ t.ctaH }}</h2>
+      <p style="margin:18px 0 0;font-size:17px;line-height:1.55;color:#45473F">{{ t.ctaP }}</p>
+    </div>
+    <a href="Contact.dc.html" style="display:flex;align-items:center;gap:10px;background:#C6241C;color:#FFFFFF;font-weight:550;font-size:16px;padding:16px 22px;border-radius:4px" style-hover="background:#A3181A;color:#FFFFFF">{{ t.quote }} <i class="ph ph-arrow-right"></i></a>
+  </div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const LINE = { food: '#EA2915', digital: '#28937A', workforce: '#5E9628', remote: '#FD572A', facility: '#C6241C' };
+const CLIENT = { danone: 'Danone', cargill: 'Cargill', mandiri: 'Bank Mandiri', danantara: 'Danantara Indonesia', 'darya-varia': 'Darya-Varia Laboratoria', siloam: 'Siloam Hospitals', 'st-carolus': 'RS St. Carolus Summarecon Serpong', 'permata-cibubur': 'RS Permata Cibubur', 'harapan-kita': 'RS Jantung Harapan Kita', 'lippo-malls': 'Lippo Malls', 'lippo-group': 'Lippo Group', 'united-tractors': 'United Tractors', buma: 'BUMA', hpu: 'HPU', byd: 'BYD', savoria: 'Savoria', 'fks-food': 'FKS Food', hpmu: 'PT Harapan Pangan Muslim', sph: 'Sekolah Pelita Harapan' };
+const IND = [
+  ['healthcare', 'ph-first-aid-kit', ['food', 'facility', 'digital', 'workforce'], ['siloam', 'st-carolus', 'permata-cibubur', 'harapan-kita']],
+  ['corporate', 'ph-buildings', ['food', 'facility', 'workforce', 'digital'], ['danone', 'cargill', 'mandiri', 'danantara', 'darya-varia']],
+  ['retail', 'ph-storefront', ['facility', 'food', 'workforce'], ['lippo-malls', 'lippo-group']],
+  ['industrial', 'ph-hard-hat', ['remote', 'food', 'facility', 'workforce'], ['united-tractors', 'buma', 'hpu', 'byd']],
+  ['hospitality', 'ph-fork-knife', ['food', 'facility', 'workforce'], ['savoria', 'fks-food', 'hpmu']],
+  ['education', 'ph-graduation-cap', ['food', 'facility'], ['sph']],
+  ['residential', 'ph-house-line', ['facility', 'workforce'], []]
+];
+const COPY = {
+  en: {
+    home: 'Home', kick: 'Industries', quote: 'Request a Quotation', lines: 'Services we usually run', clients: 'Clients in this sector', noClients: 'Talk to us about your residential tower',
+    h1: 'Built around how each kind of building runs.',
+    intro: 'A hospital kitchen and a mining camp canteen have different rules. Our experience across the Lippo ecosystem and beyond lets us staff and train for the site you have.',
+    lineNames: { food: 'Food Services', digital: 'Digital & Operational', workforce: 'Workforce Solutions', remote: 'Remote', facility: 'Facility Management' },
+    ind: {
+      healthcare: ['Healthcare', 'Clinical nutrition and hospital food operations, patient meals and infection-aware cleaning for wards, clinics and laboratories.'],
+      corporate: ['Corporate offices', 'Canteens, pantries and coffee, cleaning and building upkeep for offices and corporate campuses.'],
+      retail: ['Retail & malls', 'Large-scale retail operational support: large-floor cleaning, security and food solutions for malls and stores.'],
+      industrial: ['Industrial & mining', 'High-volume canteens, supply chain and site services for plants, mines and remote camps. Camp life, city standard.'],
+      hospitality: ['Hospitality & F&B', 'Quality dining and operational services across hotels, restaurants and food brands, from concept to execution.'],
+      education: ['Education', 'Meals, cleaning and safety for schools and higher education campuses.'],
+      residential: ['Residential towers', 'Common-area cleaning, MEP upkeep and security for residential towers.']
+    },
+    ctaH: 'Your sector is not listed?', ctaP: 'We also support financial services, EPC and institutional sites. Tell us what your site needs.'
+  },
+  id: {
+    home: 'Beranda', kick: 'Industri', quote: 'Minta Penawaran', lines: 'Layanan yang biasa kami jalankan', clients: 'Klien di sektor ini', noClients: 'Diskusikan kebutuhan apartemen Anda',
+    h1: 'Disesuaikan dengan cara setiap gedung beroperasi.',
+    intro: 'Dapur rumah sakit dan kantin site tambang punya aturan berbeda. Pengalaman kami di ekosistem Lippo dan di luarnya membuat kami bisa menyiapkan dan melatih tim sesuai lokasi Anda.',
+    lineNames: { food: 'Layanan Makanan', digital: 'Digital & Operasional', workforce: 'Solusi Tenaga Kerja', remote: 'Remote', facility: 'Manajemen Fasilitas' },
+    ind: {
+      healthcare: ['Kesehatan', 'Gizi klinis dan operasional makanan rumah sakit, makanan pasien, dan kebersihan standar pengendalian infeksi untuk bangsal, klinik, dan laboratorium.'],
+      corporate: ['Perkantoran', 'Kantin, pantry dan kopi, kebersihan, serta perawatan gedung untuk kantor dan kawasan korporat.'],
+      retail: ['Ritel & mal', 'Dukungan operasional ritel skala besar: kebersihan area luas, keamanan, dan solusi makanan untuk mal dan toko.'],
+      industrial: ['Industri & tambang', 'Kantin berkapasitas besar, rantai pasok, dan layanan site untuk pabrik, tambang, dan camp terpencil. Camp life, city standard.'],
+      hospitality: ['Perhotelan & F&B', 'Layanan makan dan operasional berkualitas untuk hotel, restoran, dan merek makanan, dari konsep hingga eksekusi.'],
+      education: ['Pendidikan', 'Makanan, kebersihan, dan keamanan untuk sekolah dan kampus pendidikan tinggi.'],
+      residential: ['Apartemen & hunian', 'Kebersihan area umum, perawatan MEP, dan keamanan untuk apartemen.']
+    },
+    ctaH: 'Sektor Anda tidak tercantum?', ctaP: 'Kami juga mendukung jasa keuangan, EPC, dan lokasi institusi. Ceritakan kebutuhan lokasi Anda.'
+  }
+};
+const RES = (id, p) => (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || p;
+const CSSURL = u => 'url("' + u + '")';
+const A = (id, p) => CSSURL(RES(id, p));
+class Component extends DCLogic {
+  state = { lang: 'en' };
+  componentDidMount() {
+    try { const l = localStorage.getItem('sfg-lang'); if (l === 'en' || l === 'id') this.setState({ lang: l }); } catch (e) {}
+    this._l = e => this.setState({ lang: e.detail }); window.addEventListener('sfg-lang', this._l);
+  }
+  componentWillUnmount() { window.removeEventListener('sfg-lang', this._l); }
+  renderVals() {
+    const t = COPY[this.state.lang];
+    return {
+      t,
+      industries: IND.map(([k, icon, lines, clients]) => ({
+        icon, title: t.ind[k][0], desc: t.ind[k][1],
+        lines: lines.map(l => ({ title: t.lineNames[l], base: LINE[l], href: 'Service%20Detail.dc.html?line=' + l })),
+        clients: clients.map(c => ({ name: CLIENT[c], urlCss: A('client-' + c, 'assets/clients/' + c + '.png') })),
+        hasClients: clients.length > 0, noClients: clients.length === 0
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
