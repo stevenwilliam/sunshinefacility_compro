@@ -46,17 +46,17 @@ type TextRow struct {
 
 type SectionRow struct {
 	Page, Section, TitleEN, TitleID, BodyEN, BodyID, ImageID string
-	Published, Placeholder                                  bool
+	Published, Placeholder                                   bool
 }
 
 type LineRow struct {
-	ID, Key                                                      string
-	Sort                                                         int
-	TitleEN, TitleID, ShortEN, ShortID, LabelEN, LabelID         string
-	SummaryEN, SummaryID, DescriptionEN, DescriptionID           string
-	LeadEN, LeadID                                               string
+	ID, Key                                                     string
+	Sort                                                        int
+	TitleEN, TitleID, ShortEN, ShortID, LabelEN, LabelID        string
+	SummaryEN, SummaryID, DescriptionEN, DescriptionID          string
+	LeadEN, LeadID                                              string
 	Base, Ink, Shade, OnInk, Label, MarkID, PhotoID, MapImageID string
-	ShowMap, ShowCerts                                           bool
+	ShowMap, ShowCerts                                          bool
 }
 
 type ItemRow struct{ LineID, Kind, EN, ID string }
@@ -80,8 +80,8 @@ type ListRow struct {
 type StatRow struct{ Scope, ValueEN, ValueID, LabelEN, LabelID string }
 type OpeningRow struct {
 	ID, TitleEN, TitleID, LineID, LocationKey, TypeKey, ClosingDate string
-	SummaryEN, SummaryID, RequirementsEN, RequirementsID          string
-	Placeholder                                                   bool
+	SummaryEN, SummaryID, RequirementsEN, RequirementsID            string
+	Placeholder                                                     bool
 }
 type TestimonialRow struct {
 	QuoteEN, QuoteID, Name, Role, Company string

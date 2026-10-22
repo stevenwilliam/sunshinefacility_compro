@@ -311,7 +311,9 @@ func (a *Auth) ChangePassword(ctx context.Context, actor Actor, current, next st
 // User management (superadmin)
 // ---------------------------------------------------------------------------
 
-func (a *Auth) ListUsers(ctx context.Context, q string) ([]User, error) { return a.store.ListUsers(ctx, q) }
+func (a *Auth) ListUsers(ctx context.Context, q string) ([]User, error) {
+	return a.store.ListUsers(ctx, q)
+}
 
 func (a *Auth) CreateUser(ctx context.Context, actor Actor, email, name, role, password string) (*User, error) {
 	u, err := a.newUser(ctx, email, name, role, password)
