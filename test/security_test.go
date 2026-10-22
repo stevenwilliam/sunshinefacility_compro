@@ -274,3 +274,23 @@ func TestSecurityHeaders(t *testing.T) {
 	}
 	_ = http.StatusOK
 }
+
+// Break-glass: a locked, deactivated account comes back from the console,
+// and the action is audited.
+func TestBreakGlassReset(t *testing.T) {
+	e := fresh(t)
+	e.user("superadmin")
+	if err := e.gdb.Exec(`UPDATE users SET active = false, locked_until = now() + interval '1 hour' WHERE email = 'superadmin@sfg.test'`).Error; err != nil {
+		t.Fatal(err)
+	}
+	if err := e.auth.BreakGlassReset(t.Context(), "superadmin@sfg.test", "short"); err == nil {
+		t.Fatal("a too-short password was accepted")
+	}
+	if err := e.auth.BreakGlassReset(t.Context(), "superadmin@sfg.test", "a brand new long password"); err != nil {
+		t.Fatal(err)
+	}
+	e.anon().do("POST", "/api/v1/auth/login", map[string]string{"email": "superadmin@sfg.test", "password": "a brand new long password"}, nil, 200)
+	if e.count(`SELECT count(*) FROM audit_log WHERE actor_email = 'system:reset-password'`) != 1 {
+		t.Fatal("break-glass reset not audited")
+	}
+}

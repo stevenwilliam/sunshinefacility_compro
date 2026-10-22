@@ -1,0 +1,206 @@
+openapi: 3.1.0
+info:
+  title: Sunshine Facilities Group — website and CMS API
+  version: 1.0.0
+  description: |
+    The REST contract behind www.sunshinefacility.com and its CMS.
+    Reading version and rules: docs/04-api-specification.md and docs/02-business-rules.md.
+servers:
+  - url: https://www.sunshinefacility.com/api/v1
+  - url: http://127.0.0.1:8098/api/v1
+tags:
+  - name: public
+  - name: auth
+  - name: admin
+components:
+  securitySchemes:
+    bearer: { type: http, scheme: bearer, bearerFormat: JWT }
+    refreshCookie: { type: apiKey, in: cookie, name: sfg_rt }
+  parameters:
+    q: { name: q, in: query, schema: { type: string }, description: Search; every word must match one of the searchable columns }
+    format: { name: format, in: query, schema: { type: string, enum: [csv] }, description: Pipe-delimited CSV of the same rows (BR-9.2) }
+    limit: { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 5000 } }
+    offset: { name: offset, in: query, schema: { type: integer, minimum: 0 } }
+    id: { name: id, in: path, required: true, schema: { type: string } }
+    resource:
+      name: resource
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [pages, text, services, service-items, service-facts, service-groups, industries, clients, certificates, careers, testimonials, management, lists, stats, parameters]
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string, enum: [VALIDATION, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT, IN_USE, CERTIFICATE_EXPIRED, RATE_LIMITED, TOO_LARGE, UNSUPPORTED_TYPE, SETUP_CLOSED, INTERNAL] }
+            message: { type: string }
+            fields: { type: object, additionalProperties: { type: string } }
+    L2: { type: array, items: { type: string }, minItems: 2, maxItems: 2, description: "[english, indonesian]" }
+    QuotationInput:
+      type: object
+      required: [name, company, email, phone, buildingType, location, services]
+      properties:
+        name: { type: string, maxLength: 120 }
+        company: { type: string, maxLength: 160 }
+        email: { type: string, format: email, maxLength: 254 }
+        phone: { type: string, maxLength: 30, description: "≥ 6 digits; digits, spaces, + - ( ) ." }
+        buildingType: { type: string, description: a building_types parameter key }
+        area: { type: string, pattern: '^[0-9]*$', description: m², optional }
+        location: { type: string, maxLength: 200 }
+        services: { type: array, minItems: 1, items: { type: string, description: a published service line key } }
+        message: { type: string, maxLength: 2000 }
+        lang: { type: string, enum: [en, id] }
+        website: { type: string, description: honeypot — leave empty }
+        elapsedMs: { type: integer, description: how long the form was open }
+    Session:
+      type: object
+      properties:
+        accessToken: { type: string }
+        accessExpiresAt: { type: string, format: date-time }
+        user: { $ref: '#/components/schemas/Me' }
+    Me:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string }
+        name: { type: string }
+        role: { type: string, enum: [superadmin, editor, sales, hr] }
+        permissions: { type: array, items: { type: string } }
+    Row: { type: object, additionalProperties: true, description: "A CMS row; columns per /admin/schema" }
+    Rows:
+      type: object
+      properties:
+        rows: { type: array, items: { $ref: '#/components/schemas/Row' } }
+        total: { type: integer }
+  responses:
+    Error: { description: Error, content: { application/json: { schema: { $ref: '#/components/schemas/Error' } } } }
+    CSV: { description: Pipe-delimited CSV, content: { text/csv: { schema: { type: string } } } }
+paths:
+  /public/bundle:
+    get:
+      tags: [public]
+      summary: Everything the public site renders, both languages (published only)
+      responses:
+        '200': { description: The bundle, content: { application/json: { schema: { type: object } } } }
+        '304': { description: Not modified (ETag) }
+  /public/quotation:
+    post:
+      tags: [public]
+      summary: Request a quotation (BR-5)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/QuotationInput' } } } }
+      responses:
+        '200': { description: Received, content: { application/json: { schema: { type: object, properties: { ok: { type: boolean }, firstName: { type: string } } } } } }
+        '422': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/Error' }
+  /public/application:
+    post:
+      tags: [public]
+      summary: Apply for a job (BR-6)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [name, phone, email, position, cv]
+              properties:
+                name: { type: string }
+                phone: { type: string }
+                email: { type: string }
+                position: { type: string, description: an opening id or "open" }
+                message: { type: string }
+                lang: { type: string, enum: [en, id] }
+                website: { type: string }
+                elapsedMs: { type: integer }
+                cv: { type: string, format: binary, description: "PDF, DOC or DOCX by content; ≤ careers.cv_max_mb" }
+      responses:
+        '200': { description: Received }
+        '422': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/Error' }
+  /auth/login:
+    post:
+      tags: [auth]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [email, password], properties: { email: { type: string }, password: { type: string } } } } } }
+      responses:
+        '200': { description: Signed in; sets sfg_rt, content: { application/json: { schema: { $ref: '#/components/schemas/Session' } } } }
+        '401': { $ref: '#/components/responses/Error' }
+        '429': { $ref: '#/components/responses/Error' }
+  /auth/refresh:
+    post: { tags: [auth], security: [{ refreshCookie: [] }], responses: { '200': { description: Rotated, content: { application/json: { schema: { $ref: '#/components/schemas/Session' } } } }, '401': { $ref: '#/components/responses/Error' } } }
+  /auth/logout:
+    post: { tags: [auth], responses: { '200': { description: Signed out } } }
+  /auth/setup:
+    get: { tags: [auth], responses: { '200': { description: "{setupNeeded}" } } }
+    post:
+      tags: [auth]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [token, email, name, password], properties: { token: { type: string }, email: { type: string }, name: { type: string }, password: { type: string } } } } } }
+      responses: { '200': { description: First superadmin created }, '404': { $ref: '#/components/responses/Error' }, '422': { $ref: '#/components/responses/Error' } }
+  /me:
+    get: { tags: [auth], security: [{ bearer: [] }], responses: { '200': { description: Me, content: { application/json: { schema: { $ref: '#/components/schemas/Me' } } } }, '401': { $ref: '#/components/responses/Error' } } }
+  /me/password:
+    post: { tags: [auth], security: [{ bearer: [] }], responses: { '200': { description: Changed; all sessions end }, '422': { $ref: '#/components/responses/Error' } } }
+  /admin/schema:
+    get: { tags: [admin], security: [{ bearer: [] }], summary: Resource definitions for the CMS, responses: { '200': { description: Definitions } } }
+  /admin/options:
+    get: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Picker options } } }
+  /admin/placeholders:
+    get: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Remaining placeholders per resource } } }
+  /admin/r/{resource}:
+    parameters: [{ $ref: '#/components/parameters/resource' }]
+    get:
+      tags: [admin]
+      security: [{ bearer: [] }]
+      parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }, { $ref: '#/components/parameters/limit' }, { $ref: '#/components/parameters/offset' }]
+      responses: { '200': { description: Rows (or CSV), content: { application/json: { schema: { $ref: '#/components/schemas/Rows' } }, text/csv: { schema: { type: string } } } }, '403': { $ref: '#/components/responses/Error' } }
+    post:
+      tags: [admin]
+      security: [{ bearer: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/Row' } } } }
+      responses: { '201': { description: Created }, '409': { $ref: '#/components/responses/Error' }, '422': { $ref: '#/components/responses/Error' } }
+  /admin/r/{resource}/{id}:
+    parameters: [{ $ref: '#/components/parameters/resource' }, { $ref: '#/components/parameters/id' }]
+    get: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Row }, '404': { $ref: '#/components/responses/Error' } } }
+    put:
+      tags: [admin]
+      security: [{ bearer: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/Row' } } } }
+      responses: { '200': { description: Updated }, '422': { $ref: '#/components/responses/Error' } }
+    delete: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Deleted }, '409': { $ref: '#/components/responses/Error' } } }
+  /admin/media:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { name: kind, in: query, schema: { type: string, enum: [photo, logo, certificate, brand] } }, { $ref: '#/components/parameters/format' }], responses: { '200': { description: Media } } }
+    post:
+      tags: [admin]
+      security: [{ bearer: [] }]
+      requestBody: { required: true, content: { multipart/form-data: { schema: { type: object, required: [file, kind], properties: { file: { type: string, format: binary }, kind: { type: string, enum: [photo, logo, certificate, brand] } } } } } }
+      responses: { '201': { description: Uploaded }, '413': { $ref: '#/components/responses/Error' }, '415': { $ref: '#/components/responses/Error' } }
+  /admin/media/{id}:
+    parameters: [{ $ref: '#/components/parameters/id' }]
+    put: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Updated } } }
+    delete: { tags: [admin], security: [{ bearer: [] }], responses: { '200': { description: Deleted }, '409': { $ref: '#/components/responses/Error' } } }
+  /admin/quotations:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }], responses: { '200': { description: Requests } } }
+  /admin/quotations/{id}:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/id' }], responses: { '200': { description: Request } } }
+  /admin/applications:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }], responses: { '200': { description: Applications } } }
+  /admin/applications/{id}:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/id' }], responses: { '200': { description: Application } } }
+  /admin/applications/{id}/cv:
+    post: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/id' }], responses: { '200': { description: "{url} valid 5 minutes; audited" } } }
+  /admin/users:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }], responses: { '200': { description: Users } } }
+    post: { tags: [admin], security: [{ bearer: [] }], responses: { '201': { description: Created }, '422': { $ref: '#/components/responses/Error' } } }
+  /admin/users/{id}:
+    put: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/id' }], responses: { '200': { description: Updated }, '409': { $ref: '#/components/responses/Error' } } }
+  /admin/users/{id}/password:
+    post: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/id' }], responses: { '200': { description: Reset; their sessions end } } }
+  /admin/audit:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }, { $ref: '#/components/parameters/limit' }], responses: { '200': { description: Audit entries } } }
+  /admin/outbox:
+    get: { tags: [admin], security: [{ bearer: [] }], parameters: [{ $ref: '#/components/parameters/q' }, { $ref: '#/components/parameters/format' }], responses: { '200': { description: Outgoing mail } } }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/subtle"
 	"errors"
+	"fmt"
 	"strings"
 	"time"
 
@@ -444,4 +445,37 @@ func itoa(n int) string {
 		n /= 10
 	}
 	return string(b[i:])
+}
+
+// BreakGlassReset sets a new password for an account from the server's
+// command line and unlocks and reactivates it — the way back in when every
+// superadmin is locked out. It is audited as a system action.
+func (a *Auth) BreakGlassReset(ctx context.Context, email, password string) error {
+	u, err := a.store.UserByEmail(ctx, strings.ToLower(strings.TrimSpace(email)))
+	if errors.Is(err, ErrNotFound) {
+		return fmt.Errorf("no account with that email")
+	}
+	if err != nil {
+		return err
+	}
+	if msg := a.passwordProblem(ctx, password); msg != "" {
+		return errors.New(msg)
+	}
+	hash, err := security.HashPassword(password)
+	if err != nil {
+		return err
+	}
+	return a.store.InTx(ctx, func(s Store) error {
+		if err := s.SetPassword(ctx, u.ID, hash); err != nil {
+			return err
+		}
+		u.Active = true
+		if err := s.UpdateUser(ctx, *u); err != nil {
+			return err
+		}
+		if err := s.RevokeUserRefreshTokens(ctx, u.ID); err != nil {
+			return err
+		}
+		return audit(ctx, s, System("reset-password"), "password_reset", "user", u.ID, "Break-glass reset from the server console for "+u.Email, nil, nil)
+	})
 }

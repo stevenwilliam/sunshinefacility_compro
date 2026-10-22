@@ -5,10 +5,12 @@
 //	sfg migrate up|down|status
 //	sfg seed-assets <design/assets dir>
 //	sfg seed-dev                      development admin (refused in production)
+//	sfg reset-password <email>        break-glass; new password on stdin
 //	sfg job deliver-mail|certificate-reminders|purge-applications
 package main
 
 import (
+	"bufio"
 	"context"
 	"errors"
 	"fmt"
@@ -16,6 +18,7 @@ import (
 	nethttp "net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -142,6 +145,24 @@ func run(args []string) error {
 		} else {
 			fmt.Println("seed-dev:", email, "already exists; unchanged")
 		}
+		return nil
+	case "reset-password":
+		// Break-glass: sfg reset-password <email>, new password on stdin.
+		if len(args) < 2 {
+			return errors.New("usage: echo 'new password' | sfg reset-password <email>")
+		}
+		s, err := wire(cfg, log)
+		if err != nil {
+			return err
+		}
+		line, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		if err != nil && line == "" {
+			return errors.New("read the new password from stdin")
+		}
+		if err := s.auth.BreakGlassReset(context.Background(), args[1], strings.TrimRight(line, "\r\n")); err != nil {
+			return err
+		}
+		fmt.Println("reset-password: done; the account is unlocked and active, its sessions ended")
 		return nil
 	case "job":
 		if len(args) < 2 {
