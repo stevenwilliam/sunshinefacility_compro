@@ -183,9 +183,10 @@ func (s *Store) PublicSnapshot(ctx context.Context) (*app.Snapshot, error) {
 		}); err != nil {
 			return err
 		}
-		if err := each(`SELECT quote_en, quote_id, name, role, company, is_placeholder FROM testimonials WHERE published ORDER BY sort, name`, func(sc func(...any) error) error {
+		if err := each(`SELECT quote_en, quote_id, name, role, company, published, is_placeholder FROM testimonials
+			WHERE published OR is_placeholder ORDER BY sort, name`, func(sc func(...any) error) error {
 			var r app.TestimonialRow
-			if err := sc(&r.QuoteEN, &r.QuoteID, &r.Name, &r.Role, &r.Company, &r.Placeholder); err != nil {
+			if err := sc(&r.QuoteEN, &r.QuoteID, &r.Name, &r.Role, &r.Company, &r.Published, &r.Placeholder); err != nil {
 				return err
 			}
 			snap.Testimonials = append(snap.Testimonials, r)

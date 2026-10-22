@@ -85,7 +85,7 @@ type OpeningRow struct {
 }
 type TestimonialRow struct {
 	QuoteEN, QuoteID, Name, Role, Company string
-	Placeholder                           bool
+	Published, Placeholder                bool
 }
 type PersonRow struct {
 	Name, RoleEN, RoleID, PhotoID string
@@ -255,10 +255,15 @@ type Bundle struct {
 	Stats         map[string][]StatV     `json:"stats"`
 	Openings      []OpeningV             `json:"openings"`
 	Testimonials  []TestimonialV         `json:"testimonials"`
-	Management    []PersonV              `json:"management"`
-	Rules         Rules                  `json:"rules"`
-	GA4           string                 `json:"ga4"`
-	OGImage       string                 `json:"ogImage"`
+	// TestimonialPH are the unpublished placeholder quotes. The Home page
+	// shows them as dashed placeholder cards while no real quote is
+	// published (BR-2.4). A row that is unpublished but no longer a
+	// placeholder is real, unapproved content and is never sent.
+	TestimonialPH []TestimonialV `json:"testimonialPlaceholders"`
+	Management    []PersonV      `json:"management"`
+	Rules         Rules          `json:"rules"`
+	GA4           string         `json:"ga4"`
+	OGImage       string         `json:"ogImage"`
 }
 
 // publicParamGroups are the parameter groups the site may read. Recipients,
@@ -345,7 +350,7 @@ func BuildBundle(s *Snapshot, today calendar.Date, baseURL string) *Bundle {
 		Sections: map[string]Section{}, Params: map[string]ParamValue{},
 		Logos: map[string]*Img{}, Lists: map[string][]ListItemV{}, Stats: map[string][]StatV{},
 		Lines: []LineV{}, Industries: []IndustryV{}, Clients: []ClientV{}, Certificates: []CertV{},
-		Openings: []OpeningV{}, Testimonials: []TestimonialV{}, Management: []PersonV{},
+		Openings: []OpeningV{}, Testimonials: []TestimonialV{}, TestimonialPH: []TestimonialV{}, Management: []PersonV{},
 		BuildingTypes: []OptionV{}, Locations: []OptionV{}, JobTypes: []OptionV{},
 	}
 	for _, t := range s.Text {
@@ -521,8 +526,13 @@ func BuildBundle(s *Snapshot, today calendar.Date, baseURL string) *Bundle {
 			Placeholder:  o.Placeholder})
 	}
 	for _, t := range s.Testimonials {
-		b.Testimonials = append(b.Testimonials, TestimonialV{Quote: L2{t.QuoteEN, t.QuoteID}, Name: t.Name, Role: t.Role,
-			Company: t.Company, Placeholder: t.Placeholder})
+		v := TestimonialV{Quote: L2{t.QuoteEN, t.QuoteID}, Name: t.Name, Role: t.Role, Company: t.Company, Placeholder: t.Placeholder}
+		switch {
+		case t.Published:
+			b.Testimonials = append(b.Testimonials, v)
+		case t.Placeholder:
+			b.TestimonialPH = append(b.TestimonialPH, v)
+		}
 	}
 	for _, p := range s.Management {
 		b.Management = append(b.Management, PersonV{Name: p.Name, Role: L2{p.RoleEN, p.RoleID}, Photo: img(p.PhotoID), Placeholder: p.Placeholder})

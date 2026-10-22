@@ -140,7 +140,10 @@ PARAMETERS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Site text: key -> (en, id[, placeholder])
+# Site text: key -> (en, id[, placeholder]). Keys added after 0002 was
+# applied live in later migrations (0003_more_site_text: err.phone,
+# form.error.too_fast, form.error.invalid) — not here, so 0002 stays
+# byte-identical.
 # ---------------------------------------------------------------------------
 
 TEXT = {

@@ -1,0 +1,40 @@
+[Unit]
+Description=sfg — Sunshine Facilities Group website and CMS
+Documentation=file:///home/dev/projects/sfg/docs/09-deployment.md
+After=network-online.target postgresql.service docker.service
+Wants=network-online.target
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=dev
+Group=dev
+WorkingDirectory=/home/dev/projects/sfg
+EnvironmentFile=/etc/sfg/sfg.env
+ExecStart=/home/dev/projects/sfg/bin/sfg serve
+Restart=on-failure
+RestartSec=5s
+
+# Loopback only; nginx is the only way in. Hardening that costs nothing.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sfg
+
+[Install]
+WantedBy=multi-user.target

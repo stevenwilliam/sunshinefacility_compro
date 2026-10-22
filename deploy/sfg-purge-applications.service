@@ -1,0 +1,15 @@
+[Unit]
+Description=sfg — daily job: purge-applications
+After=postgresql.service
+
+[Service]
+Type=oneshot
+User=dev
+WorkingDirectory=/home/dev/projects/sfg
+EnvironmentFile=/etc/sfg/sfg.env
+ExecStart=/home/dev/projects/sfg/bin/sfg job purge-applications
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+SyslogIdentifier=sfg-purge-applications

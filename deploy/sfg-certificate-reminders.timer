@@ -1,0 +1,11 @@
+[Unit]
+Description=sfg — certificate expiry reminders, every morning (BR-3.4)
+
+[Timer]
+# 07:00 Asia/Jakarta, before the office opens. Idempotent: the ledger allows
+# one mail per certificate per expiry date, so a catch-up run never repeats one.
+OnCalendar=*-*-* 07:00:00 Asia/Jakarta
+Persistent=true
+
+[Install]
+WantedBy=timers.target

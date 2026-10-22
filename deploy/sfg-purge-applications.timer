@@ -1,0 +1,10 @@
+[Unit]
+Description=sfg — delete job applications past the retention period (BR-6.3)
+
+[Timer]
+# 02:30 Asia/Jakarta. Persistent: a missed night catches up at next boot.
+OnCalendar=*-*-* 02:30:00 Asia/Jakarta
+Persistent=true
+
+[Install]
+WantedBy=timers.target

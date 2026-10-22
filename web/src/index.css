@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nohemi is the only typeface (SFG brand guide). Variable, 100–900. */
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  /* Tailwind's reset sets line-height 1.5 on html; the design inherits the
+     browser's 'normal', and every text block without an explicit
+     line-height was measured that way. */
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; line-height: normal; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: #FFFFFF;
+    color: #1F211C;
+    font-family: 'Nohemi', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Links take their colour from their component. There is deliberately no
+     global a:hover colour: at (0,1,1) it would out-rank every component's
+     own colour and turn a white button label red (impeccable §4). */
+  a { color: inherit; text-decoration: none; }
+  input, select, textarea, button { font-family: inherit; }
+  /* Focus ring: 2px Strong Red, offset 3px (README → Layout). On dark
+     ground the ring is Tangerine, because Strong Red on Charcoal is only
+     2.9:1 and a focus ring needs 3:1 (WCAG 1.4.11). */
+  *:focus-visible { outline: 2px solid #C6241C; outline-offset: 3px; }
+  .on-dark *:focus-visible, .on-dark:focus-visible { outline-color: #FD572A; }
+  [hidden] { display: none !important; }
+}
+
+@layer components {
+  /* The design's styles are inline and therefore content-box: max-width
+     1280 is the CONTENT width, with the side padding outside it. Tailwind's
+     reset makes everything border-box, which would shrink the column to
+     1184 — measured against the approved design at 1440 px. */
+  .wrap { box-sizing: content-box; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: clamp(20px, 4vw, 48px); padding-right: clamp(20px, 4vw, 48px); }
+  .pad-y { padding-top: clamp(56px, 7vw, 104px); padding-bottom: clamp(56px, 7vw, 104px); }
+
+  /* Type scale (README → Type). */
+  .t-hero { margin: 0; font-size: clamp(40px, 5.2vw, 74px); line-height: .98; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance; }
+  .t-page { margin: 0; font-size: clamp(38px, 5.4vw, 72px); line-height: 1; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance; }
+  .t-h2 { margin: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; font-weight: 550; letter-spacing: -0.03em; text-wrap: balance; }
+  .t-h2s { margin: 0; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.05; font-weight: 550; letter-spacing: -0.03em; text-wrap: balance; }
+  .t-cta { margin: 0; font-size: clamp(30px, 3.8vw, 52px); line-height: 1; font-weight: 550; letter-spacing: -0.035em; text-wrap: balance; }
+  .t-lead { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; text-wrap: pretty; }
+  .t-kicker { margin: 0 0 14px; font-size: 14px; font-weight: 500; color: #C6241C; }
+  .on-dark .t-kicker, .t-kicker.on-dark { color: #FD572A; }
+  .t-caps { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #5A5C54; }
+  .t-stat { margin: 0; font-size: clamp(34px, 3.6vw, 48px); font-weight: 550; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Eyebrow: 14/500 with a 28×3 bar (Strong Red on light, Tangerine on dark). */
+  .eyebrow { margin: 0 0 18px; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: #45473F; }
+  .eyebrow::before { content: ''; width: 28px; height: 3px; border-radius: 2px; background: #C6241C; flex: none; }
+  .on-dark .eyebrow { color: #C9CABF; }
+  .on-dark .eyebrow::before { background: #FD572A; }
+
+  /* Buttons. Every hover colour is set here, on the component, so nothing
+     global can override it. */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; font-size: 16px; font-weight: 550; padding: 16px 22px; border-radius: 4px; cursor: pointer; border: 0; text-decoration: none; white-space: nowrap; transition: background-color .15s, color .15s; }
+  .btn-red { background: #C6241C; color: #FFFFFF; }
+  .btn-red:hover { background: #A3181A; color: #FFFFFF; }
+  .btn-red:disabled, .btn-red[aria-disabled='true'] { background: #8A8B83; cursor: not-allowed; }
+  .btn-white { background: #FFFFFF; color: #1F211C; }
+  .btn-white:hover { background: #F4F4F1; color: #1F211C; }
+  .btn-line-light { border: 1.5px solid #FFFFFF; color: #FFFFFF; font-weight: 500; padding: 15px 22px; background: transparent; }
+  .btn-line-light:hover { background: #FFFFFF; color: #1F211C; }
+  .btn-line-dark { border: 1.5px solid #1F211C; color: #1F211C; font-weight: 500; padding: 15px 22px; background: transparent; }
+  .btn-line-dark:hover { background: #1F211C; color: #FFFFFF; }
+  .btn-quiet { min-height: 44px; padding: 0 16px; border: 1px solid #C4C4BC; border-radius: 4px; background: #FFFFFF; color: #1F211C; font-size: 15px; cursor: pointer; }
+  .btn-quiet:hover { border-color: #1F211C; }
+
+  /* Placeholder tag (BR-2.1): visible, dashed, until the content is real. */
+  .ph-tag { display: inline-flex; align-items: center; font-size: 12px; font-weight: 550; letter-spacing: .06em; text-transform: uppercase; color: #C6241C; border: 1px dashed #C6241C; padding: 5px 10px; border-radius: 4px; line-height: 1.2; white-space: nowrap; }
+  .ph-tag.sm { font-size: 10px; padding: 2px 6px; letter-spacing: .05em; vertical-align: middle; }
+  .on-dark .ph-tag { color: #FD572A; border-color: #FD572A; }
+
+  /* Breadcrumb */
+  .crumbs { font-size: 14px; color: #5A5C54; display: flex; flex-wrap: wrap; gap: 8px; }
+  .crumbs a { color: #5A5C54; }
+  .crumbs a:hover { color: #C6241C; }
+  .crumbs [aria-current] { color: #1F211C; }
+  .on-dark .crumbs, .on-dark .crumbs a { color: #C9CABF; }
+  .on-dark .crumbs a:hover { color: #FFFFFF; }
+  .on-dark .crumbs [aria-current] { color: #FFFFFF; }
+
+  /* Poster card (README → Brand patterns): white header strip with a
+     clipped edge, the line's ink field below, and a grayscale photo masked
+     by the line's mark in the corner. */
+  .poster { position: relative; display: flex; flex-direction: column; background: var(--ink); color: var(--on-ink); border-radius: 4px; overflow: hidden; }
+  .poster-head { background: #FFFFFF; display: flex; justify-content: space-between; align-items: flex-start; clip-path: polygon(0 0, 100% 0, 100% 55%, 0 100%); }
+  .poster-head.h45 { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 100%); }
+  .poster-num { font-size: 13px; color: #5A5C54; font-variant-numeric: tabular-nums; }
+  .poster-photo { position: absolute; aspect-ratio: 1 / 1; background-size: cover; background-position: center; filter: grayscale(1);
+    -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; pointer-events: none; }
+  .mark { background-position: left top; background-size: contain; background-repeat: no-repeat; }
+
+  /* Colour divider strip: five tiles, each line's mark in its shade, bleeding off. */
+  .divider { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); height: clamp(64px, 9vw, 128px); overflow: hidden; }
+  .divider > div { position: relative; overflow: hidden; background: var(--base); }
+  .divider > div > div { position: absolute; left: 28%; top: -38%; width: 120%; aspect-ratio: 1 / 1; background: var(--shade);
+    -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: 0 0; mask-position: 0 0; }
+
+  /* Stats: number over label, 3px Signal Red rule on the left. */
+  .stat { display: flex; flex-direction: column-reverse; gap: 6px; border-left: 3px solid var(--rule, #EA2915); padding-left: 16px; }
+  .stat dt { font-size: 14px; color: #5A5C54; line-height: 1.4; }
+
+  /* Form fields */
+  .field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500; }
+  .input { height: 48px; border: 1px solid #C4C4BC; border-radius: 4px; padding: 0 14px; font-size: 16px; color: #1F211C; background: #FFFFFF; width: 100%; box-sizing: border-box; }
+  .input:focus { border-color: #1F211C; }
+  .input[aria-invalid='true'] { border-color: #C6241C; }
+  textarea.input { height: auto; padding: 12px 14px; resize: vertical; line-height: 1.5; }
+  select.input { padding: 0 10px; }
+  .err { font-size: 13px; font-weight: 400; color: #A3181A; }
+  .chip { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 1px solid #C4C4BC; border-radius: 999px; font-size: 14px; cursor: pointer; background: #FFFFFF; }
+  .chip:hover { border-color: #1F211C; }
+  .chip.on { background: #F4F4F1; border-color: #1F211C; }
+  .chip input { accent-color: #1F211C; width: 16px; height: 16px; margin: 0; }
+  .sq { width: 8px; height: 8px; flex: none; background: var(--sq, #1F211C); display: inline-block; }
+
+  /* Visually hidden but readable by assistive tech. */
+  .sr-only-focusable:not(:focus) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* Signature ribbon — copied from patterns/signature-ribbon.html as-is. */
+@keyframes sigRibbon { from { stroke-dashoffset: 2000 } to { stroke-dashoffset: 0 } }
+@keyframes sigFloat { from { transform: translateY(-16px) } to { transform: translateY(16px) } }
+@media (prefers-reduced-motion: reduce) { .sig-ribbon * { animation: none !important } }
+.sig-ribbon { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none }
+.sig-ribbon .float { animation: sigFloat 14s ease-in-out infinite alternate }
+.sig-ribbon .r1 { animation: sigRibbon 34s linear infinite }
+.sig-ribbon .r2 { animation: sigRibbon 34s linear -17s infinite }
+
+/* Hero ball HUD */
+@keyframes sfgPing { 0% { transform: scale(.94); opacity: .8 } 100% { transform: scale(1.3); opacity: 0 } }
+@keyframes sfgDot { 50% { opacity: .3 } }
+@media (prefers-reduced-motion: reduce) { [data-hud] *, [data-hud] { animation: none !important } }
