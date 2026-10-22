@@ -26,8 +26,8 @@ Three lists, kept apart on purpose.
 | # | What | Steps |
 |---|---|---|
 | M1 | **Verify from your laptop** — `curl` on the server does not cross the firewall | open `http://<dev-server-ip>:8097/` and `/admin`; if it spins: `sudo grep -a 'DPT=8097' /var/log/ufw.log` |
-| M2 | **SMTP relay** for production + **SPF/DKIM** for `noreply@sunshinefacility.com` | relay credentials into `/etc/sfg/sfg.env` (`SFG_SMTP_*`); publish SPF (`v=spf1 include:<relay> ~all`) and the relay's DKIM record on sunshinefacility.com |
-| M3 | **Production server, DNS, TLS** | `13-production-deployment-handbook.md`, top to bottom |
+| M2 | Mail goes out through **Office 365** as `noreply@sunshinefood.co.id` (done). Check that sunshinefood.co.id has SPF `include:spf.protection.outlook.com` and Microsoft DKIM enabled, or notifications may land in spam. When www.sunshinefacility.com is live, either keep this sender or add that domain to Microsoft 365 | Microsoft 365 admin → Domains; Defender → DKIM |
+| M3 | Production is **deployed** (D37). Keep Cloudflare SSL/TLS mode on **Full (strict)**, since the origin has a real Let's Encrypt certificate. Store the `ven`, root and CMS passwords in your password manager, then rotate the Office 365 password, which went through chat. Mirror `/var/backups/sfg` and `/srv/sfg-minio` off the server | Cloudflare → SSL/TLS; `/srv/README.md` on the server |
 | M4 | GA4 measurement ID (only if you want analytics) | Parameters → Analytics → `G-…` |
 | M5 | Upgrade the system **npm** (10.8 crashes on an optional peer) | `sudo npm install -g npm@11`, then delete `web/.npmrc` and confirm `npm install` works |
 | M6 | Upgrade the server's shared **Go** to ≥ 1.26.10 (this module pins its own toolchain meanwhile) | your call — it affects every project on the box |
@@ -36,7 +36,6 @@ Three lists, kept apart on purpose.
 
 | What | Why |
 |---|---|
-| Production deployment | D24: handbook only |
 | WhatsApp alerts, inbox statuses, 2FA, self-service reset, `/id/` URLs, CMS in Indonesian | phase 2 (`08-roadmap.md`) |
 | Tailwind 4 | dev-only advisories in Tailwind 3's watcher; runtime is clean |
 | `/metrics` | no monitoring stack yet |

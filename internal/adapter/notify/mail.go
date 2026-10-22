@@ -56,7 +56,7 @@ func (s SMTP) Send(ctx context.Context, m app.Mail) error {
 	addr := net.JoinHostPort(s.Host, fmt.Sprint(s.Port))
 	var auth smtp.Auth
 	if s.User != "" {
-		auth = smtp.PlainAuth("", s.User, s.Password, s.Host)
+		auth = &autoAuth{user: s.User, password: s.Password, host: s.Host}
 	}
 	done := make(chan error, 1)
 	go func() { done <- smtp.SendMail(addr, auth, m.From, m.To, []byte(b.String())) }()
@@ -68,6 +68,50 @@ func (s SMTP) Send(ctx context.Context, m app.Mail) error {
 	case <-time.After(30 * time.Second):
 		return fmt.Errorf("smtp: timed out after 30s")
 	}
+}
+
+// autoAuth uses PLAIN when the server offers it and LOGIN otherwise:
+// Office 365 advertises only "AUTH LOGIN XOAUTH2". Like smtp.PlainAuth it
+// refuses to send credentials over an unencrypted link except to localhost.
+type autoAuth struct {
+	user, password, host string
+	plain                smtp.Auth
+}
+
+func (a *autoAuth) Start(server *smtp.ServerInfo) (string, []byte, error) {
+	for _, m := range server.Auth {
+		if m == "PLAIN" {
+			a.plain = smtp.PlainAuth("", a.user, a.password, a.host)
+			return a.plain.Start(server)
+		}
+	}
+	if !server.TLS && !isLocalhost(server.Name) {
+		return "", nil, fmt.Errorf("smtp: refusing AUTH LOGIN over an unencrypted connection")
+	}
+	if server.Name != a.host {
+		return "", nil, fmt.Errorf("smtp: wrong host name %q", server.Name)
+	}
+	return "LOGIN", nil, nil
+}
+
+func (a *autoAuth) Next(fromServer []byte, more bool) ([]byte, error) {
+	if a.plain != nil {
+		return a.plain.Next(fromServer, more)
+	}
+	if !more {
+		return nil, nil
+	}
+	switch strings.ToLower(strings.TrimSpace(string(fromServer))) {
+	case "username:":
+		return []byte(a.user), nil
+	case "password:":
+		return []byte(a.password), nil
+	}
+	return nil, fmt.Errorf("smtp: unexpected AUTH LOGIN challenge %q", fromServer)
+}
+
+func isLocalhost(name string) bool {
+	return name == "localhost" || name == "127.0.0.1" || name == "::1"
 }
 
 // Log only records that a mail would have been sent.

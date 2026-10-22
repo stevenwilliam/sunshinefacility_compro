@@ -2,7 +2,29 @@
 
 Empty Ubuntu 24.04+ server → www.sunshinefacility.com running. Copy-paste,
 top to bottom, as a sudo-capable user. Absolute paths throughout; the editor
-is `vi`. Nothing here has been run yet (decision Q23: handbook only).
+is `vi`.
+
+> **As deployed (2026-10-22, D37)** on 119.8.189.246, Ubuntu 26.04, a host
+> shared with other projects (`/srv/README.md` lists them). Where it
+> differs from the steps below:
+> - **Users.** Admin `ven` (sudo, SSH key only). Root SSH and password logins
+>   are off (`/etc/ssh/sshd_config.d/00-sfg-hardening.conf`); fail2ban
+>   guards sshd; unattended-upgrades is on.
+> - **Cloudflare** proxies the domain. ufw admits 80/443 from Cloudflare's
+>   ranges only. `/etc/nginx/conf.d/cloudflare-realip.conf` restores the
+>   visitor IP. `sites-available/00-default` drops unknown hosts. The
+>   certificate comes from `certbot certonly --webroot -w /var/www/letsencrypt`;
+>   a deploy hook reloads nginx.
+> - **MinIO.** Docker Hub no longer serves `minio/minio`; the dev server's
+>   image was copied over (`docker save | ssh … docker load`).
+> - **Code.** No clone on the server: build here with `make web build`, then
+>   copy `bin/sfg` to `/opt/sfg/app/bin/sfg`, the units to
+>   `/etc/systemd/system`, and the seed images to `/opt/sfg/app/assets`.
+>   Updating means the same copy, `sfg migrate up`, and a restart.
+> - **Mail.** `smtp.office365.com:587` as `noreply@sunshinefood.co.id`
+>   (parameter `notify.from` set to match, as Office 365 requires).
+> - **PostgreSQL** `timezone = 'UTC'`. Nightly dump at 01:15 UTC to
+>   `/var/backups/sfg` (restore tested).
 
 > **Temporary domain.** Until www.sunshinefacility.com is bought, the site
 > runs at `sunshinefacility.sunshinefood.co.id`: substitute it for both
