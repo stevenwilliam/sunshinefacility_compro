@@ -70,7 +70,10 @@ func VerifyPassword(plain, encoded string) error {
 	if err != nil {
 		return ErrBadHash
 	}
-	got := argon2.IDKey([]byte(plain), salt, time, mem, threads, uint32(len(want)))
+	if len(want) == 0 || len(want) > 64 {
+		return ErrBadHash
+	}
+	got := argon2.IDKey([]byte(plain), salt, time, mem, threads, uint32(len(want))) // #nosec G115 -- bounded to 1..64 above
 	if subtle.ConstantTimeCompare(got, want) != 1 {
 		return ErrMismatch
 	}

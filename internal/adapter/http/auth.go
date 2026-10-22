@@ -19,13 +19,15 @@ const refreshCookie = "sfg_rt"
 
 func (s *Server) setRefresh(c *gin.Context, sess *app.Session) {
 	secure := s.Production || strings.EqualFold(c.GetHeader("X-Forwarded-Proto"), "https")
+	// #nosec G124 -- HttpOnly and SameSite=Strict always; Secure in production and
+	// on any HTTPS request. Only the plain-HTTP dev port (:8097) omits it.
 	http.SetCookie(c.Writer, &http.Cookie{Name: refreshCookie, Value: sess.RefreshToken, Path: "/api/v1/auth",
 		Expires: sess.RefreshExpiresAt, HttpOnly: true, Secure: secure, SameSite: http.SameSiteStrictMode})
 }
 
 func (s *Server) clearRefresh(c *gin.Context) {
 	http.SetCookie(c.Writer, &http.Cookie{Name: refreshCookie, Value: "", Path: "/api/v1/auth", MaxAge: -1,
-		HttpOnly: true, SameSite: http.SameSiteStrictMode})
+		HttpOnly: true, SameSite: http.SameSiteStrictMode, Secure: s.Production || strings.EqualFold(c.GetHeader("X-Forwarded-Proto"), "https")}) // #nosec G124 -- see setRefresh
 }
 
 func (s *Server) getSetup(c *gin.Context) {

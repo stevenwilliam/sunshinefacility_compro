@@ -162,7 +162,8 @@ func TestTokenHashingIsStable(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if HashToken(tok) != HashToken(tok) {
+	first, second := HashToken(tok), HashToken(tok)
+	if first != second {
 		t.Fatal("HashToken is not deterministic")
 	}
 	if HashToken(tok) == tok {

@@ -28,11 +28,11 @@ func Luminance(hex string) (float64, error) {
 	if len(h) != 6 {
 		return 0, fmt.Errorf("not a #RRGGBB colour: %q", hex)
 	}
-	n, err := strconv.ParseUint(h, 16, 32)
+	n, err := strconv.ParseUint(h, 16, 24) // ≤ 0xFFFFFF
 	if err != nil {
 		return 0, fmt.Errorf("not a #RRGGBB colour: %q", hex)
 	}
-	r, g, b := uint8(n>>16), uint8(n>>8), uint8(n)
+	r, g, b := uint8(n>>16&0xFF), uint8(n>>8&0xFF), uint8(n&0xFF) // #nosec G115 -- 24-bit value, each byte masked
 	return 0.2126*channel(r) + 0.7152*channel(g) + 0.0722*channel(b), nil
 }
 
