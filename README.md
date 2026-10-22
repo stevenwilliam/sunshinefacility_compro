@@ -23,6 +23,7 @@ the admin CMS that edits every text and image on it.
 4. `docs/02a-general-flow.md` — the flows, drawn.
 5. `docs/PROGRESS.md` — what is built and what was actually run.
 6. `docs/RUN-WHEN-BACK.md` — what needs Steven, or a machine that does not exist yet.
+7. `docs/user_guide/` — the CMS user guide (Markdown + PDF, real screenshots); `make user-guide` rebuilds it.
 
 ## Run it (development server)
 

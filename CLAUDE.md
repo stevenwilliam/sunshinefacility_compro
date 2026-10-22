@@ -137,6 +137,14 @@ the truth about what was verified; anything needing an interactive terminal
 goes in `docs/RUN-WHEN-BACK.md`; **every reply ends with the access table**
 (URL, backend URL, admin user, admin password — dev credentials only).
 
+**The user guide stays current.** `docs/user_guide/` holds `user-guide.md`,
+`user-guide.pdf` and real CMS screenshots in `img/`. Any change a CMS user
+could notice (screens, fields, roles, parameters, wording, flows) updates
+`user-guide.md` in the same commit, then `make deploy && make user-guide`
+retakes the screenshots and rebuilds the PDF. `make check` fails
+(`user-guide-check`) while the guide is older than `web/src/admin`,
+`internal/domain/{resource,access,params}` or the guide itself.
+
 ## 8. Infrastructure (dev server `claudedev`)
 
 | Thing | Where |

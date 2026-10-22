@@ -91,7 +91,7 @@ export default function ResourceScreen() {
           const options: Option[] = fl.options || (fl.ref ? opts?.refs[fl.ref] || [] : fl.group ? opts?.params[fl.group] || [] : isParams ? schema.paramGroups.map((g) => ({ value: g.key, label: g.label })) : [])
           return (
             <select key={fl.key} aria-label={fl.label} className="inp inp-auto" value={filters[fl.key] || ''} onChange={(e) => setFilters((s) => ({ ...s, [fl.key]: e.target.value }))}>
-              <option value="">All {fl.label.toLowerCase()}s</option>
+              <option value="">All {plural(fl.label.toLowerCase())}</option>
               {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           )
@@ -271,4 +271,9 @@ function Editor({ def, schema, initial, id, writable, opts, media, onClose, onSa
       </div>
     </Drawer>
   )
+}
+
+// "industry" → "industries", "page" → "pages": the filter's "All …" option.
+function plural(word: string) {
+  return /[^aeiou]y$/.test(word) ? word.slice(0, -1) + 'ies' : word + 's'
 }

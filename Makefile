@@ -10,7 +10,8 @@ LOAD := set -a; . $(ENV); set +a;
 ASSETS := docs/design/handoff/design/assets
 
 .PHONY: help web icons build run migrate-up migrate-down migrate-status seed-assets seed-dev job \
-        test test-shuffle e2e vet fmt contrast diagrams typecheck audit check deploy shots seed-sql clean
+        test test-shuffle e2e vet fmt contrast diagrams typecheck audit check deploy shots seed-sql clean \
+        user-guide user-guide-pdf user-guide-check
 
 help: ## show this
 	@grep -E '^[a-z-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-16s %s\n",$$1,$$2}'
@@ -78,7 +79,17 @@ contrast: ## measure every colour pairing against design.md
 diagrams: ## parse every mermaid diagram in docs/
 	@node scripts/mermaid-check/check.mjs
 
-check: fmt vet test contrast diagrams typecheck audit ## everything that gates a commit
+check: fmt vet test contrast diagrams typecheck audit user-guide-check ## everything that gates a commit
+
+user-guide: ## retake the CMS screenshots from the running dev site (deploy first) and rebuild docs/user_guide PDF
+	cd web && SFG_GUIDE_PASSWORD=$$(sudo sed -n 's/^SFG_DEV_ADMIN_PASSWORD=//p' $(ENV)) node scripts/user-guide.mjs shots
+	cd web && node scripts/user-guide.mjs pdf
+
+user-guide-pdf: ## rebuild docs/user_guide/user-guide.pdf from the Markdown only (wording changes)
+	cd web && node scripts/user-guide.mjs pdf
+
+user-guide-check: ## fail if the CMS changed since the user guide was last rebuilt
+	cd web && node scripts/user-guide.mjs check
 
 shots: ## screenshots of every page, site vs approved design, 1440 + 360 (needs xvfb)
 	cd web && LIBGL_ALWAYS_SOFTWARE=1 xvfb-run -a -s "-screen 0 1600x1000x24" node scripts/shots.mjs scripts/shots
