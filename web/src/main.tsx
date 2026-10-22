@@ -13,6 +13,7 @@ import About from './pages/About'
 import Careers from './pages/Careers'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
+import { ADMIN } from './admin/paths'
 
 const Admin = lazy(() => import('./admin/AdminApp'))
 
@@ -55,7 +56,7 @@ function PublicSite() {
 
 const root = createRoot(document.getElementById('root')!)
 
-if (window.location.pathname === '/admin' || window.location.pathname.startsWith('/admin/')) {
+if (window.location.pathname === ADMIN || window.location.pathname.startsWith(`${ADMIN}/`)) {
   root.render(
     <StrictMode>
       <BrowserRouter>

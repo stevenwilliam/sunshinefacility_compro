@@ -16,6 +16,11 @@ import (
 )
 
 // Public routes, for the sitemap and for telling a real page from a 404.
+// AdminPath is where the CMS is served (web/src/admin/paths.ts must match).
+// Not /admin, which every scanner probes; robots.txt does not name it either,
+// the pages carry noindex instead.
+const AdminPath = "/tytb"
+
 var staticRoutes = []string{"/", "/services", "/industries", "/about", "/careers", "/contact"}
 
 type pageMeta struct {
@@ -148,7 +153,7 @@ func (s *Server) spa(c *gin.Context) {
 	}
 	var m pageMeta
 	var data []byte
-	if p == "/admin" || strings.HasPrefix(p, "/admin/") {
+	if p == AdminPath || strings.HasPrefix(p, AdminPath+"/") {
 		m = pageMeta{title: "Admin · Sunshine Facilities Group", status: http.StatusOK, noindex: true, admin: true}
 		c.Header("X-Robots-Tag", "noindex, nofollow")
 	} else {
@@ -210,7 +215,7 @@ func url(s string) string {
 
 func (s *Server) robots(c *gin.Context) {
 	c.Header("Cache-Control", "no-cache")
-	c.String(http.StatusOK, "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\n\nSitemap: "+s.BaseURL+"/sitemap.xml\n")
+	c.String(http.StatusOK, "User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: "+s.BaseURL+"/sitemap.xml\n")
 }
 
 func (s *Server) sitemap(c *gin.Context) {

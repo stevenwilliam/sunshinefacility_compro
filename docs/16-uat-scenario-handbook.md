@@ -4,7 +4,7 @@ For the person signing the site off, alone, without a developer. Work top to
 bottom: later scenarios build on earlier ones. ⛔ marks a refusal — the
 system must say **no**, and say why.
 
-**Site:** http://<dev-server>:8097/ · **CMS:** http://<dev-server>:8097/admin
+**Site:** http://<dev-server>:8097/ · **CMS:** http://<dev-server>:8097/tytb
 **Accounts:** `admin@sfg.local` (superadmin; password in the access table of
 the build report). Scenario A1 creates the other roles.
 

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DownloadSimple } from '@/lib/phosphor'
 import { ApiError, fmtTime, get, post, qs } from './api'
 import { CountLine, Drawer, Empty, ExportButton, ScreenHeader, SearchBox, useDebounced, useToast } from './ui'
+import { ADMIN } from './paths'
 
 interface Quote {
   id: string; createdAt: string; name: string; company: string; email: string; phone: string; buildingType: string
@@ -57,7 +58,7 @@ export function QuotationsScreen() {
             <thead><tr>{['Received', 'Name', 'Company', 'Building', 'Location', 'Services'].map((h) => <th key={h} scope="col">{h}</th>)}</tr></thead>
             <tbody>
               {l.rows?.map((r) => (
-                <tr key={r.id} className="click" tabIndex={0} onClick={() => nav('/admin/inbox/quotations/' + r.id)} onKeyDown={(e) => e.key === 'Enter' && nav('/admin/inbox/quotations/' + r.id)}>
+                <tr key={r.id} className="click" tabIndex={0} onClick={() => nav(`${ADMIN}/inbox/quotations/` + r.id)} onKeyDown={(e) => e.key === 'Enter' && nav(`${ADMIN}/inbox/quotations/` + r.id)}>
                   <td className="whitespace-nowrap tnum">{fmtTime(r.createdAt)}</td><td><span className="ell">{r.name}</span></td><td><span className="ell">{r.company}</span></td>
                   <td><span className="ell">{r.buildingType}</span></td><td><span className="ell">{r.location}</span></td><td><span className="ell">{r.services.join(', ')}</span></td>
                 </tr>
@@ -69,7 +70,7 @@ export function QuotationsScreen() {
         </div>
       </main>
       {open && (
-        <Drawer title={open.company} kicker="Quotation request" onClose={() => nav('/admin/inbox/quotations')}>
+        <Drawer title={open.company} kicker="Quotation request" onClose={() => nav(`${ADMIN}/inbox/quotations`)}>
           <dl className="m-0">
             <Row k="Received" v={fmtTime(open.createdAt)} />
             <Row k="Name" v={open.name} />
@@ -119,7 +120,7 @@ export function ApplicationsScreen() {
             <thead><tr>{['Received', 'Name', 'Position', 'Phone', 'Email'].map((h) => <th key={h} scope="col">{h}</th>)}</tr></thead>
             <tbody>
               {l.rows?.map((r) => (
-                <tr key={r.id} className="click" tabIndex={0} onClick={() => nav('/admin/inbox/applications/' + r.id)} onKeyDown={(e) => e.key === 'Enter' && nav('/admin/inbox/applications/' + r.id)}>
+                <tr key={r.id} className="click" tabIndex={0} onClick={() => nav(`${ADMIN}/inbox/applications/` + r.id)} onKeyDown={(e) => e.key === 'Enter' && nav(`${ADMIN}/inbox/applications/` + r.id)}>
                   <td className="whitespace-nowrap tnum">{fmtTime(r.createdAt)}</td><td><span className="ell">{r.name}</span></td><td><span className="ell">{r.position}</span></td>
                   <td><span className="ell">{r.phone}</span></td><td><span className="ell">{r.email}</span></td>
                 </tr>
@@ -131,7 +132,7 @@ export function ApplicationsScreen() {
         </div>
       </main>
       {open && (
-        <Drawer title={open.name} kicker="Job application" onClose={() => nav('/admin/inbox/applications')}
+        <Drawer title={open.name} kicker="Job application" onClose={() => nav(`${ADMIN}/inbox/applications`)}
           footer={<button type="button" className="b b-red" onClick={() => cv(open)}><DownloadSimple aria-hidden="true" />Open CV ({(open.cvBytes / 1024).toFixed(0)} KB)</button>}>
           <dl className="m-0">
             <Row k="Received" v={fmtTime(open.createdAt)} />

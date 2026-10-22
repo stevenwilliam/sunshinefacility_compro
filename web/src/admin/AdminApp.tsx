@@ -8,6 +8,7 @@ import MediaScreen from './MediaScreen'
 import { ApplicationsScreen, QuotationsScreen } from './Inbox'
 import { AccountScreen, AuditScreen, OutboxScreen, UsersScreen } from './Admin'
 import { ArrowUpRight, SignOut } from '@/lib/phosphor'
+import { ADMIN } from './paths'
 
 interface Session {
   me: Me
@@ -167,26 +168,26 @@ function Shell({ me, onSignedOut }: { me: Me; onSignedOut: () => void }) {
   if (schema) {
     const byNav: Record<string, NavItem[]> = {}
     for (const d of schema.resources) {
-      ;(byNav[d.nav] ||= []).push({ to: `/admin/r/${d.name}`, label: d.label, ph: d.name, perm: ['content.read', 'params.content'] })
+      ;(byNav[d.nav] ||= []).push({ to: `${ADMIN}/r/${d.name}`, label: d.label, ph: d.name, perm: ['content.read', 'params.content'] })
     }
-    if (byNav.Content) groups.push({ title: 'Content', items: [...byNav.Content, { to: '/admin/media', label: 'Media library', perm: ['content.read'] }] })
+    if (byNav.Content) groups.push({ title: 'Content', items: [...byNav.Content, { to: `${ADMIN}/media`, label: 'Media library', perm: ['content.read'] }] })
     if (byNav.Services) groups.push({ title: 'Services', items: byNav.Services })
     if (byNav.Settings) groups.push({ title: 'Settings', items: byNav.Settings })
   }
   const inbox: NavItem[] = [
-    { to: '/admin/inbox/quotations', label: 'Quotation requests', perm: ['quotations.read'] },
-    { to: '/admin/inbox/applications', label: 'Job applications', perm: ['applications.read'] },
+    { to: `${ADMIN}/inbox/quotations`, label: 'Quotation requests', perm: ['quotations.read'] },
+    { to: `${ADMIN}/inbox/applications`, label: 'Job applications', perm: ['applications.read'] },
   ].filter((i) => i.perm.some((p) => can(me, p)))
   if (inbox.length) groups.unshift({ title: 'Inbox', items: inbox })
   const admin: NavItem[] = [
-    { to: '/admin/users', label: 'Users', perm: ['users.manage'] },
-    { to: '/admin/audit', label: 'Audit history', perm: ['audit.read'] },
-    { to: '/admin/outbox', label: 'Outgoing mail', perm: ['audit.read'] },
+    { to: `${ADMIN}/users`, label: 'Users', perm: ['users.manage'] },
+    { to: `${ADMIN}/audit`, label: 'Audit history', perm: ['audit.read'] },
+    { to: `${ADMIN}/outbox`, label: 'Outgoing mail', perm: ['audit.read'] },
   ].filter((i) => i.perm.some((p) => can(me, p)))
   if (admin.length) groups.push({ title: 'Administration', items: admin })
-  groups.push({ title: 'You', items: [{ to: '/admin/account', label: 'Your account', perm: [] }] })
+  groups.push({ title: 'You', items: [{ to: `${ADMIN}/account`, label: 'Your account', perm: [] }] })
   const flat = groups.flatMap((g) => g.items)
-  const first = flat[0]?.to || '/admin/account'
+  const first = flat[0]?.to || `${ADMIN}/account`
   const totalPH = Object.values(ph).reduce((a, b) => a + b, 0)
 
   return (
@@ -234,15 +235,15 @@ function Shell({ me, onSignedOut }: { me: Me; onSignedOut: () => void }) {
             <button type="button" onClick={signOut} className="ib" aria-label="Sign out"><SignOut aria-hidden="true" /></button>
           </div>
           <Routes>
-            <Route path="/admin" element={<Navigate to={first} replace />} />
-            <Route path="/admin/r/:name" element={<ResourceScreen />} />
-            <Route path="/admin/media" element={<MediaScreen />} />
-            <Route path="/admin/inbox/quotations/:id?" element={<QuotationsScreen />} />
-            <Route path="/admin/inbox/applications/:id?" element={<ApplicationsScreen />} />
-            <Route path="/admin/users" element={<UsersScreen />} />
-            <Route path="/admin/audit" element={<AuditScreen />} />
-            <Route path="/admin/outbox" element={<OutboxScreen />} />
-            <Route path="/admin/account" element={<AccountScreen />} />
+            <Route path={ADMIN} element={<Navigate to={first} replace />} />
+            <Route path={`${ADMIN}/r/:name`} element={<ResourceScreen />} />
+            <Route path={`${ADMIN}/media`} element={<MediaScreen />} />
+            <Route path={`${ADMIN}/inbox/quotations/:id?`} element={<QuotationsScreen />} />
+            <Route path={`${ADMIN}/inbox/applications/:id?`} element={<ApplicationsScreen />} />
+            <Route path={`${ADMIN}/users`} element={<UsersScreen />} />
+            <Route path={`${ADMIN}/audit`} element={<AuditScreen />} />
+            <Route path={`${ADMIN}/outbox`} element={<OutboxScreen />} />
+            <Route path={`${ADMIN}/account`} element={<AccountScreen />} />
             <Route path="*" element={<Navigate to={first} replace />} />
           </Routes>
         </div>

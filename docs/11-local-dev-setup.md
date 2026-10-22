@@ -6,7 +6,7 @@ Everything runs on the shared dev server `claudedev`; there is no laptop setup.
 
 | Port | What |
 |---|---|
-| 8097 | nginx → the site and `/admin` (LAN + VMware host net) |
+| 8097 | nginx → the site and `/tytb` (LAN + VMware host net) |
 | 8098 | `sfg serve`, loopback |
 | 9012 / 9013 | MinIO API / console, loopback |
 | 1025 / 8025 | mailpit SMTP / UI, loopback (shared) |

@@ -56,7 +56,7 @@ never deleted.
 | D20 | 2026-10-22 | SEO: server-injected head per route; English URLs `/services/:line`; `?line=` 301; `?lang=id` | Steven (Q17) | 04, 05 |
 | D21 | 2026-10-22 | Google Maps keyless embed; coordinates are placeholder parameters | Steven (Q20) | 02, 12 |
 | D22 | 2026-10-22 | Uploads re-encoded to WebP at 480/960/1600 (certificates also 2400; logos 240/480), never upscaled | Steven (Q21) | 02 BR-4 |
-| D23 | 2026-10-22 | GA4 optional: measurement-ID parameter, consent banner (default denied), never on /admin | Steven (Q22) | 02 BR-12, 12 |
+| D23 | 2026-10-22 | GA4 optional: measurement-ID parameter, consent banner (default denied), never on /tytb | Steven (Q22) | 02 BR-12, 12 |
 | D24 | 2026-10-22 | Production: handbook only, nothing deployed | Steven (Q23) | 13 |
 | D25 | 2026-10-22 | Footer social links shown with placeholder URLs, tagged | Steven (Q24) | 02 BR-2 |
 | D26 | 2026-10-22 | Sender `noreply@sunshinefacility.com` (parameter) | Steven (Q25) | 06 |
@@ -71,6 +71,7 @@ never deleted.
 | D35 | 2026-10-22 | Contact-detail placeholders are excluded from the JSON-LD, so a fake phone number never reaches search engines | Claude | 05, 12 |
 | D36 | 2026-10-22 | Temporary domain `sunshinefacility.sunshinefood.co.id` until www.sunshinefacility.com is bought; host comes only from `SFG_PUBLIC_BASE_URL` (footer text: site text `footer.domain`, migration 0004) | Steven | 09, 13 |
 | D37 | 2026-10-22 | Production deployed to 119.8.189.246 (supersedes D24): shared multi-project host, Cloudflare in front (ufw lets only Cloudflare reach 80/443), binary built on the dev server and copied over, mail via Office 365 `noreply@sunshinefood.co.id` (AUTH LOGIN support added to the mailer) | Steven | 13 |
+| D38 | 2026-10-22 | CMS moved from `/admin` to **`/tytb`** (`AdminPath` in `internal/adapter/http/spa.go`, `ADMIN` in `web/src/admin/paths.ts`); `/admin` is a plain 404, and robots.txt names neither path (CMS pages carry `noindex`). The API stays at `/api/v1/admin` | Steven | 02a, 14 |
 
 ## Open questions
 

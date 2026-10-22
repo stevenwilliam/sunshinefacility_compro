@@ -8,7 +8,7 @@ What **flows** (solid) and what **constrains** (dotted).
 
 ```mermaid
 flowchart LR
-  Editor([Editor]) -->|edits| CMS[CMS /admin]
+  Editor([Editor]) -->|edits| CMS[CMS /tytb]
   CMS -->|writes, audited| DB[(PostgreSQL)]
   CMS -->|uploads, re-encoded| S3[(MinIO, private)]
   DB -->|published rows| Bundle[Public bundle]
@@ -42,7 +42,7 @@ flowchart TD
 |---|---|
 | `migrate up` | the service refuses to start: "migration(s) pending" |
 | `seed-assets` | the site renders with **no images** — rows exist, files do not (no broken images: rows without a file are left out) |
-| first superadmin | `/admin` shows the setup screen; without `SFG_SETUP_TOKEN` it is closed and nobody can sign in |
+| first superadmin | `/tytb` shows the setup screen; without `SFG_SETUP_TOKEN` it is closed and nobody can sign in |
 | `notify.*` | submissions are stored, mail goes to the seeded address (itdept) |
 | placeholders | the site shows dashed **Placeholder** tags; the CMS sidebar counts them |
 

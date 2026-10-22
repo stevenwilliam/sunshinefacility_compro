@@ -85,4 +85,4 @@ right** and the other is stale. Code comments and test names cite these ids.
 
 ## BR-12 Analytics
 
-- **BR-12.1** GA4 loads only when `analytics.ga4_measurement_id` is set **and** the visitor accepted the consent banner. Never on `/admin`.
+- **BR-12.1** GA4 loads only when `analytics.ga4_measurement_id` is set **and** the visitor accepted the consent banner. Never on `/tytb`.

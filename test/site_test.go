@@ -52,11 +52,14 @@ func TestNotFoundAndRedirects(t *testing.T) {
 	if st, h, _ := a.raw("GET", "/services?line=remote"); st != 301 || h.Get("Location") != "/services/remote" {
 		t.Errorf("?line redirect: %d %s", st, h.Get("Location"))
 	}
-	if st, _, body := a.raw("GET", "/admin/r/clients"); st != 200 || !strings.Contains(body, "noindex") {
+	if st, _, body := a.raw("GET", "/tytb/r/clients"); st != 200 || !strings.Contains(body, "noindex") {
 		t.Errorf("admin: %d", st)
 	}
+	if st, _, body := a.raw("GET", "/admin"); st != 404 || strings.Contains(body, "Admin ·") {
+		t.Errorf("/admin must no longer serve the CMS: %d", st)
+	}
 	_, _, robots := a.raw("GET", "/robots.txt")
-	if !strings.Contains(robots, "Disallow: /admin") || !strings.Contains(robots, "Sitemap: https://www.sunshinefacility.com/sitemap.xml") {
+	if strings.Contains(robots, "tytb") || strings.Contains(robots, "/admin") || !strings.Contains(robots, "Sitemap: https://www.sunshinefacility.com/sitemap.xml") {
 		t.Errorf("robots: %s", robots)
 	}
 	_, _, sm := a.raw("GET", "/sitemap.xml")

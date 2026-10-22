@@ -71,7 +71,7 @@ internal/
     media/                WebP re-encoding
   platform/               apierror config csvexport database id logging ratelimit sanitize security
 db/migrations/            NNNN_name.up.sql + .down.sql, go:embed, checksummed
-web/                      React 18 + Vite + TypeScript + Tailwind (public site + /admin), embedded in the binary
+web/                      React 18 + Vite + TypeScript + Tailwind (public site + /tytb), embedded in the binary
 test/                     integration, authorisation and security suites (real PostgreSQL)
 deploy/                   systemd units + timers, nginx vhost
 ```

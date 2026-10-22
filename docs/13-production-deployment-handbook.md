@@ -166,7 +166,7 @@ the refresh cookie is `Secure`. `SFG_TRUSTED_PROXIES=127.0.0.1`.
 
 ## 11. First superadmin
 
-Open `https://www.sunshinefacility.com/admin`. The setup screen asks for the
+Open `https://www.sunshinefacility.com/tytb`. The setup screen asks for the
 setup token (`SFG_SETUP_TOKEN` in `/etc/sfg/sfg.env`), name, email and
 password. Afterwards blank the token and restart:
 

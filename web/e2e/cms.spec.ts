@@ -9,7 +9,7 @@ let page: Page
 test.beforeAll(async ({ browser }) => {
   page = await browser.newPage()
   if (!PASSWORD) return
-  await page.goto('/admin')
+  await page.goto('/tytb')
   await page.getByLabel('Email').fill('admin@sfg.local')
   await page.getByLabel('Password').fill(PASSWORD)
   await page.getByRole('button', { name: 'Sign in' }).click()
@@ -22,7 +22,7 @@ async function signIn(_p: Page) {
 
 test('an edit in the CMS appears on the site, in both languages', async () => {
   await signIn(page)
-  await page.goto('/admin/r/text')
+  await page.goto('/tytb/r/text')
   await page.getByRole('searchbox').fill('home.trust.trusted')
   await page.getByRole('button', { name: 'Edit home.trust.trusted' }).click()
   await page.getByLabel('English *').fill('Trusted by (e2e)')
@@ -31,7 +31,7 @@ test('an edit in the CMS appears on the site, in both languages', async () => {
   await page.goto('/')
   await expect(page.getByText('Trusted by (e2e)')).toBeVisible()
   // put it back
-  await page.goto('/admin/r/text')
+  await page.goto('/tytb/r/text')
   await page.getByRole('searchbox').fill('home.trust.trusted')
   await page.getByRole('button', { name: 'Edit home.trust.trusted' }).click()
   await page.getByLabel('English *').fill('Trusted by')
@@ -41,7 +41,7 @@ test('an edit in the CMS appears on the site, in both languages', async () => {
 
 test('expired certificate: the Published toggle is disabled and says why', async () => {
   await signIn(page)
-  await page.goto('/admin/r/certificates')
+  await page.goto('/tytb/r/certificates')
   await expect(page.getByText('Expired')).toBeVisible()
   await page.getByRole('button', { name: 'Edit Halal' }).click()
   const toggle = page.getByLabel('Draft (hidden from the site)')
@@ -51,7 +51,7 @@ test('expired certificate: the Published toggle is disabled and says why', async
 
 test('lists: search filters, export disabled with the reason when empty', async () => {
   await signIn(page)
-  await page.goto('/admin/r/clients')
+  await page.goto('/tytb/r/clients')
   await expect(page.getByText('19 items')).toBeVisible()
   await page.getByRole('searchbox').fill('siloam')
   await expect(page.getByText('Showing 1 of 19')).toBeVisible()
@@ -62,7 +62,7 @@ test('lists: search filters, export disabled with the reason when empty', async 
 
 test('media in use: delete disabled with the usage count', async () => {
   await signIn(page)
-  await page.goto('/admin/media')
+  await page.goto('/tytb/media')
   const del = page.getByRole('button', { name: 'Delete danone.png' })
   await expect(del).toBeDisabled()
   await expect(del).toHaveAttribute('title', /used in 1 item/)

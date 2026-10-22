@@ -73,7 +73,7 @@ func wire(cfg config.Config, log *slog.Logger) (*services, error) {
 	}
 	store := postgres.New(gdb)
 	now := time.Now
-	adminURL := cfg.PublicBaseURL + "/admin"
+	adminURL := cfg.PublicBaseURL + httpapi.AdminPath
 	settings := app.NewSettings(store)
 	public := app.NewPublic(store, cfg.PublicBaseURL, now)
 	var mailer app.Mailer = notify.SMTP{Host: cfg.SMTPHost, Port: cfg.SMTPPort, User: cfg.SMTPUser, Password: cfg.SMTPPassword}
