@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
 
@@ -25,6 +26,15 @@ type Submissions struct {
 	public   *Public
 	adminURL string
 	now      func() time.Time
+}
+
+// siteHost is the public host named in notification mails, taken from the
+// admin URL so the domain lives only in SFG_PUBLIC_BASE_URL.
+func (s *Submissions) siteHost() string {
+	if u, err := url.Parse(s.adminURL); err == nil && u.Host != "" {
+		return u.Host
+	}
+	return "the website"
 }
 
 func NewSubmissions(store Store, storage Storage, settings *Settings, public *Public, adminURL string, now func() time.Time) *Submissions {
@@ -120,7 +130,7 @@ func (s *Submissions) SubmitQuotation(ctx context.Context, in forms.QuotationInp
 	if q.AreaM2 != nil {
 		area = fmt.Sprintf("%d m²", *q.AreaM2)
 	}
-	body := fmt.Sprintf(`A new quotation request arrived on www.sunshinefacility.com.
+	body := fmt.Sprintf(`A new quotation request arrived on %s.
 
 Name:          %s
 Company:       %s
@@ -136,7 +146,7 @@ Message:
 %s
 
 Open it in the CMS: %s/inbox/quotations/%s
-`, rec.Name, rec.Company, rec.Email, rec.Phone, typeLabel[q.BuildingType][0], area, rec.Location,
+`, s.siteHost(), rec.Name, rec.Company, rec.Email, rec.Phone, typeLabel[q.BuildingType][0], area, rec.Location,
 		strings.Join(svc, ", "), strings.ToUpper(rec.Lang), orDash(rec.Message), s.adminURL, rec.ID)
 
 	to := params.RecipientList(s.settings.String(ctx, "notify.quotation_to", ""))
@@ -218,7 +228,7 @@ func (s *Submissions) SubmitApplication(ctx context.Context, in forms.Applicatio
 		return err
 	}
 
-	body := fmt.Sprintf(`A new job application arrived on www.sunshinefacility.com.
+	body := fmt.Sprintf(`A new job application arrived on %s.
 
 Name:      %s
 Phone:     %s
@@ -232,7 +242,7 @@ Message:
 
 The CV is not attached: it is personal data and stays in the CMS.
 Open it in the CMS: %s/inbox/applications/%s
-`, rec.Name, rec.Phone, rec.Email, position[0], rec.CVFilename, (rec.CVBytes+1023)/1024, strings.ToUpper(rec.Lang),
+`, s.siteHost(), rec.Name, rec.Phone, rec.Email, position[0], rec.CVFilename, (rec.CVBytes+1023)/1024, strings.ToUpper(rec.Lang),
 		orDash(rec.Message), s.adminURL, rec.ID)
 
 	to := params.RecipientList(s.settings.String(ctx, "notify.career_to", ""))

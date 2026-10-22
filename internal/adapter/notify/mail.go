@@ -47,7 +47,7 @@ func (s SMTP) Send(ctx context.Context, m app.Mail) error {
 	b.WriteString("To: " + strings.Join(m.To, ", ") + "\r\n")
 	b.WriteString("Subject: " + mime.QEncoding.Encode("utf-8", m.Subject) + "\r\n")
 	b.WriteString("Date: " + time.Now().UTC().Format(time.RFC1123Z) + "\r\n")
-	b.WriteString("Message-ID: <" + id.NewString() + "@sunshinefacility.com>\r\n")
+	b.WriteString("Message-ID: <" + id.NewString() + "@" + messageIDDomain(m.From) + ">\r\n")
 	b.WriteString("MIME-Version: 1.0\r\n")
 	b.WriteString("Content-Type: text/plain; charset=utf-8\r\n")
 	b.WriteString("Content-Transfer-Encoding: 8bit\r\n\r\n")
@@ -76,4 +76,13 @@ type Log struct{ L *slog.Logger }
 func (l Log) Send(_ context.Context, m app.Mail) error {
 	l.L.Info("mail not sent (notifications disabled)", "to_count", len(m.To), "subject", m.Subject)
 	return nil
+}
+
+// messageIDDomain takes the Message-ID right-hand side from the sender
+// address, so it follows the notify.from parameter rather than a constant.
+func messageIDDomain(from string) string {
+	if i := strings.LastIndex(from, "@"); i >= 0 && i < len(from)-1 {
+		return strings.Trim(from[i+1:], "> ")
+	}
+	return "localhost"
 }

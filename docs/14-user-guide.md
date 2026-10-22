@@ -1,7 +1,7 @@
 # 14 — User guide (CMS)
 
 For the people who edit the website and read the inbox. Sign in at
-**www.sunshinefacility.com/admin**. Forgotten your password? Ask a
+**sunshinefacility.sunshinefood.co.id/admin** (www.sunshinefacility.com/admin once that domain is live). Forgotten your password? Ask a
 superadmin to set a new one (Users → your name → Reset password).
 
 ## Your role decides what you see

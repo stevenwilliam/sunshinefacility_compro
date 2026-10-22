@@ -69,6 +69,7 @@ never deleted.
 | D33 | 2026-10-22 | Container content width is 1280px + padding (the design is content-box), base line-height `normal` — both measured against the approved design | Claude | 10 |
 | D34 | 2026-10-22 | Certificate meta: "Valid until Mon YYYY" when dated, else "Issued by {issuer}" — on About this replaces the design's "Sertifikat Laik Higiene Sanitasi" line for SLHS, so both pages read the same field | Claude (flagged) | 10 |
 | D35 | 2026-10-22 | Contact-detail placeholders are excluded from the JSON-LD, so a fake phone number never reaches search engines | Claude | 05, 12 |
+| D36 | 2026-10-22 | Temporary domain `sunshinefacility.sunshinefood.co.id` until www.sunshinefacility.com is bought; host comes only from `SFG_PUBLIC_BASE_URL` (footer text: site text `footer.domain`, migration 0004) | Steven | 09, 13 |
 
 ## Open questions
 

@@ -22,7 +22,8 @@ newer, more specific decision — and it says below exactly where it departs.
 **Started:** 2026-10-22
 
 The public company-profile website for **Sunshine Facilities Group**
-(www.sunshinefacility.com) — an Indonesian integrated facility-services
+(www.sunshinefacility.com; until it is bought, the temporary domain is
+sunshinefacility.sunshinefood.co.id — set in `SFG_PUBLIC_BASE_URL`) — an Indonesian integrated facility-services
 company, part of Lippo Indonesia — and the **admin CMS** that edits every
 text and image on it. Bilingual **EN / ID**. Seven public pages (Home,
 Services, Service Detail ×5 lines, Industries, About Us, Careers, Contact /

@@ -4,6 +4,12 @@ Empty Ubuntu 24.04+ server → www.sunshinefacility.com running. Copy-paste,
 top to bottom, as a sudo-capable user. Absolute paths throughout; the editor
 is `vi`. Nothing here has been run yet (decision Q23: handbook only).
 
+> **Temporary domain.** Until www.sunshinefacility.com is bought, the site
+> runs at `sunshinefacility.sunshinefood.co.id`: substitute it for both
+> `sunshinefacility.com` names below (one `server_name`, one certbot `-d`,
+> no apex redirect). The switch later is `SFG_PUBLIC_BASE_URL`, nginx, a
+> certificate, and CMS → Site text → `footer.domain`.
+
 **You need before starting:** the server's public IP; DNS for
 `sunshinefacility.com` and `www.sunshinefacility.com` pointing at it; an
 SMTP relay (host, port, user, password) allowed to send as
