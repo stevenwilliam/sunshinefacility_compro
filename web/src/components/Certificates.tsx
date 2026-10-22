@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { MagnifyingGlassPlus, SealCheck, X } from '@/lib/phosphor'
 import type { Certificate } from '@/lib/types'
 import { fmtMonthYear, useSite } from '@/lib/site'
@@ -10,7 +11,11 @@ export function useCertMeta() {
     c.validUntil ? t('certs.valid_until', { date: fmtMonthYear(c.validUntil, lang) }) : c.issuer ? t('certs.issued_by', { issuer: c.issuer }) : ''
 }
 
-/** The full-size certificate. Closed by the backdrop, the Close button or Esc. */
+/** The full-size certificate. Closed by the backdrop, the Close button or Esc.
+ * The design sized the image at 100vh − 140px, which left the Close button
+ * partly below the fold once the overlay's padding was added; the height
+ * here subtracts the padding and the caption row (measured: 900 px tall
+ * screen, button bottom at 912 px before the fix). */
 function Lightbox({ cert, onClose }: { cert: Certificate; onClose: () => void }) {
   const { t } = useSite()
   const meta = useCertMeta()
@@ -28,12 +33,15 @@ function Lightbox({ cert, onClose }: { cert: Certificate; onClose: () => void })
       prev?.focus()
     }
   }, [onClose])
-  return (
+  // Portalled to <body>: rendered in place it sat inside the section's
+  // stacking context (relative + z-index 1), and the next section painted
+  // over the overlay and took its clicks — found by the e2e suite.
+  return createPortal(
     <div role="dialog" aria-modal="true" aria-label={cert.name} onClick={onClose}
       className="on-dark fixed inset-0 z-[80] box-border flex items-center justify-center bg-[rgba(22,24,19,0.88)]" style={{ padding: 'clamp(16px,4vw,48px)' }}>
       <figure className="m-0 flex max-h-full flex-col items-center gap-3" onClick={(e) => e.stopPropagation()}>
         <img src={cert.full || cert.image?.src} alt={t('certs.aria', { name: cert.name })}
-          className="block max-w-full bg-white object-contain shadow-modal" style={{ height: 'calc(100vh - 140px)', aspectRatio: '1/1.414' }} />
+          className="block max-w-full bg-white object-contain shadow-modal" style={{ height: 'calc(100dvh - 2 * clamp(16px,4vw,48px) - 72px)', aspectRatio: '1/1.414' }} />
         <figcaption className="flex flex-wrap items-center justify-center gap-4 text-[15px] text-ondark-bright">
           {cert.name} · {meta(cert)}
           <button ref={closeRef} type="button" onClick={onClose}
@@ -42,7 +50,8 @@ function Lightbox({ cert, onClose }: { cert: Certificate; onClose: () => void })
           </button>
         </figcaption>
       </figure>
-    </div>
+    </div>,
+    document.body,
   )
 }
 

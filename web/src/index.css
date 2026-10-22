@@ -79,8 +79,10 @@
   .btn-quiet:hover { border-color: #1F211C; }
 
   /* Placeholder tag (BR-2.1): visible, dashed, until the content is real. */
-  .ph-tag { display: inline-flex; align-items: center; font-size: 12px; font-weight: 550; letter-spacing: .06em; text-transform: uppercase; color: #C6241C; border: 1px dashed #C6241C; padding: 5px 10px; border-radius: 4px; line-height: 1.2; white-space: nowrap; }
-  .ph-tag.sm { font-size: 10px; padding: 2px 6px; letter-spacing: .05em; vertical-align: middle; }
+  /* The long section tags wrap on a phone (one is 431 px on a line); the
+     small inline ones stay whole. */
+  .ph-tag { display: inline-flex; align-items: center; max-width: 100%; font-size: 12px; font-weight: 550; letter-spacing: .06em; text-transform: uppercase; color: #C6241C; border: 1px dashed #C6241C; padding: 5px 10px; border-radius: 4px; line-height: 1.2; }
+  .ph-tag.sm { font-size: 10px; padding: 2px 6px; letter-spacing: .05em; vertical-align: middle; white-space: nowrap; }
   .on-dark .ph-tag { color: #FD572A; border-color: #FD572A; }
 
   /* Breadcrumb */

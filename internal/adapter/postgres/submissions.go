@@ -192,9 +192,11 @@ func scanOutbox(sc interface{ Scan(...any) error }) (*app.OutboxMail, error) {
 	return &m, nil
 }
 
-func (s *Store) DueMail(ctx context.Context, limit int) ([]app.OutboxMail, error) {
-	rows, err := s.q(ctx).Raw(`SELECT `+outboxCols+` FROM notification_outbox WHERE sent_at IS NULL AND next_attempt_at <= now()
-		ORDER BY next_attempt_at LIMIT ? FOR UPDATE SKIP LOCKED`, limit).Rows()
+// DueMail claims mail whose time has come. "Now" is the application's
+// clock, the same one the back-off was computed from.
+func (s *Store) DueMail(ctx context.Context, limit int, now time.Time) ([]app.OutboxMail, error) {
+	rows, err := s.q(ctx).Raw(`SELECT `+outboxCols+` FROM notification_outbox WHERE sent_at IS NULL AND next_attempt_at <= ?
+		ORDER BY next_attempt_at LIMIT ? FOR UPDATE SKIP LOCKED`, now, limit).Rows()
 	if err != nil {
 		return nil, translate(err)
 	}

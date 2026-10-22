@@ -17,3 +17,5 @@ __pycache__/
 # the supplied archive (its contents live in docs/design/handoff/)
 /initial_file.zip
 /web/scripts/shots/
+/web/test-results/
+/web/playwright-report/

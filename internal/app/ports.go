@@ -87,7 +87,7 @@ type Store interface {
 
 	// Outbound mail.
 	EnqueueMail(ctx context.Context, m OutboxMail) error
-	DueMail(ctx context.Context, limit int) ([]OutboxMail, error)
+	DueMail(ctx context.Context, limit int, now time.Time) ([]OutboxMail, error)
 	MarkMailSent(ctx context.Context, id string) error
 	MarkMailFailed(ctx context.Context, id string, errText string, next time.Time) error
 	ListOutbox(ctx context.Context, limit int) ([]OutboxMail, error)

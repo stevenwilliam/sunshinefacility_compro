@@ -44,7 +44,7 @@ const maxMailAttempts = 10
 func (j *Jobs) DeliverMail(ctx context.Context) (sent, failed int, err error) {
 	from := j.settings.String(ctx, "notify.from", "noreply@sunshinefacility.com")
 	err = j.store.InTx(ctx, func(s Store) error {
-		due, err := s.DueMail(ctx, 20)
+		due, err := s.DueMail(ctx, 20, j.now())
 		if err != nil {
 			return err
 		}

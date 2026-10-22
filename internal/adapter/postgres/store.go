@@ -45,6 +45,8 @@ func translate(err error) error {
 	var pg *pgconn.PgError
 	if errors.As(err, &pg) {
 		switch pg.Code {
+		case "23001": // restrict_violation (ON DELETE RESTRICT)
+			return apierror.Wrap(apierror.CodeInUse, "Can’t delete: other items still use this. Change or remove them first.", err)
 		case "23503": // foreign_key_violation
 			if strings.Contains(strings.ToLower(pg.Message), "update or delete") {
 				return apierror.Wrap(apierror.CodeInUse, "Can’t delete: other items still use this. Change or remove them first.", err)
