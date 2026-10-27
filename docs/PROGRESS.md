@@ -22,6 +22,15 @@ A ✅ is earned by running the gate, on the date shown.
 | Hero ball | headed Chromium under Xvfb + software GL | idle ball, split, focus panel, labels, chips, Esc — screenshots match the design's states |
 | Live forms | quotation + application against the running service | stored; both mails delivered to mailpit from `noreply@sunshinefacility.com` |
 
+## 2026-10-27 — copywriting review (migration 0005)
+
+| Check | Result |
+|---|---|
+| Guards on production | dry run in a rolled-back transaction: every UPDATE in 0005 up matched (29 statements; the button rule covers 2 keys), down reverses them |
+| Dev | 0005 applied, reverted by its down file, re-applied; `make check` exit 0 |
+| Visual | changed sections shot at 1440 and 360, EN and ID. The longer Remote title runs over the card photo on the Services page (the Digital card already does, less) |
+| Not done | row 32 (new contact-form fields) — a code change, deferred |
+
 ## Modules
 
 | Area | State | Verified by |
