@@ -175,9 +175,11 @@ export default function Contact() {
             <InfoRow icon={<MapPin aria-hidden="true" />} label={t('contact.office')} border>
               <p className="m-0 text-[16px] leading-[1.5]">{param('contact.address')} <PH show={paramPH('contact.address')} small /></p>
             </InfoRow>
-            <InfoRow icon={<Phone aria-hidden="true" />} label={t('contact.phone_label')} border>
-              <a href={telHref(param('contact.phone'))} className="text-[16px] hover:text-red">{param('contact.phone')}</a> <PH show={paramPH('contact.phone')} small />
-            </InfoRow>
+            {param('contact.phone').trim() && (
+              <InfoRow icon={<Phone aria-hidden="true" />} label={t('contact.phone_label')} border>
+                <a href={telHref(param('contact.phone'))} className="text-[16px] hover:text-red">{param('contact.phone')}</a> <PH show={paramPH('contact.phone')} small />
+              </InfoRow>
+            )}
             <InfoRow icon={<EnvelopeSimple aria-hidden="true" />} label={t('common.email')} border>
               <a href={`mailto:${param('contact.email')}`} className="break-all text-[16px] hover:text-red">{param('contact.email')}</a> <PH show={paramPH('contact.email')} small />
             </InfoRow>

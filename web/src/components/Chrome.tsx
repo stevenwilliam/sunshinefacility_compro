@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { FacebookLogo, InstagramLogo, LinkedinLogo, List, WhatsappLogo, X, YoutubeLogo } from '@/lib/phosphor'
+import { InstagramLogo, LinkedinLogo, List, WhatsappLogo, X, YoutubeLogo } from '@/lib/phosphor'
 import { lineVars, useSite } from '@/lib/site'
 import { cssUrl, PH } from './bits'
 
@@ -107,7 +107,7 @@ export function DividerStrip() {
 
 const SOCIAL = [
   ['social.instagram', 'Instagram', InstagramLogo], ['social.linkedin', 'LinkedIn', LinkedinLogo],
-  ['social.facebook', 'Facebook', FacebookLogo], ['social.youtube', 'YouTube', YoutubeLogo],
+  ['social.youtube', 'YouTube', YoutubeLogo],
 ] as const
 
 export function SiteFooter() {
@@ -130,7 +130,7 @@ export function SiteFooter() {
           <div>
             <p className="mb-[14px] mt-0 font-medium text-white">{t('footer.contact')}</p>
             <ul className="m-0 flex list-none flex-col gap-[10px] p-0">
-              <li><a href={telHref(phone)} className={link}>{phone}</a> <PH show={paramPH('contact.phone')} small /></li>
+              {phone.trim() && <li><a href={telHref(phone)} className={link}>{phone}</a> <PH show={paramPH('contact.phone')} small /></li>}
               <li><a href={waHref(param('contact.whatsapp_digits'))} className={link}>{t('common.whatsapp')} {wa}</a> <PH show={paramPH('contact.whatsapp')} small /></li>
               <li><a href={`mailto:${email}`} className={link}>{email}</a> <PH show={paramPH('contact.email')} small /></li>
             </ul>

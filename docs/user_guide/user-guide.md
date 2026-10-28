@@ -145,6 +145,10 @@ and thresholds. Filter by group to find a value quickly.
 | Analytics | `ga4_measurement_id` (empty means no analytics) | superadmin |
 | Search and link previews | `og_image` (the name of a media item) | superadmin |
 
+The office **phone** is hidden on the website while its value is empty (it is
+empty now). Type a number into it to show it again in the footer, the Home
+quotation band and the Contact page.
+
 Values are checked: a retention of "twelve" or a recipient of "itdept" is
 refused with the reason. **Add parameter** works only in the option groups
 (building types, locations, job types, brand colours); the other groups

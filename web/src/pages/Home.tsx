@@ -255,10 +255,12 @@ function QuoteBand() {
               <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-wa text-[22px] text-white"><WhatsappLogo weight="fill" aria-hidden="true" /></span>
               <span>{t('wa.chat')} · {param('contact.whatsapp')} <PH show={paramPH('contact.whatsapp')} small /></span>
             </a>
-            <a href={telHref(param('contact.phone'))} className="flex items-center gap-3 text-white hover:text-tangerine">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full border border-charcoal-400 text-[20px]"><Phone aria-hidden="true" /></span>
-              <span>{t('home.quote.call')} · {param('contact.phone')} <PH show={paramPH('contact.phone')} small /></span>
-            </a>
+            {param('contact.phone').trim() && (
+              <a href={telHref(param('contact.phone'))} className="flex items-center gap-3 text-white hover:text-tangerine">
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-full border border-charcoal-400 text-[20px]"><Phone aria-hidden="true" /></span>
+                <span>{t('home.quote.call')} · {param('contact.phone')} <PH show={paramPH('contact.phone')} small /></span>
+              </a>
+            )}
           </div>
         </div>
         <form onSubmit={submit} className="grid min-w-0 flex-[1.3_1_420px] gap-4 rounded-[14px] bg-white text-charcoal" style={{ padding: 'clamp(20px,3vw,32px)', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))' }}>

@@ -16,6 +16,7 @@ right** and the other is stale. Code comments and test names cite these ids.
 - **BR-2.2** The flag clears automatically when a **content** field of that row changes. Publishing, ordering and other non-content fields do not clear it.
 - **BR-2.3** An editor may set or clear the flag explicitly; an explicit change in the same save wins over BR-2.2.
 - **BR-2.4** Testimonials are seeded unpublished. While no testimonial is published, the Home page shows the unpublished **placeholder** testimonials as dashed placeholder cards. An unpublished testimonial that is no longer a placeholder is never sent to the site.
+- **BR-2.5** An empty `contact.phone` hides the office phone everywhere on the public site and in the structured data. Since migration 0006 (2026-10-28) it is empty: the office number is not published.
 
 ## BR-3 Certificates
 

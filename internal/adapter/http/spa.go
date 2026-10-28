@@ -102,6 +102,7 @@ func (s *Server) head(b *app.Bundle, m pageMeta, lang string) string {
 	// Organization JSON-LD. Contact details still marked placeholder are
 	// left out: structured data is read by machines that will not see the
 	// on-page "Placeholder" tag, and a fake phone number would spread.
+	// An empty phone is hidden on the site, so it is left out here too.
 	org := map[string]any{
 		"@context": "https://schema.org", "@type": "Organization",
 		"name": "Sunshine Facilities Group", "url": s.BaseURL + "/",
@@ -110,7 +111,7 @@ func (s *Server) head(b *app.Bundle, m pageMeta, lang string) string {
 	if logo, ok := b.Logos["sfg-logo-primary"]; ok && logo != nil {
 		org["logo"] = s.BaseURL + logo.Src
 	}
-	if v, ok := b.Params["contact.phone"]; ok && !v.Placeholder {
+	if v, ok := b.Params["contact.phone"]; ok && !v.Placeholder && v.V[0] != "" {
 		org["telephone"] = v.V[0]
 	}
 	if v, ok := b.Params["contact.email"]; ok && !v.Placeholder {
