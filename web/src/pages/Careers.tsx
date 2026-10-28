@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent } from 'react'
-import { ArrowDown, ArrowRight, CaretDown, CaretUp, Check, CheckCircle, Clock, MagnifyingGlass, MapPin, PaperPlaneTilt } from '@/lib/phosphor'
+import { ArrowDown, ArrowRight, CaretDown, CaretUp, Check, CheckCircle, Clock, LinkedinLogo, MagnifyingGlass, MapPin, PaperPlaneTilt } from '@/lib/phosphor'
 import { lineVars, useSite } from '@/lib/site'
 import { usePageMeta } from '@/lib/meta'
 import { Icon } from '@/lib/icons'
@@ -159,9 +159,16 @@ function Openings({ onApply }: { onApply: (id: string) => void }) {
                     <ul className="m-0 list-none p-0">
                       {reqs.map((r, i) => <li key={i} className="grid grid-cols-[22px_1fr] gap-2 py-1.5 text-[15px] leading-[1.45]"><Check aria-hidden="true" className="mt-0.5 text-success" />{r}</li>)}
                     </ul>
-                    <button type="button" onClick={() => onApply(o.id)} className="btn btn-red mt-[14px] px-[18px] py-[14px] text-[15px]">
-                      {t('careers.apply_role')} <ArrowRight aria-hidden="true" />
-                    </button>
+                    <div className="mt-[14px] flex flex-wrap items-center gap-x-5 gap-y-3">
+                      <button type="button" onClick={() => onApply(o.id)} className="btn btn-red px-[18px] py-[14px] text-[15px]">
+                        {t('careers.apply_role')} <ArrowRight aria-hidden="true" />
+                      </button>
+                      {o.linkedin && (
+                        <a href={o.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[15px] font-medium hover:text-red">
+                          <LinkedinLogo aria-hidden="true" className="text-[20px]" />{t('careers.linkedin')}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}

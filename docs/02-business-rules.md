@@ -46,6 +46,7 @@ right** and the other is stale. Code comments and test names cite these ids.
 - **BR-6.1** Required: full name, phone, valid email, position (a published opening or "Open application"), CV. The CV is PDF, DOC or DOCX **by its bytes** (a DOCX must contain a Word document part), at most `careers.cv_max_mb` (5). The stored name is generated; the visitor's filename is kept only as a sanitised label.
 - **BR-6.2** The application is stored and notified like BR-5.3. The email does **not** attach the CV (personal data stays in the CMS).
 - **BR-6.3** Applications older than `careers.retention_months` (12) are deleted with their CVs by a daily job; each deletion is audited as `system:purge-applications`. Quotation requests are kept.
+- **BR-6.4** An opening may carry an optional **LinkedIn job post** link. It must start `https://` on `linkedin.com` (checked by the CMS and by the database). When set, the opening on the Careers page shows **View on LinkedIn** beside *Apply for this role*, opening in a new tab; applications still come through the site form.
 
 ## BR-7 Inbox
 

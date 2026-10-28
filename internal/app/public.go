@@ -81,6 +81,7 @@ type StatRow struct{ Scope, ValueEN, ValueID, LabelEN, LabelID string }
 type OpeningRow struct {
 	ID, TitleEN, TitleID, LineID, LocationKey, TypeKey, ClosingDate string
 	SummaryEN, SummaryID, RequirementsEN, RequirementsID            string
+	LinkedInURL                                                     string
 	Placeholder                                                     bool
 }
 type TestimonialRow struct {
@@ -211,6 +212,7 @@ type OpeningV struct {
 	ClosingDate  string      `json:"closingDate,omitempty"`
 	Summary      L2          `json:"summary"`
 	Requirements [2][]string `json:"requirements"`
+	LinkedIn     string      `json:"linkedin,omitempty"`
 	Placeholder  bool        `json:"placeholder,omitempty"`
 }
 
@@ -523,6 +525,7 @@ func BuildBundle(s *Snapshot, today calendar.Date, baseURL string) *Bundle {
 			Location: o.LocationKey, Type: o.TypeKey, ClosingDate: o.ClosingDate,
 			Summary:      L2{o.SummaryEN, o.SummaryID},
 			Requirements: [2][]string{splitLines(o.RequirementsEN), splitLines(o.RequirementsID)},
+			LinkedIn:     o.LinkedInURL,
 			Placeholder:  o.Placeholder})
 	}
 	for _, t := range s.Testimonials {

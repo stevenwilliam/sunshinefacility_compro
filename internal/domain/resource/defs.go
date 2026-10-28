@@ -254,6 +254,8 @@ var Defs = []Def{
 			pair("summary", "Summary", Textarea, 800, false),
 			Field{Key: "requirements_en", Label: "Requirements (EN), one per line", Type: Lines, Max: 2000, Content: true, Search: true},
 			Field{Key: "requirements_id", Label: "Requirements (ID), one per line", Type: Lines, Max: 2000, Content: true, Search: true},
+			Field{Key: "linkedin_url", Label: "LinkedIn job post (optional)", Type: Text, Max: 500, Content: true,
+				Pattern: `^https://([a-z]{2,3}\.)?linkedin\.com/\S*$`, Help: "must be a link starting with https://www.linkedin.com/."},
 			sortF(), publishedF(), placeholderF(),
 		),
 	},

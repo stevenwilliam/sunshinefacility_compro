@@ -93,6 +93,12 @@ Press the **pencil** on a row. The editor opens on the right.
 
 ![Services](img/07-services.png)
 
+**Careers** holds the job openings. **LinkedIn job post** is optional: paste
+the link of the same job on LinkedIn (it must start with
+`https://www.linkedin.com/`) and the opening on the website shows a
+**View on LinkedIn** link next to *Apply for this role*. Leave it empty if the
+job is not on LinkedIn.
+
 ### Placeholders
 
 Some content is provisional: contact details, social links, testimonials,

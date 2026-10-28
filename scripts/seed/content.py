@@ -142,8 +142,8 @@ PARAMETERS = [
 # ---------------------------------------------------------------------------
 # Site text: key -> (en, id[, placeholder]). Keys added after 0002 was
 # applied live in later migrations (0003_more_site_text: err.phone,
-# form.error.too_fast, form.error.invalid) — not here, so 0002 stays
-# byte-identical.
+# form.error.too_fast, form.error.invalid; 0007_opening_linkedin_url:
+# careers.linkedin) — not here, so 0002 stays byte-identical.
 # ---------------------------------------------------------------------------
 
 TEXT = {

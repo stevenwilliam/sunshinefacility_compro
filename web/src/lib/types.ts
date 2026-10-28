@@ -101,6 +101,7 @@ export interface Opening {
   closingDate?: string
   summary: L2
   requirements: [string[], string[]]
+  linkedin?: string
   placeholder?: boolean
 }
 

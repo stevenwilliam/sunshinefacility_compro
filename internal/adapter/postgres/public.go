@@ -171,11 +171,11 @@ func (s *Store) PublicSnapshot(ctx context.Context) (*app.Snapshot, error) {
 			return err
 		}
 		if err := each(`SELECT id::text, title_en, title_id, line_id::text, location_key, type_key, COALESCE(to_char(closing_date, 'YYYY-MM-DD'), ''),
-			summary_en, summary_id, requirements_en, requirements_id, is_placeholder
+			summary_en, summary_id, requirements_en, requirements_id, linkedin_url, is_placeholder
 			FROM career_openings WHERE published ORDER BY sort, title_en`, func(sc func(...any) error) error {
 			var r app.OpeningRow
 			if err := sc(&r.ID, &r.TitleEN, &r.TitleID, &r.LineID, &r.LocationKey, &r.TypeKey, &r.ClosingDate,
-				&r.SummaryEN, &r.SummaryID, &r.RequirementsEN, &r.RequirementsID, &r.Placeholder); err != nil {
+				&r.SummaryEN, &r.SummaryID, &r.RequirementsEN, &r.RequirementsID, &r.LinkedInURL, &r.Placeholder); err != nil {
 				return err
 			}
 			snap.Openings = append(snap.Openings, r)

@@ -95,3 +95,17 @@ func TestSingleLineText(t *testing.T) {
 		t.Fatal("a newline in a single-line field was accepted")
 	}
 }
+
+// BR-6.4: the LinkedIn link is optional, and only an https LinkedIn link.
+func TestOpeningLinkedInURL(t *testing.T) {
+	d, _ := Lookup("careers")
+	for v, ok := range map[string]bool{
+		"": true, "https://www.linkedin.com/jobs/view/123": true, "https://id.linkedin.com/jobs/view/1": true,
+		"http://www.linkedin.com/jobs/view/1": false, "javascript:alert(1)": false,
+		"https://linkedin.com.evil.example/x": false, "https://www.linkedin.com/jobs/ 1": false,
+	} {
+		if _, errs := Validate(d, map[string]any{"linkedin_url": v}, false); (errs["linkedin_url"] == "") != ok {
+			t.Errorf("%q: accepted=%v, want %v", v, errs["linkedin_url"] == "", ok)
+		}
+	}
+}
