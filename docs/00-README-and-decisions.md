@@ -78,6 +78,7 @@ never deleted.
 | D41 | 2026-11-05 | Real domains bought: **www.sunshinefacility.com** is canonical (`SFG_PUBLIC_BASE_URL`); `sunshinefacility.com`, `(www.)sunshinefacility.co.id`, `(www.)sunshinefacility.id` and the temporary `sunshinefacility.sunshinefood.co.id` answer 301 to it, path kept. TLS via Cloudflare Origin Certificates (one per zone, Full strict); the temporary domain keeps its Let's Encrypt cert. Footer text back to the real domain (migration 0008). Config: `deploy/nginx-sfg-production.conf`; cutover: `deploy/prod-switch-domain.sh`. Replaces the Sunshinefood page the domains used to serve | Steven | 13 |
 | D42 | 2026-11-05 | GA4 switched on: `analytics.ga4_measurement_id` = `G-XNBZ88NTP9` by migration **0009** (fills an empty value only); page views now send the full `page_location` (with `?lang=`), not `page_path`. Still behind the consent banner (BR-12.1) | Steven | 17 |
 | D43 | 2026-11-05 | Canonical host is the apex **sunshinefacility.com** (supersedes D41's www): `www.sunshinefacility.com`, `(www.)sunshinefacility.co.id`, `(www.)sunshinefacility.id` and the temporary domain 301 to it, path kept. `SFG_PUBLIC_BASE_URL=https://sunshinefacility.com`; footer by migration **0012**; applied with `deploy/prod-apex-canonical.sh` | Steven | 13 |
+| D44 | 2026-11-05 | GA4 measurement ID is **`G-YQ3537VDCW`** (the stream GA reports for sunshinefacility.com); migration **0013** replaces 0009's `G-XNBZ88NTP9` only | Steven | 17 |
 
 ## Open questions
 

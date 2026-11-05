@@ -213,3 +213,5 @@ sudo systemctl restart sfg && curl -fsS http://127.0.0.1:8098/readyz
 ```
 
 Rollback = previous commit's binary; migrations are forward-only.
+
+**As deployed (D37):** build here, `scp bin/sfg maxx-prod:sfg-release/sfg`, then on the server `sudo bash ~/sfg-release/prod-update.sh` (`deploy/prod-update.sh`: binary backup, database dump, install, `migrate up`, restart, origin check).

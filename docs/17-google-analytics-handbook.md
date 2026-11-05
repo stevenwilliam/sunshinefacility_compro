@@ -8,8 +8,8 @@ the CMS.
 ## What the site already does (nothing to code)
 
 - **Switched on (D42).** The parameter `analytics.ga4_measurement_id` is
-  **`G-XNBZ88NTP9`** (set by migration 0009, which only fills an empty
-  value). Empty it and no Google script loads and no banner shows
+  **`G-YQ3537VDCW`** (migration 0013; 0009 had set an earlier stream's
+  `G-XNBZ88NTP9`). Empty it and no Google script loads and no banner shows
   (BR-12.1, D23).
 - **Consent first.** Once an ID is set, each visitor sees a bilingual
   banner (*Accept* / *Decline*). Google's script loads only after
@@ -47,8 +47,7 @@ ignore the banner, are never counted. That is the intended trade-off.
 3. **Enhanced measurement → gear icon.** Turn **off** *Page changes based
    on browser history events*. The site already sends a `page_view` on
    every navigation, so leaving this on **counts each page twice**
-   (measured on 2026-11-05: on for `G-XNBZ88NTP9`, and `/services` arrived
-   twice). The
+   (measured on 2026-11-05 on the first stream: `/services` arrived twice). The
    other options (scrolls, outbound clicks, file downloads, site search,
    form interactions, video) can stay on.
 4. **Create stream.** Copy the **Measurement ID** from the top right. It
@@ -72,8 +71,7 @@ All under **Admin**, in the property column:
 
 ## 4. Switch it on in the CMS
 
-Already done for `G-XNBZ88NTP9` (migration 0009, applied on the next
-deploy). Use these steps only to change the ID to another property.
+Already done for `G-YQ3537VDCW` (migrations 0009 and 0013). Use these steps only to change the ID to another property.
 
 1. Sign in to `https://sunshinefacility.com/tytb` as a **superadmin**.
 2. **Parameters** → filter group **Analytics** → `ga4_measurement_id`.

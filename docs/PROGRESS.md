@@ -47,7 +47,7 @@ A ✅ is earned by running the gate, on the date shown.
 | Jobs: mail worker, certificate reminders, retention purge | ✅ | integration tests; timers installed and enabled |
 | Break-glass `sfg reset-password` | ✅ | `TestBreakGlassReset` |
 | CMS dark theme | 🟡 | tokens written and measured; not screenshotted in dark mode |
-| GA4 + consent | ✅ | `G-XNBZ88NTP9` (migration 0009); banner, Accept → one gtag load, Decline → nothing, no CSP errors — checked in headless Chromium on dev 2026-11-05 with collection intercepted |
+| GA4 + consent | ✅ | `G-YQ3537VDCW` (migrations 0009, 0013); banner, Accept → one gtag load, Decline → nothing, no CSP errors — checked in headless Chromium on dev 2026-11-05 with collection intercepted |
 | Dev deployment (systemd, timers, nginx :8097, ufw) | ✅ on the server; 🟡 **not verified from another machine** | `curl` on the box only (see RUN-WHEN-BACK) |
 | Production (119.8.189.246, behind Cloudflare) | ✅ deployed 2026-10-22 (D37) | from outside: HTTPS 200 on `/`, `/admin`, `/robots.txt`; HSTS + CSP present; CMS login sets a `Secure; HttpOnly; SameSite=Strict` cookie; a test quotation stored and mailed through Office 365 (sent, no error); a backup dump restored into a scratch DB |
 | Docs set 00–16, OpenAPI, CLAUDE, README | ✅ written | diagrams parse; OpenAPI parses (26 paths) |
