@@ -7,16 +7,17 @@ the CMS.
 
 ## What the site already does (nothing to code)
 
-- **Off until you switch it on.** With the parameter
-  `analytics.ga4_measurement_id` empty (as now), no Google script is
-  loaded and no banner is shown (BR-12.1, D23).
+- **Switched on (D42).** The parameter `analytics.ga4_measurement_id` is
+  **`G-XNBZ88NTP9`** (set by migration 0009, which only fills an empty
+  value). Empty it and no Google script loads and no banner shows
+  (BR-12.1, D23).
 - **Consent first.** Once an ID is set, each visitor sees a bilingual
   banner (*Accept* / *Decline*). Google's script loads only after
   *Accept*. Ads storage, ad user data and ad personalisation are always
   denied. The choice is remembered in the browser (`localStorage`
   key `sfg-consent`).
 - **Page views only.** The site is a single-page app, so it sends its own
-  `page_view` on every navigation. Form submissions (quotation, job
+  `page_view` on every navigation, with the full URL (so `?lang=id` shows). Form submissions (quotation, job
   application) are **not** tracked as events (see § 6).
 - **Never in the CMS.** `/tytb` never loads analytics.
 - The CSP already allows Google's tag and collection hosts.
@@ -45,7 +46,9 @@ ignore the banner, are never counted. That is the intended trade-off.
    `SFG website`.
 3. **Enhanced measurement → gear icon.** Turn **off** *Page changes based
    on browser history events*. The site already sends a `page_view` on
-   every navigation, so leaving this on **counts each page twice**. The
+   every navigation, so leaving this on **counts each page twice**
+   (measured on 2026-11-05: on for `G-XNBZ88NTP9`, and `/services` arrived
+   twice). The
    other options (scrolls, outbound clicks, file downloads, site search,
    form interactions, video) can stay on.
 4. **Create stream.** Copy the **Measurement ID** from the top right. It
@@ -68,6 +71,9 @@ All under **Admin**, in the property column:
 | Users | Admin → Account access management → **+** | add colleagues as *Viewer* (or *Analyst*) | never share the owner login |
 
 ## 4. Switch it on in the CMS
+
+Already done for `G-XNBZ88NTP9` (migration 0009, applied on the next
+deploy). Use these steps only to change the ID to another property.
 
 1. Sign in to `https://www.sunshinefacility.com/tytb` as a **superadmin**.
 2. **Parameters** → filter group **Analytics** → `ga4_measurement_id`.

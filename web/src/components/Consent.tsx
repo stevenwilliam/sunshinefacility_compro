@@ -48,9 +48,10 @@ export function Consent() {
     if (id && choice === 'granted') loadGA(id)
   }, [id, choice])
 
+  // The full URL, so ?lang=id reaches GA (page_path alone drops the query).
   useEffect(() => {
-    if (id && choice === 'granted' && window.gtag) window.gtag('event', 'page_view', { page_path: loc.pathname })
-  }, [id, choice, loc.pathname])
+    if (id && choice === 'granted' && window.gtag) window.gtag('event', 'page_view', { page_location: window.location.href, page_title: document.title })
+  }, [id, choice, loc.pathname, loc.search])
 
   if (!id || choice) return null
   const decide = (v: 'granted' | 'denied') => {
