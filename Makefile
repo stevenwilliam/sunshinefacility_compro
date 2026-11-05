@@ -22,6 +22,9 @@ web: ## build the frontend (embedded into the binary, so this runs FIRST)
 icons: ## regenerate the slim Phosphor icon module after adding an icon import
 	cd web && node scripts/gen-icons.mjs
 
+favicon: ## regenerate web/public favicon.ico, icon-192.png, apple-touch-icon.png from the logo's G
+	go run ./scripts/favicon
+
 build: ## build the binary (run `make web` first if the UI changed)
 	CGO_ENABLED=0 go build -trimpath -o $(BIN) ./cmd/api
 

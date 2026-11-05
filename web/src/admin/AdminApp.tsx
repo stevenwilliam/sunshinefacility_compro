@@ -58,7 +58,7 @@ function AuthCard({ title, children }: { title: string; children: ReactNode }) {
     <main className="grid min-h-screen place-items-center p-4">
       <div className="surface w-[min(420px,100%)] p-8">
         <div className="mb-6 flex items-center gap-3">
-          <span className="block h-[30px] w-[120px] bg-contain bg-left bg-no-repeat" style={{ backgroundImage: 'url("/favicon.svg")', width: 30 }} aria-hidden="true" />
+          <span className="block h-[30px] w-[120px] bg-contain bg-left bg-no-repeat" style={{ backgroundImage: 'url("/icon-192.png")', width: 30 }} aria-hidden="true" />
           <span className="text-[13px] font-semibold uppercase tracking-[0.08em] faint">Content admin</span>
         </div>
         <h1 className="mb-6 mt-0 text-[26px] font-[550] tracking-[-0.02em]">{title}</h1>
