@@ -33,7 +33,7 @@ is `vi`.
 > supersedes § 10's sketch). TLS: one Cloudflare Origin Certificate per zone
 > in `/etc/ssl/sfg/<zone>.pem|.key` (SSL mode Full (strict)); the temporary
 > domain keeps its Let's Encrypt certificate. The cutover was
-> `deploy/prod-switch-domain.sh` (backs up, installs binary, migrates, sets
+> `deploy/prod-switch-domain.sh`, run 2026-11-05 15:06 (backs up, installs binary, migrates, sets
 > `SFG_PUBLIC_BASE_URL`, swaps nginx, verifies every host at the origin).
 
 **You need before starting:** the server's public IP; DNS for

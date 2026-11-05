@@ -56,12 +56,14 @@ fi
 systemctl reload nginx
 
 say "verify at the origin (before DNS)"
-check() { curl -sk -o /dev/null -w "%{http_code} %{redirect_url}" --resolve "$1:443:127.0.0.1" "https://$1/careers?x=1"; echo "  ← $1"; }
+sleep 2   # reload is asynchronous: let the new workers take over
+# A failed check reports itself and moves on; under set -e a curl error used to end the script here.
+check() { curl -sk -o /dev/null -w "%{http_code} %{redirect_url}" --resolve "$1:443:127.0.0.1" "https://$1/careers?x=1" || printf 'curl failed (%s)' "$?"; echo "  ← $1"; }
 for h in www.sunshinefacility.com sunshinefacility.com www.sunshinefacility.co.id sunshinefacility.co.id \
          www.sunshinefacility.id sunshinefacility.id sunshinefacility.sunshinefood.co.id; do check "$h"; done
-curl -sk --resolve www.sunshinefacility.com:443:127.0.0.1 https://www.sunshinefacility.com/robots.txt | grep Sitemap
+curl -sk --resolve www.sunshinefacility.com:443:127.0.0.1 https://www.sunshinefacility.com/robots.txt | grep Sitemap || true
 for h in $(awk '/server_name/{for(i=2;i<=NF;i++){gsub(";","",$i);print $i}}' /etc/nginx/sites-enabled/maxx | sort -u); do
-  curl -sk -o /dev/null -w "%{http_code}  ← $h (other site, must be unchanged)\n" --resolve "$h:443:127.0.0.1" "https://$h/"
+  curl -sk -o /dev/null -w "%{http_code}  ← $h (other site, must be unchanged)\n" --resolve "$h:443:127.0.0.1" "https://$h/" || echo "curl failed ← $h"
 done
 
 cat <<EOF
