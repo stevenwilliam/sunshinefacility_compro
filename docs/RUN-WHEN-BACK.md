@@ -23,7 +23,7 @@ Three lists, kept apart on purpose.
 
 ## 2. Needs a machine or access that does not exist yet
 
-### M0 — real domains: **done** 2026-11-05 15:06 (D41); apex canonical (D43) pending step 6
+### M0 — real domains: **done** 2026-11-05 15:06 (D41); apex canonical (D43) **done** 15:29
 
 6. **Apex instead of www (D43)**: `sudo bash ~/sfg-release/prod-apex-canonical.sh` on the server. Nothing in Cloudflare changes. In GA → Data streams → the stream, you may edit the URL to `https://sunshinefacility.com` (cosmetic).
 
