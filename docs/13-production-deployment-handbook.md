@@ -1,6 +1,6 @@
 # 13 — Production deployment handbook
 
-Empty Ubuntu 24.04+ server → www.sunshinefacility.com running. Copy-paste,
+Empty Ubuntu 24.04+ server → sunshinefacility.com running. Copy-paste,
 top to bottom, as a sudo-capable user. Absolute paths throughout; the editor
 is `vi`.
 
@@ -26,9 +26,9 @@ is `vi`.
 > - **PostgreSQL** `timezone = 'UTC'`. Nightly dump at 01:15 UTC to
 >   `/var/backups/sfg` (restore tested).
 
-> **Domains (D41, 2026-11-05).** www.sunshinefacility.com is canonical;
-> the apex, `(www.)sunshinefacility.co.id`, `(www.)sunshinefacility.id` and
-> the former temporary domain `sunshinefacility.sunshinefood.co.id` 301 to
+> **Domains (D41, D43, 2026-11-05).** **sunshinefacility.com** (no www) is
+> canonical; `www.sunshinefacility.com`, `(www.)sunshinefacility.co.id`,
+> `(www.)sunshinefacility.id` and the former temporary domain `sunshinefacility.sunshinefood.co.id` 301 to
 > it. The live nginx file is **`deploy/nginx-sfg-production.conf`** (it
 > supersedes § 10's sketch). TLS: one Cloudflare Origin Certificate per zone
 > in `/etc/ssl/sfg/<zone>.pem|.key` (SSL mode Full (strict)); the temporary
@@ -95,7 +95,7 @@ sudo cp /opt/sfg/app/.env.example /etc/sfg/sfg.env
 sudo vi /etc/sfg/sfg.env
 ```
 
-Set: `SFG_ENV=production`, `SFG_PUBLIC_BASE_URL=https://www.sunshinefacility.com`,
+Set: `SFG_ENV=production`, `SFG_PUBLIC_BASE_URL=https://sunshinefacility.com`,
 `SFG_DATABASE_URL` (password from step 3), `SFG_JWT_SECRET=$(openssl rand -hex 32)`,
 `SFG_SETUP_TOKEN=$(openssl rand -hex 16)`, the SMTP relay values,
 `SFG_S3_SECRET_KEY` (step 4). **Leave `SFG_DEV_ADMIN_*` unset.**
@@ -170,7 +170,7 @@ the refresh cookie is `Secure`. `SFG_TRUSTED_PROXIES=127.0.0.1`.
 
 ## 11. First superadmin
 
-Open `https://www.sunshinefacility.com/tytb`. The setup screen asks for the
+Open `https://sunshinefacility.com/tytb`. The setup screen asks for the
 setup token (`SFG_SETUP_TOKEN` in `/etc/sfg/sfg.env`), name, email and
 password. Afterwards blank the token and restart:
 
@@ -184,9 +184,9 @@ Then CMS → Parameters → Notifications: confirm recipients and sender.
 ## 12. Verify (from outside the server)
 
 ```bash
-curl -sI https://www.sunshinefacility.com/ | grep -i 'strict-transport\|content-security'
-curl -s https://www.sunshinefacility.com/ | grep -i 'og:\|<title'
-curl -s https://www.sunshinefacility.com/robots.txt
+curl -sI https://sunshinefacility.com/ | grep -i 'strict-transport\|content-security'
+curl -s https://sunshinefacility.com/ | grep -i 'og:\|<title'
+curl -s https://sunshinefacility.com/robots.txt
 ```
 
 Send a test quotation; it arrives by mail and in CMS → Quotation requests.

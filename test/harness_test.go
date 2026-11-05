@@ -146,17 +146,17 @@ func fresh(t *testing.T) *env {
 	clock := func() time.Time { return e.now }
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	e.settings = app.NewSettings(e.store)
-	e.public = app.NewPublic(e.store, "https://www.sunshinefacility.com", clock)
+	e.public = app.NewPublic(e.store, "https://sunshinefacility.com", clock)
 	e.auth = app.NewAuth(e.store, e.settings, security.NewTokenIssuer(testSecret, 15*time.Minute), 7*24*time.Hour, setupToken, clock)
 	content := app.NewContent(e.store, e.public, e.settings, clock)
 	med := app.NewMedia(e.store, e.storage, media.WebP{}, e.settings, e.public)
-	subs := app.NewSubmissions(e.store, e.storage, e.settings, e.public, "https://www.sunshinefacility.com/tytb", clock)
-	e.jobs = app.NewJobs(e.store, e.storage, e.mailer, e.settings, "https://www.sunshinefacility.com/tytb", log, clock)
+	subs := app.NewSubmissions(e.store, e.storage, e.settings, e.public, "https://sunshinefacility.com/tytb", clock)
+	e.jobs = app.NewJobs(e.store, e.storage, e.mailer, e.settings, "https://sunshinefacility.com/tytb", log, clock)
 	dist, err := web.Dist()
 	if err != nil {
 		t.Fatal(err)
 	}
-	_, h, err := httpapi.New(httpapi.Deps{Log: log, BaseURL: "https://www.sunshinefacility.com", Auth: e.auth, Content: content,
+	_, h, err := httpapi.New(httpapi.Deps{Log: log, BaseURL: "https://sunshinefacility.com", Auth: e.auth, Content: content,
 		Media: med, Public: e.public, Submissions: subs, Audit: app.NewAuditLog(e.store),
 		Ready: func(context.Context) error { return nil }, Web: dist})
 	if err != nil {

@@ -20,7 +20,7 @@ func TestSEOHeadPerRoute(t *testing.T) {
 		"/services":      "<title>Services · Sunshine Facilities Group</title>",
 		"/services/food": "<title>Food Services · Sunshine Facilities Group</title>",
 		"/about?lang=id": "<title>Tentang Kami · Sunshine Facilities Group</title>",
-		"/contact":       `<link rel="canonical" href="https://www.sunshinefacility.com/contact">`,
+		"/contact":       `<link rel="canonical" href="https://sunshinefacility.com/contact">`,
 	}
 	for path, want := range cases {
 		st, _, body := a.raw("GET", path)
@@ -59,7 +59,7 @@ func TestNotFoundAndRedirects(t *testing.T) {
 		t.Errorf("/admin must no longer serve the CMS: %d", st)
 	}
 	_, _, robots := a.raw("GET", "/robots.txt")
-	if strings.Contains(robots, "tytb") || strings.Contains(robots, "/admin") || !strings.Contains(robots, "Sitemap: https://www.sunshinefacility.com/sitemap.xml") {
+	if strings.Contains(robots, "tytb") || strings.Contains(robots, "/admin") || !strings.Contains(robots, "Sitemap: https://sunshinefacility.com/sitemap.xml") {
 		t.Errorf("robots: %s", robots)
 	}
 	_, _, sm := a.raw("GET", "/sitemap.xml")

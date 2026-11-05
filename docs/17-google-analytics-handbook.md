@@ -1,7 +1,7 @@
 # 17 — Google Analytics handbook
 
 From no Google Analytics at all to visitor numbers in GA4, for
-www.sunshinefacility.com. About 20 minutes. You need the Google account that
+sunshinefacility.com. About 20 minutes. You need the Google account that
 should own the data (`itdept.sfg@gmail.com`) and a **superadmin** login to
 the CMS.
 
@@ -33,7 +33,7 @@ ignore the banner, are never counted. That is the intended trade-off.
    - Data-sharing settings: untick everything you don't need. *Technical
      support* is enough.
 3. **Property**:
-   - Property name: `www.sunshinefacility.com`
+   - Property name: `sunshinefacility.com`
    - Reporting time zone: **Indonesia — (GMT+07:00) Jakarta**
    - Currency: **Indonesian Rupiah (IDR)**
 4. Business details: industry *Business & Industrial Markets*, size *Large*.
@@ -42,7 +42,7 @@ ignore the banner, are never counted. That is the intended trade-off.
 ## 2. Add the web data stream
 
 1. Choose platform **Web**.
-2. Website URL: `https://www.sunshinefacility.com`, stream name
+2. Website URL: `https://sunshinefacility.com`, stream name
    `SFG website`.
 3. **Enhanced measurement → gear icon.** Turn **off** *Page changes based
    on browser history events*. The site already sends a `page_view` on
@@ -75,7 +75,7 @@ All under **Admin**, in the property column:
 Already done for `G-XNBZ88NTP9` (migration 0009, applied on the next
 deploy). Use these steps only to change the ID to another property.
 
-1. Sign in to `https://www.sunshinefacility.com/tytb` as a **superadmin**.
+1. Sign in to `https://sunshinefacility.com/tytb` as a **superadmin**.
 2. **Parameters** → filter group **Analytics** → `ga4_measurement_id`.
 3. Paste the Measurement ID (`G-…`) and save. Anything that does not look
    like `G-` plus 4–16 capitals and digits is refused, with the reason
@@ -126,7 +126,7 @@ This shows which Google searches lead to the site.
 2. Google gives you a **TXT record**. In Cloudflare → `sunshinefacility.com`
    → DNS → **Add record**: type TXT, name `@`, content the value Google
    gave. Click Verify.
-3. **Sitemaps** → submit `https://www.sunshinefacility.com/sitemap.xml`.
+3. **Sitemaps** → submit `https://sunshinefacility.com/sitemap.xml`.
 4. In GA: Admin → Product links → **Search Console links** → Link.
 
 The `.co.id` and `.id` domains only redirect, so they don't need their own

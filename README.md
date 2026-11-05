@@ -1,6 +1,6 @@
 # Sunshine Facilities Group — website and CMS
 
-The bilingual (EN/ID) company website for **www.sunshinefacility.com** (sunshinefacility.co.id and sunshinefacility.id redirect to it) and
+The bilingual (EN/ID) company website for **sunshinefacility.com** (www., sunshinefacility.co.id and sunshinefacility.id redirect to it) and
 the admin CMS that edits every text and image on it.
 
 - **Public site:** Home (with the interactive 3D jigsaw hero ball), Services,

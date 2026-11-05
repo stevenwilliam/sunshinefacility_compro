@@ -3,10 +3,10 @@ info:
   title: Sunshine Facilities Group — website and CMS API
   version: 1.0.0
   description: |
-    The REST contract behind www.sunshinefacility.com and its CMS.
+    The REST contract behind sunshinefacility.com and its CMS.
     Reading version and rules: docs/04-api-specification.md and docs/02-business-rules.md.
 servers:
-  - url: https://www.sunshinefacility.com/api/v1
+  - url: https://sunshinefacility.com/api/v1
   - url: http://127.0.0.1:8098/api/v1
 tags:
   - name: public
