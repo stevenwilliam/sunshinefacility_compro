@@ -6,8 +6,8 @@ is a screenshot of the real CMS, retaken whenever the CMS changes.
 
 ## Signing in
 
-Open **https://sunshinefacility.sunshinefood.co.id/tytb** (the CMS address
-moves to www.sunshinefacility.com/tytb once that domain is live). Enter your
+Open **https://www.sunshinefacility.com/tytb** (the old address
+sunshinefacility.sunshinefood.co.id/tytb redirects there). Enter your
 email and password and press **Sign in**.
 
 ![The sign-in screen](img/01-sign-in.png)

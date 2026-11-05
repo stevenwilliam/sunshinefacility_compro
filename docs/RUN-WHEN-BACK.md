@@ -23,12 +23,23 @@ Three lists, kept apart on purpose.
 
 ## 2. Needs a machine or access that does not exist yet
 
+### M0 — switch production to the real domains (D41), in this order
+
+Everything else is staged in `~ven/sfg-release/` on 119.8.189.246. Only these steps need you (Cloudflare login and sudo).
+
+1. **Origin certificates.** For each zone (`sunshinefacility.com`, `sunshinefacility.co.id`, `sunshinefacility.id`): Cloudflare → zone → SSL/TLS → Origin Server → **Create Certificate** (RSA, hostnames `*.zone` and `zone`, 15 years). On the server, in a real terminal: `sudo mkdir -p /etc/ssl/sfg`, then `sudo vi /etc/ssl/sfg/<zone>.pem` (paste the certificate) and `sudo vi /etc/ssl/sfg/<zone>.key` (paste the private key). That makes six files.
+2. **Cloudflare SSL mode.** For each zone: SSL/TLS → Overview → **Full (strict)**.
+3. **Run the cutover**: `ssh maxx-prod`, then `sudo bash ~/sfg-release/prod-switch-domain.sh`. It checks the certificates, makes backups (binary, env, nginx, database dump), installs the new build, migrates, sets `SFG_PUBLIC_BASE_URL`, swaps nginx (restores the old file if `nginx -t` fails), checks every host at the origin, and prints the undo commands. Expect `200` for www.sunshinefacility.com and `301` for the rest.
+4. **DNS, straight after.** For each zone: DNS → set `@` and `www` to **A `119.8.189.246`, Proxied (orange cloud)**. Delete any other A/AAAA/CNAME for `@`/`www` that point at the old Sunshinefood server. Until then the old domain redirects to the old Sunshinefood page.
+5. Tell me. I'll verify all seven hostnames from outside.
+
+
 | # | What | Steps |
 |---|---|---|
 | M1 | **Verify from your laptop** — `curl` on the server does not cross the firewall | open `http://<dev-server-ip>:8097/` and `/admin`; if it spins: `sudo grep -a 'DPT=8097' /var/log/ufw.log` |
-| M2 | Mail goes out through **Office 365** as `noreply@sunshinefood.co.id` (done). Check that sunshinefood.co.id has SPF `include:spf.protection.outlook.com` and Microsoft DKIM enabled, or notifications may land in spam. When www.sunshinefacility.com is live, either keep this sender or add that domain to Microsoft 365 | Microsoft 365 admin → Domains; Defender → DKIM |
-| M3 | Production is **deployed** (D37). Keep Cloudflare SSL/TLS mode on **Full (strict)**, since the origin has a real Let's Encrypt certificate. Store the `ven`, root and CMS passwords in your password manager, then rotate the Office 365 password, which went through chat. Mirror `/var/backups/sfg` and `/srv/sfg-minio` off the server | Cloudflare → SSL/TLS; `/srv/README.md` on the server |
-| M4 | GA4 measurement ID (only if you want analytics) | Parameters → Analytics → `G-…` |
+| M2 | Mail goes out through **Office 365** as `noreply@sunshinefood.co.id` (done). Check that sunshinefood.co.id has SPF `include:spf.protection.outlook.com` and Microsoft DKIM enabled, or notifications may land in spam. Now that www.sunshinefacility.com is bought, either keep this sender or add that domain to Microsoft 365. Also: the public email parameter reads `info@sunshinefacilites.com` (missing an *i*), so check it | Microsoft 365 admin → Domains; Defender → DKIM |
+| M3 | Production is **deployed** (D37). Keep Cloudflare SSL/TLS mode on **Full (strict)** on every zone (Origin Certificates for the three real domains, Let's Encrypt for the temporary one). Store the `ven`, root and CMS passwords in your password manager, then rotate the Office 365 password, which went through chat. Mirror `/var/backups/sfg` and `/srv/sfg-minio` off the server | Cloudflare → SSL/TLS; `/srv/README.md` on the server |
+| M4 | GA4 (only if you want analytics): create the property and stream, then paste the `G-…` ID | step by step in `docs/17-google-analytics-handbook.md` |
 | M5 | Upgrade the system **npm** (10.8 crashes on an optional peer) | `sudo npm install -g npm@11`, then delete `web/.npmrc` and confirm `npm install` works |
 | M6 | Upgrade the server's shared **Go** to ≥ 1.26.10 (this module pins its own toolchain meanwhile) | your call — it affects every project on the box |
 

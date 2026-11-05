@@ -95,7 +95,7 @@ func Load() (Config, error) {
 	c := Config{
 		Env:             env("SFG_ENV", "development"),
 		HTTPAddr:        env("SFG_HTTP_ADDR", "127.0.0.1:8098"),
-		PublicBaseURL:   strings.TrimRight(env("SFG_PUBLIC_BASE_URL", "https://sunshinefacility.sunshinefood.co.id"), "/"),
+		PublicBaseURL:   strings.TrimRight(env("SFG_PUBLIC_BASE_URL", "https://www.sunshinefacility.com"), "/"),
 		DatabaseURL:     os.Getenv("SFG_DATABASE_URL"),
 		TestDatabaseURL: os.Getenv("SFG_TEST_DATABASE_URL"),
 		JWTSecret:       os.Getenv("SFG_JWT_SECRET"),

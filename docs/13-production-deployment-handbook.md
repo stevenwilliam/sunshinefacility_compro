@@ -26,11 +26,15 @@ is `vi`.
 > - **PostgreSQL** `timezone = 'UTC'`. Nightly dump at 01:15 UTC to
 >   `/var/backups/sfg` (restore tested).
 
-> **Temporary domain.** Until www.sunshinefacility.com is bought, the site
-> runs at `sunshinefacility.sunshinefood.co.id`: substitute it for both
-> `sunshinefacility.com` names below (one `server_name`, one certbot `-d`,
-> no apex redirect). The switch later is `SFG_PUBLIC_BASE_URL`, nginx, a
-> certificate, and CMS → Site text → `footer.domain`.
+> **Domains (D41, 2026-11-05).** www.sunshinefacility.com is canonical;
+> the apex, `(www.)sunshinefacility.co.id`, `(www.)sunshinefacility.id` and
+> the former temporary domain `sunshinefacility.sunshinefood.co.id` 301 to
+> it. The live nginx file is **`deploy/nginx-sfg-production.conf`** (it
+> supersedes § 10's sketch). TLS: one Cloudflare Origin Certificate per zone
+> in `/etc/ssl/sfg/<zone>.pem|.key` (SSL mode Full (strict)); the temporary
+> domain keeps its Let's Encrypt certificate. The cutover was
+> `deploy/prod-switch-domain.sh` (backs up, installs binary, migrates, sets
+> `SFG_PUBLIC_BASE_URL`, swaps nginx, verifies every host at the origin).
 
 **You need before starting:** the server's public IP; DNS for
 `sunshinefacility.com` and `www.sunshinefacility.com` pointing at it; an
