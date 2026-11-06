@@ -1,6 +1,6 @@
 import { useState, type CSSProperties, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, CheckCircle, Phone, Quotes, SealCheck, WhatsappLogo } from '@/lib/phosphor'
+import { ArrowRight, Phone, Quotes, SealCheck, WhatsappLogo } from '@/lib/phosphor'
 import { lineVars, useSite } from '@/lib/site'
 import { usePageMeta } from '@/lib/meta'
 import { useMedia } from '@/lib/useMedia'
@@ -137,16 +137,13 @@ export default function Home() {
 
 function WhySunshine() {
   const { b, t, L, section } = useSite()
-  const before = section('home.wo_before')
-  const after = section('home.wo_after')
-  const dt = 'text-ink-3'
   return (
     <section aria-labelledby="why-h" className="on-dark bg-charcoal text-white">
       <div className="wrap flex flex-wrap items-start" style={{ gap: 'clamp(40px,6vw,96px)', paddingTop: 'clamp(56px,7vw,112px)', paddingBottom: 'clamp(56px,7vw,112px)' }}>
-        <div className="min-w-0 flex-[1_1_420px]">
+        <div className="min-w-0 flex-1">
           <p className="t-kicker">{t('home.why.kicker')}</p>
           <h2 id="why-h" className="t-h2 mb-10 max-w-[560px]">{L(section('home.why')?.title)}</h2>
-          <ol className="m-0 flex list-none flex-col p-0">
+          <ol className="m-0 grid list-none p-0" style={{ columnGap: 'clamp(32px,5vw,72px)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))' }}>
             {(b.lists.home_why || []).map((w, i) => (
               <li key={i} className="grid grid-cols-[44px_1fr] gap-4 border-t border-charcoal-600 py-[22px]">
                 <Icon name={w.icon} className="mt-0.5 text-[28px] text-tangerine" />
@@ -158,44 +155,6 @@ function WhySunshine() {
             ))}
           </ol>
         </div>
-        <figure className="m-0 min-w-0 max-w-[480px] flex-[1_1_380px]">
-          <div className="rounded-[14px] bg-white p-5 text-charcoal" style={{ boxShadow: '0 30px 60px -20px rgba(0,0,0,0.55)', transform: 'rotate(-1.2deg)' }}>
-            <div className="flex items-center justify-between gap-3 border-b border-dashed border-line-3 pb-[14px]">
-              <div>
-                <p className="m-0 text-[12px] tracking-[0.04em] text-ink-3">{t('home.wo.label')}</p>
-                <p className="m-0 mt-0.5 text-[17px] font-[550] tnum">{t('home.wo.number')}</p>
-              </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-[#E5F2E7] px-[10px] py-1.5 text-[13px] font-medium text-success-fg">
-                <CheckCircle weight="fill" aria-hidden="true" />{t('home.wo.done')}
-              </span>
-            </div>
-            <dl className="my-[14px] grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-[14px]">
-              <dt className={dt}>{t('home.wo.site')}</dt><dd className="m-0">{t('home.wo.site_value')}</dd>
-              <dt className={dt}>{t('home.wo.task')}</dt><dd className="m-0">{t('home.wo.task_value')}</dd>
-              <dt className={dt}>{t('home.wo.crew')}</dt><dd className="m-0">{t('home.wo.crew_value')}</dd>
-              <dt className={dt}>{t('home.wo.time')}</dt><dd className="m-0 tnum">{t('home.wo.time_value')}</dd>
-            </dl>
-            <div className="grid grid-cols-2 gap-2">
-              {[[before, 'home.wo.before', 'home.wo.before_time'], [after, 'home.wo.after', 'home.wo.after_time']].map(([s, label, time]) => {
-                const sec = s as ReturnType<typeof section>
-                return (
-                  <div key={label as string} className="relative overflow-hidden rounded-lg bg-line-2" style={{ aspectRatio: '4/3' }}>
-                    <div role="img" aria-label={L(sec?.title)} className="h-full w-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: cssUrl(sec?.image) }} />
-                    <span className="absolute left-2 top-2 rounded bg-[rgba(31,33,28,0.86)] px-[7px] py-[3px] text-[11px] text-white">{t(label as string)} · {t(time as string)}</span>
-                  </div>
-                )
-              })}
-            </div>
-            <div className="mt-4 flex items-end justify-between gap-3">
-              <div>
-                <p className="m-0 text-[12px] text-ink-3">{t('home.wo.signed')}</p>
-                <p className="m-0 mt-1 border-b border-charcoal pb-0.5 pr-[18px] text-[22px] font-light italic tracking-[-0.02em]">{t('home.wo.signer')}</p>
-              </div>
-              <p className="m-0 text-right text-[12px] text-ink-3 tnum">{t('home.wo.role')}<br />{t('home.wo.signoff_meta')}</p>
-            </div>
-          </div>
-          <figcaption className="mt-[22px] max-w-[400px] text-[14px] leading-[1.5] text-ondark-muted">{t('home.wo.caption')}</figcaption>
-        </figure>
       </div>
     </section>
   )

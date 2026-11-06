@@ -1,0 +1,23 @@
+-- Restores the work-order card's text and its two photo sections (copied from 0002).
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.label', 'WORK ORDER', 'PERINTAH KERJA', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.number', 'WO-2610-0412', 'WO-2610-0412', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.done', 'Completed', 'Selesai', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.site', 'Site', 'Lokasi', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.site_value', 'Tower B · Lobby L1', 'Tower B · Lobby L1', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.task', 'Task', 'Tugas', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.task_value', 'Deep clean, marble floor', 'Deep clean, lantai marmer', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.crew', 'Crew', 'Tim', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.crew_value', '2 cleaners · 1 supervisor', '2 petugas · 1 supervisor', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.time', 'Time', 'Waktu', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.time_value', '05:30 → 07:42', '05:30 → 07:42', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.before', 'Before', 'Sebelum', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.before_time', '05:34', '05:34', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.after', 'After', 'Sesudah', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.after_time', '07:40', '07:40', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.signed', 'Signed off by', 'Disetujui oleh', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.signer', 'R. Hartono', 'R. Hartono', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.role', 'Building Manager', 'Building Manager', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.signoff_meta', '07:51 · GPS ✓', '07:51 · GPS ✓', false);
+INSERT INTO site_text (key, value_en, value_id, is_placeholder) VALUES ('home.wo.caption', 'A job record from the Sunshine field app, as your team receives it. Sample data.', 'Catatan pekerjaan dari aplikasi lapangan Sunshine, seperti yang diterima tim Anda. Data contoh.', false);
+INSERT INTO page_sections (id, page, section, title_en, title_id, body_en, body_id, image_id, is_placeholder, sort) VALUES ('01a160e8-5069-77d1-bf7e-98661b8c473c', 'home', 'wo_before', 'Cleaner wiping a counter before the inspection', 'Petugas membersihkan meja sebelum inspeksi', '', '', (SELECT id FROM media WHERE slug = 'photo/cleaning'), false, 3);
+INSERT INTO page_sections (id, page, section, title_en, title_id, body_en, body_id, image_id, is_placeholder, sort) VALUES ('01a160e8-506a-7ebc-b00b-239a84d7b86b', 'home', 'wo_after', 'Lobby floor after machine scrubbing', 'Lantai lobi setelah dibersihkan dengan mesin', '', '', (SELECT id FROM media WHERE slug = 'photo/lobby-cleaning'), false, 4);
