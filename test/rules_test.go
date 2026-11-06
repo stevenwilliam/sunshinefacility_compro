@@ -195,7 +195,12 @@ func TestParametersTypedAndScoped(t *testing.T) {
 	ed.do("DELETE", "/api/v1/admin/r/parameters/"+phone, nil, nil, 409)
 	inter := e.id(`SELECT id::text FROM parameters WHERE grp = 'job_types' AND key = 'in'`)
 	ed.do("DELETE", "/api/v1/admin/r/parameters/"+inter, nil, nil, 200)
-	// A location used by an opening cannot be deleted (FK).
+	// A location used by an opening cannot be deleted (FK). Migration 0014
+	// removed the seeded openings, so the test posts its own.
+	if err := e.gdb.Exec(`INSERT INTO career_openings (id, title_en, title_id, line_id, location_key, type_key)
+		SELECT uuidv7(), 'Cook', 'Juru Masak', id, 'tangerang', 'ft' FROM service_lines WHERE key = 'food'`).Error; err != nil {
+		t.Fatal(err)
+	}
 	tg := e.id(`SELECT id::text FROM parameters WHERE grp = 'locations' AND key = 'tangerang'`)
 	ed.do("DELETE", "/api/v1/admin/r/parameters/"+tg, nil, nil, 409)
 }

@@ -94,6 +94,9 @@ function Openings({ onApply }: { onApply: (id: string) => void }) {
         <h2 id="op-h" className="t-h2s">{L(section('careers.openings')?.title)}</h2>
         <PH show={anyPH} label={t('careers.sample')} />
       </div>
+      {b.openings.length === 0 ? (
+        <div className="rounded border border-dashed border-line-4 px-5 py-10 text-center text-[16px] text-ink-2">{t('careers.none')}</div>
+      ) : (<>
       <div role="search" className="grid gap-[10px] rounded bg-cotton p-4" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,200px),1fr))' }}>
         <label className="flex flex-col gap-1.5 text-[13px] font-medium">{t('careers.search')}
           <span className="relative block">
@@ -179,6 +182,7 @@ function Openings({ onApply }: { onApply: (id: string) => void }) {
       {list.length === 0 && (
         <div className="mt-3 rounded border border-dashed border-line-4 px-5 py-10 text-center text-[16px] text-ink-2">{t('careers.empty')}</div>
       )}
+      </>)}
     </section>
   )
 }
